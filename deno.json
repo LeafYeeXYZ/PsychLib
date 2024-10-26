@@ -5,7 +5,8 @@
 		"jstat": "npm:jstat-esm@^2"
 	},
 	"tasks": {
-		"check": "deno fmt && deno lint && deno test"
+		"check": "deno fmt && deno lint && deno test",
+    "release": "deno run npm:commit-and-tag-version"
 	},
 	"fmt": {
 		"useTabs": true,
