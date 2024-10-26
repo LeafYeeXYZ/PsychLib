@@ -6,7 +6,8 @@
 	},
 	"tasks": {
 		"check": "deno fmt && deno lint && deno test",
-    "release": "deno run npm:commit-and-tag-version"
+    "release": "deno run -A npm:commit-and-tag-version",
+    "deploy": "git push --follow-tags origin main && deno publish"
 	},
 	"fmt": {
 		"useTabs": true,
@@ -14,6 +15,6 @@
 		"singleQuote": true
 	},
 	"name": "@leaf/psych-lib",
-	"version": "1.0.1",
+	"version": "1.0.0",
 	"exports": "./lib/main.ts"
 }
