@@ -1,8 +1,9 @@
 import { mean } from 'mathjs'
 
 /**
- * ## Calculate the sum of squares
- * ### 计算平方和
+ * Calculate the sum of squares
+ *
+ * 计算平方和
  * @param data data to be calculated
  * @returns sum of squares
  * @example
@@ -13,8 +14,9 @@ export function ss(data: [number, number][]): number {
 }
 
 /**
- * ## Calculate the sum of the products (covariance times sample size)
- * ### 计算积和 (协方差乘样本量)
+ * Calculate the sum of the products (covariance times sample size)
+ *
+ * 计算积和 (协方差乘样本量)
  * @param data data to be calculated
  * @returns sum of the products
  */
@@ -24,8 +26,9 @@ export function sp(data: [number, number][]): number {
 }
 
 /**
- * ## Calculate the covariance
- * ### 计算协方差
+ * Calculate the covariance
+ *
+ * 计算协方差
  * @param data data to be calculated
  * @returns covariance
  */
