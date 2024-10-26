@@ -1,0 +1,102 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@std/assert@*": "1.0.6",
+    "jsr:@std/internal@^1.0.4": "1.0.4",
+    "npm:jstat-esm@*": "2.0.2",
+    "npm:jstat-esm@2": "2.0.2",
+    "npm:jstat@*": "1.9.6",
+    "npm:jstat@latest": "1.9.6",
+    "npm:ma@*": "0.0.9",
+    "npm:mathjs@*": "13.2.0",
+    "npm:mathjs@13": "13.2.0"
+  },
+  "jsr": {
+    "@std/assert@1.0.6": {
+      "integrity": "1904c05806a25d94fe791d6d883b685c9e2dcd60e4f9fc30f4fc5cf010c72207",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
+    "@std/internal@1.0.4": {
+      "integrity": "62e8e4911527e5e4f307741a795c0b0a9e6958d0b3790716ae71ce085f755422"
+    }
+  },
+  "npm": {
+    "@babel/runtime@7.26.0": {
+      "integrity": "sha512-FDSOghenHTiToteC/QRlv2q3DhPZ/oOXTBoirfWNx1Cx3TMVcGWQtMMmQcSvb/JjpNeGzx8Pq/b4fKEJuWm1sw==",
+      "dependencies": [
+        "regenerator-runtime"
+      ]
+    },
+    "complex.js@2.3.0": {
+      "integrity": "sha512-wWHzifVdUPbPBhh+ObvpVGIzrAQjTvmnnEJKBfLW5YbyAB6OXQ0r+Q92fByMIrSSlxUuCujqxriJSR6R/kVxPA=="
+    },
+    "decimal.js@10.4.3": {
+      "integrity": "sha512-VBBaLc1MgL5XpzgIP7ny5Z6Nx3UrRkIViUkPUdtl9aya5amy3De1gsUUSB1g3+3sExYNjCAsAznmukyxCb1GRA=="
+    },
+    "escape-latex@1.2.0": {
+      "integrity": "sha512-nV5aVWW1K0wEiUIEdZ4erkGGH8mDxGyxSeqPzRNtWP7ataw+/olFObw7hujFWlVjNsaDFw5VZ5NzVSIqRgfTiw=="
+    },
+    "ezlog@0.0.14": {
+      "integrity": "sha512-xDB+fvU58pZKwawgDGaI/czmVSTHpAK/QStHQfHpF+QfK5MItI1eQ6uVTAirpdUaBmDbf6ZbanZ5QGz6lGSY+A==",
+      "dependencies": [
+        "opensoars_cls"
+      ]
+    },
+    "fraction.js@4.3.7": {
+      "integrity": "sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew=="
+    },
+    "javascript-natural-sort@0.7.1": {
+      "integrity": "sha512-nO6jcEfZWQXDhOiBtG2KvKyEptz7RVbpGP4vTD2hLBdmNQSsCiicO2Ioinv6UI4y9ukqnBpy+XZ9H6uLNgJTlw=="
+    },
+    "jstat-esm@2.0.2": {
+      "integrity": "sha512-D/TKdqsiS4Xa1QfzXsllvOtVArr6xlNkZ9JdboCRuaQh5Uj85+lER4NAJON73tphu2bqGc5FIm9l3WDbDR4lOw=="
+    },
+    "jstat@1.9.6": {
+      "integrity": "sha512-rPBkJbK2TnA8pzs93QcDDPlKcrtZWuuCo2dVR0TFLOJSxhqfWOVCSp8aV3/oSbn+4uY4yw1URtLpHQedtmXfug=="
+    },
+    "ma@0.0.9": {
+      "integrity": "sha512-bVpdJG776jbubVCFvpeVXLoiHr5yUTONt2C2FtDBDSsdl5ws3gwJU35SsJWMhxaPq48LNITCbOymwkZH8Iu0RA==",
+      "dependencies": [
+        "ezlog",
+        "opensoars_cls"
+      ]
+    },
+    "mathjs@13.2.0": {
+      "integrity": "sha512-P5PZoiUX2Tkghkv3tsSqlK0B9My/ErKapv1j6wdxd0MOrYQ30cnGE4LH/kzYB2gA5rN46Njqc4cFgJjaxgijoQ==",
+      "dependencies": [
+        "@babel/runtime",
+        "complex.js",
+        "decimal.js",
+        "escape-latex",
+        "fraction.js",
+        "javascript-natural-sort",
+        "seedrandom",
+        "tiny-emitter",
+        "typed-function"
+      ]
+    },
+    "opensoars_cls@0.0.10": {
+      "integrity": "sha512-H+G7H/bfYHci4Ep+cFLFr18nYYFJ01+eFCiGayVgarBDvxqKEi0tq80EAE/s6r9+jryENHG2qp6x7mt/mWUvgw=="
+    },
+    "regenerator-runtime@0.14.1": {
+      "integrity": "sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw=="
+    },
+    "seedrandom@3.0.5": {
+      "integrity": "sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg=="
+    },
+    "tiny-emitter@2.1.0": {
+      "integrity": "sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q=="
+    },
+    "typed-function@4.2.1": {
+      "integrity": "sha512-EGjWssW7Tsk4DGfE+5yluuljS1OGYWiI1J6e8puZz9nTMM51Oug8CD5Zo4gWMsOhq5BI+1bF+rWTm4Vbj3ivRA=="
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:jstat-esm@2",
+      "npm:mathjs@13"
+    ]
+  }
+}

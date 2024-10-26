@@ -1,0 +1,18 @@
+{
+	"imports": {
+		"@": "/lib/",
+		"mathjs": "npm:mathjs@^13",
+		"jstat": "npm:jstat-esm@^2"
+	},
+	"tasks": {
+		"check": "deno fmt && deno lint && deno test"
+	},
+	"fmt": {
+		"useTabs": true,
+		"semiColons": false,
+		"singleQuote": true
+	},
+	"name": "@leaf/psych-lib",
+	"version": "1.0.0",
+	"exports": "./lib/main.ts"
+}
