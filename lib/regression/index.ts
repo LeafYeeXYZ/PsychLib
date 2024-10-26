@@ -78,10 +78,14 @@ interface LinearRegression {
  * @param y dependent variable
  * @throws {TypeError} The x and y data of linear regression must be equal
  * @example
- * const regression = new LinearRegressionOne([1, 2, 3], [2, 3, 4])
- * regression.calc(4) => 5
- * regression.b0 => 1
- * regression.b1 => 1
+ * ```typescript
+ * import { LinearRegressionOne } from '@leaf/psych-lib'
+ * const x = [1, 2, 3, 4, 5]
+ * const y = [2, 3, 4, 5, 6]
+ * const lr = new LinearRegressionOne(x, y)
+ * console.log(lr.b0, lr.b1)
+ * console.log(lr.calc(6))
+ * ```
  */
 export class LinearRegressionOne implements LinearRegression {
 	/**
@@ -232,11 +236,15 @@ export class LinearRegressionOne implements LinearRegression {
  * @param y dependent variable
  * @throws {TypeError} The x and y data of linear regression must be equal
  * @example
- * const regression = new LinearRegressionTwo([1, 2, 3], [2, 3, 4], [3, 4, 5])
- * regression.calc(4, 5) => 6
- * regression.b0 => 0
- * regression.b1 => 1
- * regression.b2 => 1
+ * ```typescript
+ * import { LinearRegressionTwo } from '@leaf/psych-lib'
+ * const x1 = [1, 2, 3, 4, 10]
+ * const x2 = [1, 3, 5, 7, 9]
+ * const y = [6, 14, 22, 30, 48]
+ * const lr = new LinearRegressionTwo(x1, x2, y)
+ * console.log(lr.b0, lr.b1, lr.b2)
+ * console.log(lr.calc(6, 7))
+ * ```
  */
 export class LinearRegressionTwo implements LinearRegression {
 	/**
