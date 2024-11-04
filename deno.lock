@@ -4,6 +4,8 @@
     "jsr:@std/assert@*": "1.0.6",
     "jsr:@std/internal@^1.0.4": "1.0.4",
     "npm:@stdlib/stats-pcorrtest@~0.2.2": "0.2.2",
+    "npm:@stdlib/stats-ttest2@*": "0.2.2",
+    "npm:@stdlib/stats-ttest@*": "0.2.2",
     "npm:@stdlib/stats@*": "0.3.1",
     "npm:jstat-esm@2": "2.0.2",
     "npm:mathjs@13": "13.2.0",
@@ -27,13 +29,130 @@
         "regenerator-runtime"
       ]
     },
+    "@stdlib/array-base-accessor-getter@0.2.2": {
+      "integrity": "sha512-HGJNjWWysDoo6ORrLj+FV/6IpfIbDGqZtpzGQzFI1A6jgqJMw2JuRwlsgRsriJ1SnyFoPNIObwyGDSY18XQrMw=="
+    },
+    "@stdlib/array-base-accessor-setter@0.2.2": {
+      "integrity": "sha512-8Nzwv9RIOvIw9xP+FEXpw0iANqNuU8vP1paVgAnErPVDllB4VVWMXMe8gwxF4gjxf+8+hp2v5kudZFYINVQWWQ=="
+    },
+    "@stdlib/array-base-arraylike2object@0.2.1": {
+      "integrity": "sha512-WHlzAZQXwz2zR0UnkGXznjvykuvhlhFqb0s8Dhv5InhRvhYkcfT7BY23In74kBBzW3gkonxJUxbd0OG6nEHcCA==",
+      "dependencies": [
+        "@stdlib/array-base-accessor-getter",
+        "@stdlib/array-base-accessor-setter",
+        "@stdlib/array-base-assert-is-accessor-array",
+        "@stdlib/array-base-getter",
+        "@stdlib/array-base-setter",
+        "@stdlib/array-dtype"
+      ]
+    },
+    "@stdlib/array-base-assert-is-accessor-array@0.2.2": {
+      "integrity": "sha512-OTkQG0wzxeEyjg1to4fTlxtQq6qoekGWn6eRbr1akBrdGlW9Qv5KjWu91dE/Su+WBkmo+Y5HgiLCFc/TuFe3iA=="
+    },
+    "@stdlib/array-base-assert-is-complex128array@0.2.2": {
+      "integrity": "sha512-C1n7o8N8KtCIjJ8dBwAozjmBUx8r+Y8oOpOMvMv6AB+YL8qaaXIQzrEeDKQuQk59QHqgl7aPwRGQ4gmjdup9oQ=="
+    },
+    "@stdlib/array-base-assert-is-complex64array@0.2.2": {
+      "integrity": "sha512-ovIQ15KnzHH4Y7dGUW8p8GqiPK5F806oDNbfIKTIk7en0XMtsGb0CcuMod0lUMyQTwh4hgTHXcp6vTuq+Igarg=="
+    },
     "@stdlib/array-base-filled@0.2.2": {
       "integrity": "sha512-T7nB7dni5Y4/nsq6Gc1bAhYfzJbcOdqsmVZJUI698xpDbhCdVCIIaEbf0PnDMGN24psN+5mgAVmnNBom+uF0Xg=="
+    },
+    "@stdlib/array-base-getter@0.2.2": {
+      "integrity": "sha512-D7PZr+QkMKQXckaLtzykcgXEMSnFOVzElklLC958ZxKN9eZuobEL4+0i6MZ9ODRO6SAU7x7NYnFFX/vdYS5b8w=="
+    },
+    "@stdlib/array-base-setter@0.2.2": {
+      "integrity": "sha512-QF3GJq2OE4KYZehgaXQGFtR5w6bV/8wjQJap+9MQB4RZ6BtIdkGeTWaMfQjx5WgJ5lXVuzRt8TrNDwOq6payxw=="
     },
     "@stdlib/array-base-zeros@0.2.2": {
       "integrity": "sha512-iwxqaEtpi4c2qpqabmhFdaQGkzgo5COwjHPn2T0S0wfJuM1VuVl5UBl15syr+MmZPJQOB1eBbh6F1uTh9597qw==",
       "dependencies": [
         "@stdlib/array-base-filled"
+      ]
+    },
+    "@stdlib/array-complex128@0.2.1": {
+      "integrity": "sha512-AinzxxCWP0E47eCPmGWTRbUKoYtY+lJQmAi1t+yvv07K0Qgph8OTDAbk2xR8dF2JmBFIZXypUTRG2cG+aoZvNw==",
+      "dependencies": [
+        "@stdlib/array-base-accessor-getter",
+        "@stdlib/array-base-assert-is-complex128array",
+        "@stdlib/array-base-assert-is-complex64array",
+        "@stdlib/array-base-getter",
+        "@stdlib/array-float64",
+        "@stdlib/assert-has-iterator-symbol-support",
+        "@stdlib/assert-is-array",
+        "@stdlib/assert-is-array-like-object",
+        "@stdlib/assert-is-arraybuffer",
+        "@stdlib/assert-is-collection",
+        "@stdlib/assert-is-complex-like",
+        "@stdlib/assert-is-function",
+        "@stdlib/assert-is-nonnegative-integer",
+        "@stdlib/assert-is-object",
+        "@stdlib/assert-is-string",
+        "@stdlib/complex-float64",
+        "@stdlib/complex-imag",
+        "@stdlib/complex-real",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/math-base-assert-is-even",
+        "@stdlib/math-base-assert-is-integer",
+        "@stdlib/math-base-special-floor",
+        "@stdlib/strided-base-reinterpret-complex128",
+        "@stdlib/strided-base-reinterpret-complex64",
+        "@stdlib/string-format",
+        "@stdlib/symbol-iterator",
+        "@stdlib/utils-define-nonenumerable-read-only-accessor",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/array-complex64@0.2.1": {
+      "integrity": "sha512-1CdCZtov9hS/RZO5RQ1DCxVIA8uMfaBpjCqA+JiEpSVHK1lnYcl86PljMs+ls38IH+B/h/cpOCWC68iuu14vwg==",
+      "dependencies": [
+        "@stdlib/array-base-accessor-getter",
+        "@stdlib/array-base-assert-is-complex128array",
+        "@stdlib/array-base-assert-is-complex64array",
+        "@stdlib/array-base-getter",
+        "@stdlib/array-float32",
+        "@stdlib/assert-has-iterator-symbol-support",
+        "@stdlib/assert-is-array",
+        "@stdlib/assert-is-array-like-object",
+        "@stdlib/assert-is-arraybuffer",
+        "@stdlib/assert-is-collection",
+        "@stdlib/assert-is-complex-like",
+        "@stdlib/assert-is-function",
+        "@stdlib/assert-is-nonnegative-integer",
+        "@stdlib/assert-is-object",
+        "@stdlib/assert-is-string",
+        "@stdlib/complex-float32",
+        "@stdlib/complex-imagf",
+        "@stdlib/complex-realf",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/math-base-assert-is-even",
+        "@stdlib/math-base-assert-is-integer",
+        "@stdlib/math-base-special-floor",
+        "@stdlib/strided-base-reinterpret-complex128",
+        "@stdlib/strided-base-reinterpret-complex64",
+        "@stdlib/string-format",
+        "@stdlib/symbol-iterator",
+        "@stdlib/utils-define-nonenumerable-read-only-accessor",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/array-dtype@0.2.1": {
+      "integrity": "sha512-ZE1BycHa405hpg2nApMDS9Lq4zOCIYdklCBmSFdwB3bUPC40/GUR4RxqVETLZKxHx+rbPyXSvzpqDm7wgQjpZA==",
+      "dependencies": [
+        "@stdlib/array-complex128",
+        "@stdlib/array-complex64",
+        "@stdlib/array-float32",
+        "@stdlib/array-float64",
+        "@stdlib/array-int16",
+        "@stdlib/array-int32",
+        "@stdlib/array-int8",
+        "@stdlib/array-uint16",
+        "@stdlib/array-uint32",
+        "@stdlib/array-uint8",
+        "@stdlib/array-uint8c",
+        "@stdlib/assert-is-array",
+        "@stdlib/assert-is-buffer",
+        "@stdlib/utils-constructor-name"
       ]
     },
     "@stdlib/array-float32@0.2.2": {
@@ -46,6 +165,24 @@
       "integrity": "sha512-ZmV5wcacGrhT0maw9dfLXNv4N3ZwFUV3D7ItFfZFGFnKIJbubrWzwtaYnxzIXigrDc8g3F6FVHRpsQLMxq0/lA==",
       "dependencies": [
         "@stdlib/assert-has-float64array-support"
+      ]
+    },
+    "@stdlib/array-int16@0.2.2": {
+      "integrity": "sha512-kHxyQ1INGtga38Grr/5MnDVAuJgnerh+MsJQcpT5jxxnc9QAnVc7O6DRv8i/hfOOxUOH15C/MeoBs+zim4CnLQ==",
+      "dependencies": [
+        "@stdlib/assert-has-int16array-support"
+      ]
+    },
+    "@stdlib/array-int32@0.2.2": {
+      "integrity": "sha512-+jFqht43oPJ8YnlyCZ7cSf9Z8xenIIsJDgLZ9zW+gh8o13SSfF+ukm0AGAdnKnKGR3zPBLnSso7JXyDe2r134g==",
+      "dependencies": [
+        "@stdlib/assert-has-int32array-support"
+      ]
+    },
+    "@stdlib/array-int8@0.2.2": {
+      "integrity": "sha512-UW3KlKt7Lww1XML5Gzj+YYHRXD8+RIUrnlPcTwYH9O8j+/m5vyvGYlBIJD2MDO1fgUl2skgmpNkK9ULfsBlIRA==",
+      "dependencies": [
+        "@stdlib/assert-has-int8array-support"
       ]
     },
     "@stdlib/array-uint16@0.2.2": {
@@ -66,6 +203,23 @@
         "@stdlib/assert-has-uint8array-support"
       ]
     },
+    "@stdlib/array-uint8c@0.2.2": {
+      "integrity": "sha512-uBEJ1yKLZjwgmCV7iSNLkr/SGCxL7qVwnb+f4avVSBxlIv/k29oIO/sibgkHbZMBlBSw39dWQzIKD0UQJWDVDQ==",
+      "dependencies": [
+        "@stdlib/assert-has-uint8clampedarray-support"
+      ]
+    },
+    "@stdlib/assert-contains@0.2.2": {
+      "integrity": "sha512-jAc+0YbXLCaL26Sz5W1QpVXT5ybMsPuUkMLYWAbIXd2NjsQR7wu3/tmzGCtArtyT5VLkdJiVQuvkUg0IQIQcWA==",
+      "dependencies": [
+        "@stdlib/assert-is-collection",
+        "@stdlib/assert-is-integer",
+        "@stdlib/assert-is-nan",
+        "@stdlib/assert-is-string",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/string-format"
+      ]
+    },
     "@stdlib/assert-has-float32array-support@0.2.2": {
       "integrity": "sha512-pi2akQl8mVki43fF1GNQVLYW0bHIPp2HuRNThX9GjB3OFQTpvrV8/3zPSh4lOxQa5gRiabgf0+Rgeu3AOhEw9A==",
       "dependencies": [
@@ -83,6 +237,37 @@
       "integrity": "sha512-TcE9BGV8i7B2OmxPlJ/2DUrAwG0W4fFS/DE7HmVk68PXVZsgyNQ/WP/IHBoazHDjhN5c3dU21c20kM/Bw007Rw==",
       "dependencies": [
         "@stdlib/utils-eval"
+      ]
+    },
+    "@stdlib/assert-has-int16array-support@0.2.2": {
+      "integrity": "sha512-rIrJ2371vd4kg5sHb/bz0xX1dlwyElT6kivnFPtZUXMaMS1breSUIpwPkUPXdr1AbmQdeJYv0c/YBtKB0PCo2g==",
+      "dependencies": [
+        "@stdlib/assert-is-int16array",
+        "@stdlib/constants-int16-max",
+        "@stdlib/constants-int16-min"
+      ]
+    },
+    "@stdlib/assert-has-int32array-support@0.2.2": {
+      "integrity": "sha512-3o/6PuZ+z6+cimb9L1f0d4LGP2GJO4EUVlD6oz8I6vKz35438coM5CduXOMVWvdzm4Rku4ty5mi1Gz0U53pC4Q==",
+      "dependencies": [
+        "@stdlib/assert-is-int32array",
+        "@stdlib/constants-int32-max@0.3.0",
+        "@stdlib/constants-int32-min"
+      ]
+    },
+    "@stdlib/assert-has-int8array-support@0.2.2": {
+      "integrity": "sha512-QUasYxAqQdgqDglQTwV9dZSwMXvLzLpVC4FcN+kia/+nX1HGjYUBq95fBj0vigW+SC2OiuepJkNiB/PlhA08+g==",
+      "dependencies": [
+        "@stdlib/assert-is-int8array",
+        "@stdlib/constants-int8-max",
+        "@stdlib/constants-int8-min"
+      ]
+    },
+    "@stdlib/assert-has-iterator-symbol-support@0.2.2": {
+      "integrity": "sha512-XQ/V/rZ0VjfODhZu65fY2Mvzd4SIxgiKGTUoQpG9nrCh9JZflBUZoDsXvtZ8PSHCylC4aYKi7maA/AkLqbft1g==",
+      "dependencies": [
+        "@stdlib/assert-has-own-property",
+        "@stdlib/symbol-ctor"
       ]
     },
     "@stdlib/assert-has-own-property@0.2.2": {
@@ -118,6 +303,19 @@
         "@stdlib/constants-uint8-max"
       ]
     },
+    "@stdlib/assert-has-uint8clampedarray-support@0.2.2": {
+      "integrity": "sha512-/zT8Piv1UUFUpelBo0LuTE4V9BOEW7DTwfGlPvez93lk72XtaIYhTHkj+Z9YBGfAMV2PbL6eteqFffMVzUgnXg==",
+      "dependencies": [
+        "@stdlib/assert-is-uint8clampedarray"
+      ]
+    },
+    "@stdlib/assert-is-array-like-object@0.2.2": {
+      "integrity": "sha512-T73aKzzi1sKhyOn1wnp1lw2yZEyCnyNfE69p1oWHyWn7EXAJN3J0wTJGGt71/mgD0DDAd3Q+5FsGCYhfmrYdsQ==",
+      "dependencies": [
+        "@stdlib/constants-array-max-array-length",
+        "@stdlib/math-base-assert-is-integer"
+      ]
+    },
     "@stdlib/assert-is-array-like@0.2.2": {
       "integrity": "sha512-kOa5oNJucpBI4rn4+EPL+FlGm7nvTOrYmjD0tdl8JsaNNiQ1w2u2i7fBvCz2iKiQmtuI/+Cu/ES5BtjYoPRxAQ==",
       "dependencies": [
@@ -127,6 +325,12 @@
     },
     "@stdlib/assert-is-array@0.2.2": {
       "integrity": "sha512-aJyTX2U3JqAGCATgaAX9ygvDHc97GCIKkIhiZm/AZaLoFHPtMA1atQ4bKcefEC8Um9eefryxTHfFPfSr9CoNQQ==",
+      "dependencies": [
+        "@stdlib/utils-native-class"
+      ]
+    },
+    "@stdlib/assert-is-arraybuffer@0.2.2": {
+      "integrity": "sha512-j0IDGRTF3+yhH9tgcNgPdicXYbCS811Uv0zYxOGcajq1Dcy931aOs9BKqBo4M5bK6eJtAFq2yReKIIXYkZpH6Q==",
       "dependencies": [
         "@stdlib/utils-native-class"
       ]
@@ -160,6 +364,13 @@
         "@stdlib/math-base-assert-is-integer"
       ]
     },
+    "@stdlib/assert-is-complex-like@0.2.2": {
+      "integrity": "sha512-/prN0SdWpTB8uHGlvvJJs/Q5o0vO0cj2Kh/MLJXrsMo2gvQsQHF+oez1X+FuMrJrfVq6+Im/H4KHa/wjoSPx8Q==",
+      "dependencies": [
+        "@stdlib/complex-float32-ctor@0.0.2",
+        "@stdlib/complex-float64-ctor@0.0.2"
+      ]
+    },
     "@stdlib/assert-is-float32array@0.2.2": {
       "integrity": "sha512-hxEKz/Y4m1NYuOaiQKoqQA1HeAYwNXFqSk3FJ4hC71DuGNit2tuxucVyck3mcWLpLmqo0+Qlojgwo5P9/C/9MQ==",
       "dependencies": [
@@ -176,6 +387,24 @@
       "integrity": "sha512-whY69DUYWljCJ79Cvygp7VzWGOtGTsh3SQhzNuGt+ut6EsOW+8nwiRkyBXYKf/MOF+NRn15pxg8cJEoeRgsPcA==",
       "dependencies": [
         "@stdlib/utils-type-of"
+      ]
+    },
+    "@stdlib/assert-is-int16array@0.2.2": {
+      "integrity": "sha512-HQ9yyX1di07pWreBk6njw9x1sipJKSP4SCSkidLfUHKxaooxeUprAFONfMiEMdNBbn7f3awfs23h1bpN/Z6Vmg==",
+      "dependencies": [
+        "@stdlib/utils-native-class"
+      ]
+    },
+    "@stdlib/assert-is-int32array@0.2.2": {
+      "integrity": "sha512-YomgTwoJD/ci8K9mWNCyqSDtkYfHNplMYw+B9rmcxrjX//1LVZkrzgwWEc6dC3RlY0Ou+uDHJpKeKL9G2fj4GQ==",
+      "dependencies": [
+        "@stdlib/utils-native-class"
+      ]
+    },
+    "@stdlib/assert-is-int8array@0.2.2": {
+      "integrity": "sha512-Y1QP3uIZ+CG+rFrD6nOO/N/8O1rRbXgG+iVo5aj8xNRUtfg1iYekUspfNKqxeZUJ95Ocv705m7/vsGlvI1MugQ==",
+      "dependencies": [
+        "@stdlib/utils-native-class"
       ]
     },
     "@stdlib/assert-is-integer@0.2.2": {
@@ -297,6 +526,12 @@
         "@stdlib/utils-native-class"
       ]
     },
+    "@stdlib/assert-is-uint8clampedarray@0.2.2": {
+      "integrity": "sha512-MjHhOxjOXesqUNgoDGOiO9vib1HV3uCNoYQfiEDWAv30pVAty70wEcwDQ7cdQs1ZGfGC/355ob8AR2Z8lY4ryw==",
+      "dependencies": [
+        "@stdlib/utils-native-class"
+      ]
+    },
     "@stdlib/assert-tools-array-function@0.2.2": {
       "integrity": "sha512-FYeT7X9x0C8Nh+MN6IJUDz+7i7yB6mio2/SDlrvyepjyPSU/cfHfwW0GEOnQhxZ+keLZC/YqDD930WjRODwMdA==",
       "dependencies": [
@@ -311,6 +546,13 @@
         "@stdlib/assert-is-array-like",
         "@stdlib/error-tools-fmtprodmsg",
         "@stdlib/string-format"
+      ]
+    },
+    "@stdlib/blas-base-gcopy@0.2.1": {
+      "integrity": "sha512-59sZsv2kzV+zHGhINJDL53o+6wFpcBPfV2BNxOZ7FRsrASR7ah9BFDPU3bo4LtxVouZFYaBcXlXcG0av4K9aQQ==",
+      "dependencies": [
+        "@stdlib/array-base-arraylike2object",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
       ]
     },
     "@stdlib/blas-ext-base-gapxsumpw@0.2.2": {
@@ -330,6 +572,17 @@
     "@stdlib/boolean-ctor@0.2.2": {
       "integrity": "sha512-qIkHzmfxDvGzQ3XI9R7sZG97QSaWG5TvWVlrvcysOGT1cs6HtQgnf4D//SRzZ52VLm8oICP+6OKtd8Hpm6G7Ww=="
     },
+    "@stdlib/complex-float32-ctor@0.0.1": {
+      "integrity": "sha512-hSAUBgV8l/MnaVpI4mmSSg68iaz2DsWkb9Hnqj41UkrY3vX406JT5HtUzFTcdInuvBDbQXOms03wwAkN05MlSg==",
+      "dependencies": [
+        "@stdlib/assert-is-number",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/number-float64-base-to-float32",
+        "@stdlib/string-format",
+        "@stdlib/utils-define-nonenumerable-read-only-property",
+        "@stdlib/utils-define-property"
+      ]
+    },
     "@stdlib/complex-float32-ctor@0.0.2": {
       "integrity": "sha512-QsTLynhTRmDT0mSkfdHj0FSqQSxh2nKx+vvrH3Y0/Cd/r0WoHFZwyibndDxshfkf9B7nist8QKyvV82I3IZciA==",
       "dependencies": [
@@ -345,7 +598,7 @@
       "integrity": "sha512-24H+t1xwQF6vhOoMZdDA3TFB4M+jb5Swm/FwNaepovlzVIG2NlthUZs6mZg1T3oegqesIRQRwhpn4jIPjuGiTw==",
       "dependencies": [
         "@stdlib/array-float32",
-        "@stdlib/complex-float32-ctor"
+        "@stdlib/complex-float32-ctor@0.0.2"
       ]
     },
     "@stdlib/complex-float32@0.2.1": {
@@ -358,11 +611,22 @@
         "@stdlib/utils-define-property"
       ]
     },
+    "@stdlib/complex-float64-ctor@0.0.2": {
+      "integrity": "sha512-X+8Iw16iDkc5FW8BoqthYJlQmHDqjAGA/YXoz/9ud/lV99jcrT519N8JcRYGglHhDCrJ4tieXvZ+RCdQKchNUg==",
+      "dependencies": [
+        "@stdlib/assert-is-number",
+        "@stdlib/complex-float32-ctor@0.0.1",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/string-format",
+        "@stdlib/utils-define-nonenumerable-read-only-property",
+        "@stdlib/utils-define-property"
+      ]
+    },
     "@stdlib/complex-float64-ctor@0.0.3": {
       "integrity": "sha512-oixCtBif+Uab2rKtgedwQTbQTEC+wVSu4JQH935eJ8Jo0eL6vXUHHlVrkLgYKlCDLvq5px1QQn42Czg/ixh6Gw==",
       "dependencies": [
         "@stdlib/assert-is-number",
-        "@stdlib/complex-float32-ctor",
+        "@stdlib/complex-float32-ctor@0.0.2",
         "@stdlib/error-tools-fmtprodmsg",
         "@stdlib/string-format",
         "@stdlib/utils-define-nonenumerable-read-only-property",
@@ -373,7 +637,7 @@
       "integrity": "sha512-q6RnfgbUunApAYuGmkft1oOM3x3xVMVJwNRlRgfIXwKDb8pYt+S/CeIwi3Su5SF6ay3AqA1s+ze7m21osXAJyw==",
       "dependencies": [
         "@stdlib/array-float64",
-        "@stdlib/complex-float64-ctor"
+        "@stdlib/complex-float64-ctor@0.0.3"
       ]
     },
     "@stdlib/complex-float64@0.2.1": {
@@ -384,6 +648,30 @@
         "@stdlib/string-format",
         "@stdlib/utils-define-nonenumerable-read-only-property",
         "@stdlib/utils-define-property"
+      ]
+    },
+    "@stdlib/complex-imag@0.2.1": {
+      "integrity": "sha512-HHTDnEFTeC2FJfP0jXccsam4hgnPF0PjQJDzKin6F/SFocxOeT2YoqA6Pii09XnDH6RrUaXIZp+VzTr7w/Vs5A==",
+      "dependencies": [
+        "@stdlib/complex-float64"
+      ]
+    },
+    "@stdlib/complex-imagf@0.2.1": {
+      "integrity": "sha512-lrYYEZfPZ9j/7jRUWVNDUunj1f/9lCxtuzHINqQg2VJ3WNJvyQ9RdWEM1ahZftZImZMIWElCNBTCrRJUOA/bww==",
+      "dependencies": [
+        "@stdlib/complex-float32"
+      ]
+    },
+    "@stdlib/complex-real@0.2.1": {
+      "integrity": "sha512-WT7Z77jQLm8VrfvOPJ0C6d8q0Of105owANn72+3YnBwIuGk4TG9DVkB+g/9vo4ptIxPdQRiZQkIGVY0bq7h9YA==",
+      "dependencies": [
+        "@stdlib/complex-float64"
+      ]
+    },
+    "@stdlib/complex-realf@0.2.1": {
+      "integrity": "sha512-bjLLhSaQWhXEkSx4CJNp81mmUCBwWkhsl62gsp8Cdd56zWkf6c2tWCph9jmXNKMzqueYswzykZt9itHjHmTT8g==",
+      "dependencies": [
+        "@stdlib/complex-float32"
       ]
     },
     "@stdlib/complex-reim@0.2.1": {
@@ -405,6 +693,9 @@
     },
     "@stdlib/constants-array-max-typed-array-length@0.2.2": {
       "integrity": "sha512-uAoBItVIfuzR4zKK1F57Znrn2frKL0U9gqJkg30BXuno3YlUvbhIfVP3VsUmGJCmi9ztgYLqX10yqb0KvlM2Ig=="
+    },
+    "@stdlib/constants-float32-max@0.2.2": {
+      "integrity": "sha512-uxvIm/KmIeZP4vyfoqPd72l5/uidnCN9YJT3p7Z2LD8hYN3PPLu6pd/5b51HMFLwfkZ27byRJ9+YK6XnneJP0Q=="
     },
     "@stdlib/constants-float32-smallest-normal@0.2.2": {
       "integrity": "sha512-2qkGjGML2/8P9YguHnac2AKXLbfycpYdCxKmuXQdAVzMMNCJWjHoIqZMFG29WBEDBOP057X+48S6WhIqoxRpWA=="
@@ -444,6 +735,9 @@
     },
     "@stdlib/constants-float64-high-word-significand-mask@0.2.2": {
       "integrity": "sha512-eDDyiQ5PR1/qyklrW0Pus0ZopM7BYjkWTjqhSHhj0DibH6UMwSMlIl4ddCh3VX37p5eByuAavnaPgizk5c9mUw=="
+    },
+    "@stdlib/constants-float64-ln-sqrt-two-pi@0.2.2": {
+      "integrity": "sha512-C9YS9W/lvv54wUC7DojQSRH9faKw0sMAM09oMRVm8OOYNr01Rs1wXeSPStl9ns4qiV/G13vZzd1I3nGqgqihbw=="
     },
     "@stdlib/constants-float64-ln-two@0.2.2": {
       "integrity": "sha512-EQ8EJ6B1wPfuhva0aApKIsF7lTna++txV4AUzL2wTfwDHw6RzWpA44u+k54KnLF8ZXUNIYDNQHHvtzdfKrFzCA=="
@@ -499,20 +793,41 @@
     "@stdlib/constants-float64-smallest-normal@0.2.2": {
       "integrity": "sha512-GXNBkdqLT9X+dU59O1kmb7W5da/RhSXSvxx0xG5r7ipJPOtRLfTXGGvvTzWD4xA3Z5TKlrEL6ww5sph9BsPJnA=="
     },
+    "@stdlib/constants-float64-smallest-subnormal@0.2.2": {
+      "integrity": "sha512-KuF+scDOsP0okx8RLF+q3l1RheaYChf+u/HbhzFbz82GeCIdIVp86UMwoBgfn8AT8cnR5SrtvLtQw15MGfa/vg=="
+    },
     "@stdlib/constants-float64-sqrt-eps@0.2.2": {
       "integrity": "sha512-X7LnGfnwNnhiwlY+zd3FX6zclsx61MaboGTNAAdaV78YjBDTdGdWMHk5MQo1U17ryPlhdGphOAejhDHeaSnTXQ=="
     },
     "@stdlib/constants-float64-sqrt-two-pi@0.2.2": {
       "integrity": "sha512-I8Ylr64x8AFSQ2hFBT8szuIBAy2wqPx69taJMzfcmuM5SnSbS8SE/H19YnCimZErVFo4bz0Rh8Fp3edN4i6teQ=="
     },
+    "@stdlib/constants-float64-sqrt-two@0.2.2": {
+      "integrity": "sha512-iqqouCuS9pUhjD91i5siScxLDtQTF1HsSZor6jaZRviMiOjCj/mjzxxTFHWUlU/rxHMBBhj/u7i12fv6a7dCAQ=="
+    },
     "@stdlib/constants-float64-two-pi@0.2.2": {
       "integrity": "sha512-cyXuwYOersVsA8tDSJ0ocMbtOc5KGxjlGvYC4vrpLQVkgNpxcGbA57n6JvaGmNk7+InXXbQ7qhTWGbTNgafcLQ=="
+    },
+    "@stdlib/constants-int16-max@0.2.2": {
+      "integrity": "sha512-w7XnWFxYXRyAnbKOxur3981FeaSlhKvHlhETwH5ZhtOQerk3Jn/iJFdtbN8CD0he1Kml4DWhnoKB7P9PcOaTIw=="
+    },
+    "@stdlib/constants-int16-min@0.2.2": {
+      "integrity": "sha512-zn15vCgNoyD97z7mNQMChEneyc6xQudVGj1BOv5vZl827vHAs+KV6xeCI7VGY8Lpd6V22piDoGG3Mvj/43u9vQ=="
     },
     "@stdlib/constants-int32-max@0.2.1": {
       "integrity": "sha512-vKtp3q/HdAeGG8BJBZdNzFrYpVQeleODgvOxh9Pn/TX1Ktjc50I9TVl7nTVWsT2QnacruOorILk2zNsdgBHPUQ=="
     },
     "@stdlib/constants-int32-max@0.3.0": {
       "integrity": "sha512-jYN84QfG/yP2RYw98OR6UYehFFs0PsGAihV6pYU0ey+WF9IOXgSjRP56KMoZ7ctHwl4wsnj9I+qB2tGuEXr+pQ=="
+    },
+    "@stdlib/constants-int32-min@0.2.2": {
+      "integrity": "sha512-4QMOTpo5QykiWp52Wtugu1WK1wV/Bi2Hjj9L97dfZ3BPB1Oa9ykiUZvTsq3GBNCMu2YHPv1ugbV91C3p3bw+Aw=="
+    },
+    "@stdlib/constants-int8-max@0.2.2": {
+      "integrity": "sha512-zp1L61S/ycOmkILmvuXEKvtXrEJ0QUAwP65sNAWMJOtdT0mhGMfGpXKvCK84TC3+jP5Wk4LU13cgO2bf/pmGTw=="
+    },
+    "@stdlib/constants-int8-min@0.2.2": {
+      "integrity": "sha512-nxPloZUqbGuyuOPC0U3xQOn9YdyRq2g9uc1dzcw6k0XBhql9mlz9kCbdC74HeMm4K9Dyyb7IlAZLCezdv60s6g=="
     },
     "@stdlib/constants-uint16-max@0.2.2": {
       "integrity": "sha512-qaFXbxgFnAkt73P5Ch7ODb0TsOTg0LEBM52hw6qt7+gTMZUdS0zBAiy5J2eEkTxA9rD9X3nIyUtLf2C7jafNdw=="
@@ -617,9 +932,9 @@
     "@stdlib/math-base-napi-binary@0.3.0": {
       "integrity": "sha512-bhwsmGMOMN1srcpNAFRjDMSXe9ue1s/XmaoBBlqcG6S2nqRQlIVnKKH4WZx4hmC1jDqoFXuNPJGE47VXpVV+mA==",
       "dependencies": [
-        "@stdlib/complex-float32-ctor",
+        "@stdlib/complex-float32-ctor@0.0.2",
         "@stdlib/complex-float32-reim",
-        "@stdlib/complex-float64-ctor",
+        "@stdlib/complex-float64-ctor@0.0.3",
         "@stdlib/complex-float64-reim",
         "@stdlib/utils-library-manifest"
       ]
@@ -627,9 +942,9 @@
     "@stdlib/math-base-napi-unary@0.2.3": {
       "integrity": "sha512-BCyJmpq2S8EFo2yMt1z+v1EL7nn8RHcM6jn7fa8n3BTP679K0MSlawIh3A0CFogfrTdjPM4G44VO1ddsdLExcg==",
       "dependencies": [
-        "@stdlib/complex-float32-ctor",
+        "@stdlib/complex-float32-ctor@0.0.2",
         "@stdlib/complex-float32-reim",
-        "@stdlib/complex-float64-ctor",
+        "@stdlib/complex-float64-ctor@0.0.3",
         "@stdlib/complex-float64-reim",
         "@stdlib/utils-library-manifest"
       ]
@@ -640,6 +955,17 @@
         "@stdlib/constants-float64-high-word-abs-mask",
         "@stdlib/math-base-napi-unary",
         "@stdlib/number-float64-base-to-words",
+        "@stdlib/utils-library-manifest"
+      ]
+    },
+    "@stdlib/math-base-special-acos@0.2.3": {
+      "integrity": "sha512-f66Ikq0E3U5XQm6sTu4UHwP3TmcPrVgSK/mZTvg2JenswZ6qPtGO1A8KHZ5+/5bk1TSc9EW4zDGUqWG7mGzT4Q==",
+      "dependencies": [
+        "@stdlib/constants-float64-fourth-pi",
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-napi-unary",
+        "@stdlib/math-base-special-asin",
+        "@stdlib/math-base-special-sqrt",
         "@stdlib/utils-library-manifest"
       ]
     },
@@ -725,6 +1051,19 @@
         "@stdlib/number-float64-base-get-high-word"
       ]
     },
+    "@stdlib/math-base-special-cos@0.3.0": {
+      "integrity": "sha512-SsZpptPgCn15MjpWqEei6XaI60N+lrP0B7pFL89KFOXmagN4MprdU/YUmG413yPgUDLEEQfA0C9KbRWuf9uRvw==",
+      "dependencies": [
+        "@stdlib/constants-float64-high-word-abs-mask",
+        "@stdlib/constants-float64-high-word-exponent-mask",
+        "@stdlib/math-base-napi-unary",
+        "@stdlib/math-base-special-kernel-cos",
+        "@stdlib/math-base-special-kernel-sin",
+        "@stdlib/math-base-special-rempio2",
+        "@stdlib/number-float64-base-get-high-word",
+        "@stdlib/utils-library-manifest"
+      ]
+    },
     "@stdlib/math-base-special-erfc@0.2.4": {
       "integrity": "sha512-tVI+mMnW+oDfQXwoH86sZ8q4ximpUXX6wZFCYZB6KcO5GXeKuvK74DnU0YyIm+sTV+r9WJiTSBEW9iVQLZOkzg==",
       "dependencies": [
@@ -734,6 +1073,18 @@
         "@stdlib/math-base-napi-unary",
         "@stdlib/math-base-special-exp",
         "@stdlib/number-float64-base-set-low-word",
+        "@stdlib/utils-library-manifest"
+      ]
+    },
+    "@stdlib/math-base-special-erfcinv@0.2.3": {
+      "integrity": "sha512-B8u7WZiIh0+rX8VWNOwvjPWpmeKBHIQoJtIigUseBgbch/rmgV43k63MCkjh2u+V2SmcFo38yD94qJg5bYyWeA==",
+      "dependencies": [
+        "@stdlib/constants-float64-ninf",
+        "@stdlib/constants-float64-pinf",
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-napi-unary",
+        "@stdlib/math-base-special-ln",
+        "@stdlib/math-base-special-sqrt",
         "@stdlib/utils-library-manifest"
       ]
     },
@@ -874,7 +1225,7 @@
         "@stdlib/math-base-special-exp",
         "@stdlib/math-base-special-floor",
         "@stdlib/math-base-special-pow@0.2.1",
-        "@stdlib/math-base-special-sin"
+        "@stdlib/math-base-special-sin@0.2.1"
       ]
     },
     "@stdlib/math-base-special-gamma@0.3.0": {
@@ -893,7 +1244,7 @@
         "@stdlib/math-base-special-exp",
         "@stdlib/math-base-special-floor",
         "@stdlib/math-base-special-pow@0.3.0",
-        "@stdlib/math-base-special-sin",
+        "@stdlib/math-base-special-sin@0.2.1",
         "@stdlib/utils-library-manifest"
       ]
     },
@@ -929,6 +1280,30 @@
         "@stdlib/math-base-tools-continued-fraction",
         "@stdlib/math-base-tools-evalpoly",
         "@stdlib/math-base-tools-sum-series"
+      ]
+    },
+    "@stdlib/math-base-special-gammaincinv@0.2.2": {
+      "integrity": "sha512-bIZ94ob1rY87seDWsvBTBRxp8Ja2Y46DLtQYuaylHUQuK+I2xKy8XKL2ZHPsOfuwhXRqm+q+91PDjPEAdH1dQw==",
+      "dependencies": [
+        "@stdlib/constants-float32-max",
+        "@stdlib/constants-float32-smallest-normal",
+        "@stdlib/constants-float64-ln-sqrt-two-pi",
+        "@stdlib/constants-float64-pinf",
+        "@stdlib/constants-float64-sqrt-two-pi",
+        "@stdlib/constants-float64-two-pi",
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-abs",
+        "@stdlib/math-base-special-erfcinv",
+        "@stdlib/math-base-special-exp",
+        "@stdlib/math-base-special-gamma@0.3.0",
+        "@stdlib/math-base-special-gammainc",
+        "@stdlib/math-base-special-gammaln",
+        "@stdlib/math-base-special-ln",
+        "@stdlib/math-base-special-min",
+        "@stdlib/math-base-special-pow@0.3.0",
+        "@stdlib/math-base-special-sqrt",
+        "@stdlib/math-base-tools-evalpoly",
+        "debug"
       ]
     },
     "@stdlib/math-base-special-gammaln@0.2.2": {
@@ -992,6 +1367,42 @@
         "@stdlib/math-base-tools-continued-fraction",
         "@stdlib/math-base-tools-sum-series",
         "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/math-base-special-kernel-betaincinv@0.2.2": {
+      "integrity": "sha512-FVGf/clx14n3cPfRLKmd8+vAj90F200VxFOlf8kEULqGKbcQfoTHUfsViJ+r8l0cz1xf9K6uyfAl5KfqUIln4w==",
+      "dependencies": [
+        "@stdlib/constants-float64-eps",
+        "@stdlib/constants-float64-half-pi",
+        "@stdlib/constants-float64-max",
+        "@stdlib/constants-float64-pi",
+        "@stdlib/constants-float64-smallest-normal",
+        "@stdlib/constants-float64-smallest-subnormal",
+        "@stdlib/constants-float64-sqrt-two",
+        "@stdlib/math-base-special-abs",
+        "@stdlib/math-base-special-acos",
+        "@stdlib/math-base-special-asin",
+        "@stdlib/math-base-special-beta",
+        "@stdlib/math-base-special-betainc",
+        "@stdlib/math-base-special-cos@0.3.0",
+        "@stdlib/math-base-special-erfcinv",
+        "@stdlib/math-base-special-exp",
+        "@stdlib/math-base-special-expm1",
+        "@stdlib/math-base-special-floor",
+        "@stdlib/math-base-special-gamma-delta-ratio",
+        "@stdlib/math-base-special-gammaincinv",
+        "@stdlib/math-base-special-kernel-betainc",
+        "@stdlib/math-base-special-ldexp",
+        "@stdlib/math-base-special-ln",
+        "@stdlib/math-base-special-log1p",
+        "@stdlib/math-base-special-max@0.3.0",
+        "@stdlib/math-base-special-min",
+        "@stdlib/math-base-special-pow@0.3.0",
+        "@stdlib/math-base-special-round@0.3.0",
+        "@stdlib/math-base-special-signum",
+        "@stdlib/math-base-special-sin@0.3.0",
+        "@stdlib/math-base-special-sqrt",
+        "@stdlib/math-base-tools-evalpoly"
       ]
     },
     "@stdlib/math-base-special-kernel-cos@0.2.3": {
@@ -1221,6 +1632,14 @@
         "@stdlib/utils-library-manifest"
       ]
     },
+    "@stdlib/math-base-special-signum@0.2.2": {
+      "integrity": "sha512-cszwgkfeMTnUiORRWdWv6Q/tpoXkXkMYNMoAFO5qzHTuahnDP37Lkn8fTmCEtgHEasg3Cm69xLbqP0UDuNPHyA==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-napi-unary",
+        "@stdlib/utils-library-manifest"
+      ]
+    },
     "@stdlib/math-base-special-sin@0.2.1": {
       "integrity": "sha512-IQ6+bzfiZ6/VUn5DIe6iwCsYERE1pwtAOsAWkgNZ1Ih3FzXUxdEOyHtv1zraPrVUb8mR+V5q7OfAGy8TCTnkUg==",
       "dependencies": [
@@ -1232,6 +1651,19 @@
         "@stdlib/number-float64-base-get-high-word"
       ]
     },
+    "@stdlib/math-base-special-sin@0.3.0": {
+      "integrity": "sha512-n5qefWrHs0tZ8hM73EvixH5nFnTU/IW2BnY9/Gamtsu90oTusqOi0WB1jVOMypC8i1mJEHdOWrsip7aDRWk1kQ==",
+      "dependencies": [
+        "@stdlib/constants-float64-high-word-abs-mask",
+        "@stdlib/constants-float64-high-word-exponent-mask",
+        "@stdlib/math-base-napi-unary",
+        "@stdlib/math-base-special-kernel-cos",
+        "@stdlib/math-base-special-kernel-sin",
+        "@stdlib/math-base-special-rempio2",
+        "@stdlib/number-float64-base-get-high-word",
+        "@stdlib/utils-library-manifest"
+      ]
+    },
     "@stdlib/math-base-special-sinpi@0.2.1": {
       "integrity": "sha512-Q3yCp1CoD7gemIILO28bU7iBn8OFiCgXm9vP/9q0tRBxmjtiUnjqbFd+3jRXdAmiCc/B/bPjwGBtVnCnrEMY9g==",
       "dependencies": [
@@ -1240,8 +1672,8 @@
         "@stdlib/math-base-assert-is-nan",
         "@stdlib/math-base-special-abs",
         "@stdlib/math-base-special-copysign",
-        "@stdlib/math-base-special-cos",
-        "@stdlib/math-base-special-sin"
+        "@stdlib/math-base-special-cos@0.2.1",
+        "@stdlib/math-base-special-sin@0.2.1"
       ]
     },
     "@stdlib/math-base-special-sqrt@0.2.2": {
@@ -1474,6 +1906,17 @@
         "@stdlib/utils-define-nonenumerable-read-only-property"
       ]
     },
+    "@stdlib/stats-base-dists-t-quantile@0.2.2": {
+      "integrity": "sha512-Ca88AGDGLU3gJeGy0aUXh6gMXXFp5JM+zEciTLT3bhyerycJYKawxNVdHeur0J7LLnujGfeH/rOfSPFTHzgkHg==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-kernel-betaincinv",
+        "@stdlib/math-base-special-signum",
+        "@stdlib/math-base-special-sqrt",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
     "@stdlib/stats-base-mean@0.2.2": {
       "integrity": "sha512-I6TTyFOstbLBC4qOz5eMxoNUNbx5AheZBhyFHXlRREkwmRdxAbh2Eh1/cyWl7qxpDyBj9eOYu09ya5lSSO6z8A==",
       "dependencies": [
@@ -1531,10 +1974,78 @@
         "@stdlib/utils-index-of"
       ]
     },
+    "@stdlib/stats-ttest2@0.2.2": {
+      "integrity": "sha512-MsQtiXZnZzwJfzClu+Ga8qsPBZXnvohVM+tmbuZ2rZijalXvZiOjCtQ8/CYtcj2jmUGnCPg3a0Xq+9FUBXowQw==",
+      "dependencies": [
+        "@stdlib/assert-has-own-property",
+        "@stdlib/assert-is-boolean",
+        "@stdlib/assert-is-nan",
+        "@stdlib/assert-is-number",
+        "@stdlib/assert-is-number-array",
+        "@stdlib/assert-is-plain-object",
+        "@stdlib/assert-is-positive-integer",
+        "@stdlib/assert-is-string",
+        "@stdlib/assert-is-typed-array-like",
+        "@stdlib/constants-float64-ninf",
+        "@stdlib/constants-float64-pinf",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/math-base-special-abs",
+        "@stdlib/math-base-special-pow@0.3.0",
+        "@stdlib/math-base-special-roundn",
+        "@stdlib/math-base-special-sqrt",
+        "@stdlib/stats-base-dists-t-cdf",
+        "@stdlib/stats-base-dists-t-quantile",
+        "@stdlib/stats-base-mean",
+        "@stdlib/stats-base-variance",
+        "@stdlib/string-format",
+        "@stdlib/utils-define-read-only-property"
+      ]
+    },
+    "@stdlib/stats-ttest@0.2.2": {
+      "integrity": "sha512-H+1y1MF3QootuPso7EYAMIwNOO2HTvxxXLTWEqFbqlv6mkbPsRxACRExZB2dyMkoQxhROTDVHY5IwsTl8FL8yg==",
+      "dependencies": [
+        "@stdlib/array-float64",
+        "@stdlib/assert-contains",
+        "@stdlib/assert-has-own-property",
+        "@stdlib/assert-is-boolean",
+        "@stdlib/assert-is-number",
+        "@stdlib/assert-is-number-array",
+        "@stdlib/assert-is-plain-object",
+        "@stdlib/assert-is-positive-integer",
+        "@stdlib/assert-is-string",
+        "@stdlib/assert-is-typed-array-like",
+        "@stdlib/blas-base-gcopy",
+        "@stdlib/constants-float64-ninf",
+        "@stdlib/constants-float64-pinf",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-abs",
+        "@stdlib/math-base-special-roundn",
+        "@stdlib/math-base-special-sqrt",
+        "@stdlib/stats-base-dists-t-cdf",
+        "@stdlib/stats-base-dists-t-quantile",
+        "@stdlib/stats-base-mean",
+        "@stdlib/stats-base-variance",
+        "@stdlib/string-format",
+        "@stdlib/utils-define-read-only-property"
+      ]
+    },
     "@stdlib/stats@0.3.1": {
       "integrity": "sha512-wWlllf59qMrWpv/Qc9r0qgOPUx89+gbWbv1yI9Hjlq0o9XPtZ/+2l3Svz2GssUf3+kjfHzpdH64VnvJUcYpwbg==",
       "dependencies": [
         "@stdlib/utils"
+      ]
+    },
+    "@stdlib/strided-base-reinterpret-complex128@0.2.2": {
+      "integrity": "sha512-vOvOCe9PIFEvIGjFcpyT0VfvDTPy2ZQ6rO9b6IM2TkkfzwEj5renq+mxYOHxXx+L61RuMjnkI3giIH/1raPxYg==",
+      "dependencies": [
+        "@stdlib/array-float64"
+      ]
+    },
+    "@stdlib/strided-base-reinterpret-complex64@0.2.1": {
+      "integrity": "sha512-p/IUPeUnsEfCvme0H8twiAfaFJ7RZ3SOZPjBjLRr04RMSdibwF/N8m9oRpzbXosCaD6LSRpB/pNLraBYNowmDw==",
+      "dependencies": [
+        "@stdlib/array-float32"
       ]
     },
     "@stdlib/string-base-format-interpolate@0.2.2": {
@@ -1571,6 +2082,12 @@
     "@stdlib/symbol-ctor@0.2.2": {
       "integrity": "sha512-XsmiTfHnTb9jSPf2SoK3O0wrNOXMxqzukvDvtzVur1XBKfim9+seaAS4akmV1H3+AroAXQWVtde885e1B6jz1w=="
     },
+    "@stdlib/symbol-iterator@0.2.2": {
+      "integrity": "sha512-4O8SrTPlffIpAXjryxAud2AhOGxhY8bCN+xFKIW/oRJYI7cDGws5MrAv+Dk9FQBkHHeVThKdvjONO+QC7YRuFA==",
+      "dependencies": [
+        "@stdlib/assert-has-iterator-symbol-support"
+      ]
+    },
     "@stdlib/utils-constant-function@0.2.2": {
       "integrity": "sha512-ezRenGy5zU4R0JTfha/bpF8U+Hx0b52AZV++ca/pcaQVvPBRkgCsJacXX0eDbexoBB4+ZZ1vcyIi4RKJ0RRlbQ=="
     },
@@ -1591,6 +2108,12 @@
         "@stdlib/string-base-lowercase",
         "@stdlib/string-format",
         "@stdlib/string-replace"
+      ]
+    },
+    "@stdlib/utils-define-nonenumerable-read-only-accessor@0.2.3": {
+      "integrity": "sha512-0ECS16+eDOkwa045K75d6b2pnl/bSny6LCQzrPyAJgbKrnDOUrE8c7ZRuVvVkWCvByYHKUO7I5JCLoty3/f2DA==",
+      "dependencies": [
+        "@stdlib/utils-define-property"
       ]
     },
     "@stdlib/utils-define-nonenumerable-read-only-property@0.2.2": {

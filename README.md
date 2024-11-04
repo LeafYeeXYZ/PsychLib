@@ -48,16 +48,16 @@ If you haven't installed `deno` yet, please install it referring to the <https:/
 git clone https://github.com/LeafYeeXYZ/PsychLib.git
 ```
 
-Now you can write `TypeScript` code in `/lib/**/*.ts` and export functions in `/lib/index.ts`. After writing the code, remember to add test cases in `tests/*.test.ts`. You can run the test cases using the following command.
+Now you can write `TypeScript` code in `/lib/**/*.ts` and export functions in `/lib/index.ts`. After writing the code, remember to add test cases in `/tests/*.test.ts`. You can run the test cases using the following command.
 
 ```bash
-deno test
+deno test -A
 ```
 
-You can also add benchmark cases in `tests/*.bench.ts` and run the benchmark using the following command.
+You can also add benchmark cases in `/benchs/*.bench.ts` and run the benchmark using the following command.
 
 ```bash
-deno bench
+deno bench -A
 ```
 
 This project publishes to <https://jsr.io>, so you don't need to compile the code to JavaScript. Just use the following command to publish the code.
