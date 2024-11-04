@@ -74,7 +74,7 @@ export function sort(data: number[], ascending: boolean = true): number[] {
  * @returns sum of numbers
  * @example
  * ```typescript
- * import { sum } from 'psych-lib'
+ * import { sum } from '@psych/lib'
  * console.log(sum([1, 2, 3, 4, 5])) // 15
  * ```
  */
@@ -94,7 +94,7 @@ export function sum(n: number[]): number {
  * @returns mean of numbers
  * @example
  * ```typescript
- * import { mean } from 'psych-lib'
+ * import { mean } from '@psych/lib'
  * console.log(mean([1, 2, 3, 4, 5])) // 3
  * ```
  */
@@ -113,7 +113,7 @@ export function mean(data: number[]): number {
  * @returns median of numbers
  * @example
  * ```typescript
- * import { median } from 'psych-lib'
+ * import { median } from '@psych/lib'
  * console.log(median([1, 2, 3, 4, 5])) // 3
  * ```
  */
@@ -137,7 +137,7 @@ export function median(data: number[], sorted: boolean = false): number {
  * @returns quantile of numbers
  * @example
  * ```typescript
- * import { quantile } from 'psych-lib'
+ * import { quantile } from '@psych/lib'
  * console.log(quantile([1, 2, 3, 4, 5], 0.5)) // 3
  * ```
  */
@@ -162,7 +162,7 @@ export function quantile(
  * @returns minimum value of numbers
  * @example
  * ```typescript
- * import { min } from 'psych-lib'
+ * import { min } from '@psych/lib'
  * console.log(min([1, 2, 3, 4, 5])) // 1
  * ```
  */
@@ -184,7 +184,7 @@ export function min(data: number[], sorted: boolean = false): number {
  * @returns maximum value of numbers
  * @example
  * ```typescript
- * import { max } from 'psych-lib'
+ * import { max } from '@psych/lib'
  * console.log(max([1, 2, 3, 4, 5])) // 5
  * ```
  */
@@ -206,7 +206,7 @@ export function max(data: number[], sorted: boolean = false): number {
  * @returns range of numbers
  * @example
  * ```typescript
- * import { range } from 'psych-lib'
+ * import { range } from '@psych/lib'
  * console.log(range([1, 2, 3, 4, 5])) // 4
  * ```
  */
@@ -223,7 +223,7 @@ export function range(data: number[], sorted: boolean = false): number {
  * @returns sum of squares
  * @example
  * ```typescript
- * import { ss } from 'psych-lib'
+ * import { ss } from '@psych/lib'
  * console.log(ss([1, 2, 3, 4, 5])) // 10
  * ```
  */
@@ -245,7 +245,7 @@ export function ss(data: number[], _mean?: number): number {
  * @returns sum of squares of the array difference
  * @example
  * ```typescript
- * import { ssDiff } from 'psych-lib'
+ * import { ssDiff } from '@psych/lib'
  * console.log(ssDiff([1, 2, 3], [4, 5, 6])) // 27
  * ```
  * @throws {Error} the length of a and b must be the same
@@ -272,7 +272,7 @@ export function ssDiff(a: number[], b: number[]): number {
  * @returns sum of the product of two centered arrays
  * @example
  * ```typescript
- * import { sp } from 'psych-lib'
+ * import { sp } from '@psych/lib'
  * console.log(sp([1, 2, 3], [4, 5, 6])) // 2
  * ```
  * @throws {Error} the length of a and b must be the same
@@ -301,7 +301,7 @@ export function sp(a: number[], b: number[], _mean?: [number, number]): number {
  * @returns covariance of two arrays
  * @example
  * ```typescript
- * import { cov } from 'psych-lib'
+ * import { cov } from '@psych/lib'
  * console.log(cov([1, 2, 3], [4, 5, 6])) // 1
  * ```
  * @throws {Error} the length of a and b must be the same
@@ -329,7 +329,7 @@ export function cov(
  * @returns kurtosis of numbers
  * @example
  * ```typescript
- * import { kurtosis } from 'psych-lib'
+ * import { kurtosis } from '@psych/lib'
  * console.log(kurtosis([1, 2, 3, 4, 5]))
  * ```
  * @see https://en.wikipedia.org/wiki/Kurtosis
@@ -371,7 +371,7 @@ export function kurtosis(
  * @returns skewness of numbers
  * @example
  * ```typescript
- * import { skewness } from 'psych-lib'
+ * import { skewness } from '@psych/lib'
  * console.log(skewness([1, 2, 3, 4, 5]))
  * ```
  * @see https://en.wikipedia.org/wiki/Skewness
@@ -413,7 +413,7 @@ export function skewness(
  * @returns variance of numbers
  * @example
  * ```typescript
- * import { vari } from 'psych-lib'
+ * import { vari } from '@psych/lib'
  * console.log(vari([1, 2, 3, 4, 5])) // 2.5
  * ```
  */
@@ -435,7 +435,7 @@ export function vari(
  * @returns standard deviation of numbers
  * @example
  * ```typescript
- * import { std } from 'psych-lib'
+ * import { std } from '@psych/lib'
  * console.log(std([1, 2, 3, 4, 5])) // 1.581...
  * ```
  */
@@ -457,7 +457,7 @@ export function std(
  * @returns standard error of the mean of numbers
  * @example
  * ```typescript
- * import { sem } from 'psych-lib'
+ * import { sem } from '@psych/lib'
  * console.log(sem([1, 2, 3, 4, 5])) // 0.707...
  * ```
  */
@@ -479,7 +479,7 @@ export function sem(
  * @returns correlation coefficient of two arrays
  * @example
  * ```typescript
- * import { corr } from 'psych-lib'
+ * import { corr } from '@psych/lib'
  * console.log(corr([1, 2, 3], [4, 5, 6])) // 1
  * ```
  * @throws {Error} the length of a and b must be the same
@@ -506,7 +506,7 @@ export function corr(
  * @returns mode of numbers
  * @example
  * ```typescript
- * import { mode } from 'psych-lib'
+ * import { mode } from '@psych/lib'
  * mode([1, 2, 3, 3, 4, 5]) // 3
  * mode([1, 2, 3, 4, 5, 6]) // 3.5
  * ```

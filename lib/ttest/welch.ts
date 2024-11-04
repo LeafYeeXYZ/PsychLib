@@ -13,7 +13,7 @@ import { p2t, t2p } from '../distribution/index.ts'
  * @returns t test result
  * @example
  * ```typescript
- * import { WelchTTest } from 'psych-lib'
+ * import { WelchTTest } from '@psych/lib'
  * const a = [1, 2, 3, 4, 5]
  * const b = [6, 7, 8, 9, 10]
  * const ttest = new WelchTTest(a, b)

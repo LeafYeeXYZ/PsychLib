@@ -10,7 +10,7 @@ import { z2p } from './distribution/index.ts'
  * @throws {Error} the length of data must be greater than 3
  * @example
  * ```typescript
- * import { kurtosis } from 'psych-lib'
+ * import { kurtosis } from '@psych/lib'
  * kurtosis([5, 5, 6, 8, 5])
  * ```
  */
@@ -38,7 +38,7 @@ export function kurtosisTest(data: number[]): {
  * @throws {Error} the length of data must be greater than 3
  * @example
  * ```typescript
- * import { skewness } from 'psych-lib'
+ * import { skewness } from '@psych/lib'
  * skewness([1, 2, 3, 4, 5])
  * ```
  */

@@ -10,9 +10,10 @@ import { mean, sort, sp, ss, std } from '../base.ts'
  * @returns a bootstrap sample
  * @example
  * ```typescript
- * import { bootstrapSample } from 'psych-lib'
+ * import { bootstrapSample } from '@psych/lib'
  * bootstrapSample([1, 2, 3], [4, 5, 6], [7, 8, 9])
  * // maybe { x: [1, 2, 2], m: [4, 5, 5], y: [7, 8, 8] }
+ * ```
  */
 export function bootstrapSample(
   x: number[],
@@ -41,6 +42,11 @@ export function bootstrapSample(
  * @param B sampling times
  * @param a signifiance level
  * @returns confidence interval
+ * @example
+ * ```typescript
+ * import { bootstrapTest } from '@psych/lib'
+ * bootstrapTest([1, 2, 3], [4, 5, 6], [7, 8, 9], 1000, 0.05)
+ * ```
  * @throws {Error} the length of x, m and y must be the same
  */
 export function bootstrapTest(

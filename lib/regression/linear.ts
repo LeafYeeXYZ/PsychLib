@@ -10,7 +10,7 @@ import { f2p, t2p } from '../distribution/index.ts'
  * @throws {Error} The x and y data of linear regression must be equal
  * @example
  * ```typescript
- * import { LinearRegressionOne } from 'psych-lib'
+ * import { LinearRegressionOne } from '@psych/lib'
  * const x = [1, 2, 3, 4, 5]
  * const y = [2, 3, 4, 5, 6]
  * const lr = new LinearRegressionOne(x, y)
@@ -180,7 +180,7 @@ export class LinearRegressionOne {
  * @throws {TypeError} The x and y data of linear regression must be equal
  * @example
  * ```typescript
- * import { LinearRegressionTwoStd } from 'psych-lib'
+ * import { LinearRegressionTwoStd } from '@psych/lib'
  * const x1 = [1, 2, 3, 4, 10]
  * const x2 = [1, 3, 5, 7, 9]
  * const y = [6, 14, 22, 30, 48]

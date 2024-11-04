@@ -12,7 +12,7 @@ import { p2t, t2p } from '../distribution/index.ts'
  * @returns t test result
  * @example
  * ```typescript
- * import { OneSampleTTest } from 'psych-lib'
+ * import { OneSampleTTest } from '@psych/lib'
  * const data = [1, 2, 3, 4, 5]
  * const mu = 3
  * const ttest = new OneSampleTTest(data, mu)
