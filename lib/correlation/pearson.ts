@@ -34,8 +34,9 @@ export class PearsonCorrTest {
     this.p = t2p(this.t, this.df)
     const fisherZ = 0.5 * Math.log((1 + this.r) / (1 - this.r))
     const sem = 1 / Math.sqrt(x.length - 3)
-    const upperZ = fisherZ + p2z(1 - alpha / 2) * sem
-    const lowerZ = fisherZ - p2z(alpha / 2) * sem
+    const diffZ = p2z(1 - alpha / 2)
+    const upperZ = fisherZ + diffZ * sem
+    const lowerZ = fisherZ - diffZ * sem
     const upperR = (Math.exp(2 * upperZ) - 1) / (Math.exp(2 * upperZ) + 1)
     const lowerR = (Math.exp(2 * lowerZ) - 1) / (Math.exp(2 * lowerZ) + 1)
     this.ci = [lowerR, upperR]
