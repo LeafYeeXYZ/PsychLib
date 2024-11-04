@@ -6,7 +6,7 @@
 - PsychLib has 0 dependencies and is lightweight.
 - For use cases, please refer to my another project [PsychPen](https://github.com/LeafYeeXYZ/PsychPen).
 
-**For full documentation, see <https://jsr.io/@psych/lib/docs>.**
+**For full documentation, see <https://jsr.io/@psych/lib/doc>.**
 
 - [Introduction](#introduction)
 - [Qiuck Start](#qiuck-start)
@@ -38,7 +38,7 @@ console.log(z2p(-2.58).toFixed(3)) // 0.005
 console.log(p2f(0.05, 5, 5).toFixed(2)) // 7.15
 ```
 
-**For full documentation, see <https://jsr.io/@psych/lib/docs>.**
+**For full documentation, see <https://jsr.io/@psych/lib/doc>.**
 
 # Development
 

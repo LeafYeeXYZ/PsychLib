@@ -1,35 +1,5 @@
-import * as pl from '../lib/index.ts'
-import { assertAlmostEquals } from 'jsr:@std/assert'
-
-
-
-// // Distribution
-// console.time('distribution')
-// assert.strictEqual(as.z2p(1.96).toFixed(3), '0.975')
-// assert.strictEqual(as.z2p(-2.58).toFixed(3), '0.005')
-// assert.strictEqual(as.p2z(0.975).toFixed(2), '1.96')
-// assert.strictEqual(as.p2z(0.005).toFixed(2), '-2.58')
-// assert.strictEqual(as.t2p(0.7, 10).toFixed(3), '0.500')
-// assert.strictEqual(as.t2p(0.7, 10, false).toFixed(3), '0.250')
-// assert.strictEqual(as.t2p(2.086, 20).toFixed(3), '0.050')
-// assert.strictEqual(as.t2p(2.086, 20, false).toFixed(3), '0.025')
-// assert.strictEqual(as.t2p(-0.7, 10).toFixed(3), '0.500')
-// assert.strictEqual(as.t2p(-0.7, 10, false).toFixed(3), '0.250')
-// assert.strictEqual(as.t2p(-2.086, 20).toFixed(3), '0.050')
-// assert.strictEqual(as.t2p(-2.086, 20, false).toFixed(3), '0.025')
-// assert.strictEqual(as.p2t(0.500, 10).toFixed(2), '0.70')
-// assert.strictEqual(as.p2t(0.250, 10, false).toFixed(2), '0.70')
-// assert.strictEqual(as.p2t(0.050, 20).toFixed(2), '2.09')
-// assert.strictEqual(as.p2t(0.025, 20, false).toFixed(2), '2.09')
-// assert.strictEqual(as.f2p(161, 1.0, 1.0, false).toFixed(3), '0.050')
-// assert.strictEqual(as.f2p(4.1, 2, 10, false).toFixed(3), '0.050')
-// assert.strictEqual(as.f2p(647.8, 1.0, 1.0).toFixed(3), '0.050')
-// assert.strictEqual(as.f2p(7.15, 5, 5).toFixed(3), '0.050')
-// assert.strictEqual(as.p2f(0.05, 1.0, 1.0, false).toFixed(0), '161')
-// assert.strictEqual(as.p2f(0.05, 2, 10, false).toFixed(1), '4.1')
-// assert.strictEqual(as.p2f(0.05, 1.0, 1.0).toFixed(1), '647.8')
-// assert.strictEqual(as.p2f(0.05, 5, 5).toFixed(2), '7.15')
-// console.timeEnd('distribution')
+// import * as pl from '../lib/index.ts'
+// import { assertAlmostEquals } from 'jsr:@std/assert'
 
 // // Utils
 // console.time('utils')
