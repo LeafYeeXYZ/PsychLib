@@ -1,62 +1,87 @@
-function gammaln(x: number): number {
-  const c: number[] = [
-    76.18009172947146,
-    -86.50532032941677,
-    24.01409824083091,
-    -1.231739572450155,
-    0.001208650973866179,
-    -0.000005395239384953,
-  ]
-  let y: number = x
-  let tmp: number = x + 5.5
-  tmp -= (x + 0.5) * Math.log(tmp)
-  let ser: number = 1.000000000190015
-  for (let j: number = 0; j < 6; j++) {
-    ser += c[j] / ++y
-  }
-  return -tmp + Math.log(2.5066282746310005 * ser / x)
-}
+// 预计算的常量
+const LOG_SQRT_2PI = Math.log(2 * Math.PI) / 2
+const GAMMA_C = [
+  0.99999999999980993,
+  676.5203681218851,
+  -1259.1392167224028,
+  771.32342877765313,
+  -176.61502916214059,
+  12.507343278686905,
+  -0.13857109526572012,
+  9.9843695780195716e-6,
+  1.5056327351493116e-7,
+]
 
-function ibeta(x: number, a: number, b: number): number {
-  const bt: number = (x === 0 || x === 1) ? 0 : Math.exp(
-    gammaln(a + b) - gammaln(a) - gammaln(b) + a * Math.log(x) +
-      b * Math.log(1 - x),
-  )
-  if (x < 0 || x > 1) return 0
-  if (x < (a + 1) / (a + b + 2)) {
-    return bt * betacf(x, a, b) / a
+function gammaln(x: number): number {
+  if (x < 0.5) {
+    return LOG_SQRT_2PI - Math.log(Math.sin(Math.PI * x)) - gammaln(1 - x)
   }
-  return 1 - bt * betacf(1 - x, b, a) / b
+
+  x -= 1
+  let t = GAMMA_C[0]
+  for (let i = 1; i < 9; i++) {
+    t += GAMMA_C[i] / (x + i)
+  }
+
+  const tmp = x + 7.5
+  return LOG_SQRT_2PI + (x + 0.5) * Math.log(tmp) - tmp + Math.log(t)
 }
 
 function betacf(x: number, a: number, b: number): number {
-  const fpmin: number = 1e-30
-  const qab: number = a + b
-  const qap: number = a + 1
-  const qam: number = a - 1
-  let c: number = 1
-  let d: number = 1 - qab * x / qap
+  const fpmin = 1e-30
+  const maxIter = 100
+  const eps = 3e-7
+
+  const qab = a + b
+  const qap = a + 1
+  const qam = a - 1
+
+  let c = 1
+  let d = 1 - qab * x / qap
   if (Math.abs(d) < fpmin) d = fpmin
   d = 1 / d
-  let h: number = d
-  for (let m: number = 1; m <= 100; m++) {
-    const m2: number = 2 * m
-    let aa: number = m * (b - m) * x / ((qam + m2) * (a + m2))
+  let h = d
+
+  for (let m = 1; m <= maxIter; m++) {
+    const m2 = 2 * m
+    // 第一次迭代
+    let aa = m * (b - m) * x / ((qam + m2) * (a + m2))
     d = 1 + aa * d
-    if (Math.abs(d) < fpmin) d = fpmin
     c = 1 + aa / c
+    if (Math.abs(d) < fpmin) d = fpmin
     if (Math.abs(c) < fpmin) c = fpmin
     d = 1 / d
-    h *= d * c
+    const del = d * c
+    h *= del
+    // 第二次迭代
     aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2))
     d = 1 + aa * d
-    if (Math.abs(d) < fpmin) d = fpmin
     c = 1 + aa / c
+    if (Math.abs(d) < fpmin) d = fpmin
     if (Math.abs(c) < fpmin) c = fpmin
     d = 1 / d
     h *= d * c
+    // 提前退出条件
+    if (Math.abs(del - 1) < eps && Math.abs(d * c - 1) < eps) break
   }
+
   return h
+}
+
+function ibeta(x: number, a: number, b: number): number {
+  if (x <= 0) return 0
+  if (x >= 1) return 1
+
+  const bt = Math.exp(
+    gammaln(a + b) - gammaln(a) - gammaln(b) +
+      a * Math.log(x) + b * Math.log(1 - x),
+  )
+
+  const symmetryPoint = (a + 1) / (a + b + 2)
+  if (x < symmetryPoint) {
+    return bt * betacf(x, a, b) / a
+  }
+  return 1 - bt * betacf(1 - x, b, a) / b
 }
 
 /**
@@ -109,7 +134,7 @@ export function p2t(
   p: number,
   df: number,
   twoside: boolean = true,
-  precision: number = 0.00001,
+  precision: number = 0.000001,
 ): number {
   if (p <= 0 || p >= 1) {
     throw new Error('p value must be in the range (0, 1)')

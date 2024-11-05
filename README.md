@@ -70,7 +70,7 @@ deno publish
 # Benchmark
 
 ```bash
-   Date | 2024-11-04
+   Date | 2024-11-05
     CPU | Apple M3
 Runtime | Deno 2.0.4 (aarch64-apple-darwin)
 
@@ -131,18 +131,18 @@ Correlation Bench - PearsonCorrTest - @stdlib/stats           26.1 µs        38
 
 benchmark                               time/iter (avg)        iter/s      (min … max)           p75      p99     p995
 --------------------------------------- ----------------------------- --------------------- --------------------------
-Distribution Bench - z2p - @psych/lib            5.9 ns   168,200,000 (  5.7 ns …  65.5 ns)   5.8 ns  10.9 ns  11.2 ns
-Distribution Bench - z2p - jstat-esm            47.7 ns    20,960,000 ( 42.6 ns …  52.4 ns)  50.3 ns  51.6 ns  51.9 ns
-Distribution Bench - p2z - @psych/lib           14.9 ns    66,950,000 ( 13.1 ns …  24.1 ns)  14.8 ns  19.4 ns  19.6 ns
-Distribution Bench - p2z - jstat-esm           191.3 ns     5,226,000 (184.4 ns … 219.1 ns) 193.0 ns 207.0 ns 210.6 ns
-Distribution Bench - t2p - @psych/lib          916.5 ns     1,091,000 (911.2 ns … 954.2 ns) 917.8 ns 954.2 ns 954.2 ns
-Distribution Bench - t2p - jstat-esm           126.7 ns     7,894,000 (116.6 ns … 147.4 ns) 129.8 ns 134.3 ns 138.2 ns
-Distribution Bench - p2t - @psych/lib           34.5 µs        28,960 ( 33.6 µs … 141.8 µs)  34.7 µs  42.0 µs  43.7 µs
-Distribution Bench - p2t - jstat-esm           571.7 ns     1,749,000 (535.2 ns … 583.4 ns) 574.6 ns 583.4 ns 583.4 ns
-Distribution Bench - f2p - @psych/lib          900.3 ns     1,111,000 (893.1 ns … 941.0 ns) 900.6 ns 941.0 ns 941.0 ns
-Distribution Bench - f2p - jstat-esm           114.1 ns     8,768,000 (104.4 ns … 121.7 ns) 116.6 ns 119.5 ns 120.5 ns
-Distribution Bench - p2f - @psych/lib           34.6 µs        28,890 ( 33.6 µs … 131.4 µs)  34.6 µs  42.2 µs  44.0 µs
-Distribution Bench - p2f - jstat-esm           586.7 ns     1,704,000 (552.3 ns … 637.9 ns) 593.7 ns 637.9 ns 637.9 ns
+Distribution Bench - z2p - @psych/lib            5.9 ns   169,200,000 (  5.4 ns …  60.1 ns)   5.9 ns  10.8 ns  11.2 ns
+Distribution Bench - z2p - jstat-esm            44.2 ns    22,600,000 ( 42.4 ns …  58.3 ns)  46.5 ns  50.6 ns  53.0 ns
+Distribution Bench - p2z - @psych/lib           14.3 ns    70,050,000 ( 13.1 ns …  25.2 ns)  14.7 ns  19.3 ns  20.0 ns
+Distribution Bench - p2z - jstat-esm           194.1 ns     5,151,000 (184.7 ns … 236.9 ns) 196.2 ns 221.6 ns 224.5 ns
+Distribution Bench - t2p - @psych/lib          109.3 ns     9,152,000 (106.7 ns … 126.8 ns) 109.3 ns 120.8 ns 121.5 ns
+Distribution Bench - t2p - jstat-esm           122.6 ns     8,156,000 (115.8 ns … 150.1 ns) 125.3 ns 140.4 ns 147.1 ns
+Distribution Bench - p2t - @psych/lib            4.9 µs       206,000 (  4.7 µs …   5.5 µs)   4.9 µs   5.5 µs   5.5 µs
+Distribution Bench - p2t - jstat-esm           540.7 ns     1,849,000 (520.9 ns … 586.6 ns) 552.5 ns 585.5 ns 586.6 ns
+Distribution Bench - f2p - @psych/lib           97.2 ns    10,290,000 ( 92.1 ns … 118.7 ns) 100.1 ns 109.3 ns 115.3 ns
+Distribution Bench - f2p - jstat-esm           119.2 ns     8,388,000 (103.8 ns … 708.0 ns) 114.8 ns 468.0 ns 610.0 ns
+Distribution Bench - p2f - @psych/lib            4.2 µs       236,300 (  4.0 µs …   4.9 µs)   4.2 µs   4.9 µs   4.9 µs
+Distribution Bench - p2f - jstat-esm           560.4 ns     1,784,000 (549.6 ns … 601.9 ns) 562.0 ns 600.4 ns 601.9 ns
 
 
 benchmark                                             time/iter (avg)        iter/s      (min … max)           p75      p99     p995
