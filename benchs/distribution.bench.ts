@@ -1,5 +1,6 @@
 import * as pl from '../lib/index.ts'
 import * as jt from 'npm:jstat-esm@^2.0.0'
+import normal from 'npm:@stdlib/random-base-normal'
 
 const z2p: (z: number) => number = (z) => jt.normal.cdf(z, 0, 1)
 const p2z: (p: number) => number = (p) => jt.normal.inv(p, 0, 1)
@@ -20,3 +21,5 @@ Deno.bench('Distribution Bench - f2p - @psych/lib', () => { pl.f2p(Math.random()
 Deno.bench('Distribution Bench - f2p - jstat-esm', () => { f2p(Math.random() * 10, (Math.random() + 1) * 5, (Math.random() + 1) * 100) })
 Deno.bench('Distribution Bench - p2f - @psych/lib', () => { pl.p2f(Math.random(), (Math.random() + 1) * 5, (Math.random() + 1) * 100, false) })
 Deno.bench('Distribution Bench - p2f - jstat-esm', () => { p2f(Math.random(), (Math.random() + 1) * 5, (Math.random() + 1) * 100) })
+Deno.bench('Distribution Bench - randomNormal - @psych/lib', () => { pl.randomNormal() })
+Deno.bench('Distribution Bench - randomNormal - @stdlib/random', () => { normal(0, 1) })

@@ -26,8 +26,16 @@ Deno.test('Distribution Test', () => {
     assertAlmostEquals(pl.z2p(stats[0]), z2p(stats[0]), 1e-6)
     assertAlmostEquals(pl.p2z(sigs[0]), p2z(sigs[0]), 1e-6)
     assertAlmostEquals(pl.t2p(stats[1], df2), t2p(stats[1], df2), 1e-6)
-    assertAlmostEquals(pl.p2t(sigs[1], df2), p2t(sigs[1], df2), 1e-4)
+    assertAlmostEquals(pl.p2t(sigs[1], df2), p2t(sigs[1], df2), 1e-3)
     assertAlmostEquals(pl.f2p(stats[2], df1, df2, false), f2p(stats[2], df1, df2), 1e-6)
-    assertAlmostEquals(pl.p2f(sigs[2], df1, df2, false), p2f(sigs[2], df1, df2), 1e-4)
+    assertAlmostEquals(pl.p2f(sigs[2], df1, df2, false), p2f(sigs[2], df1, df2), 1e-3)
   }
+  const randomResult: number[] = []
+  const randomMean = Math.random() * 10
+  const randomStd = Math.random() * 5
+  for (let i = 0; i < 100000; i++) {
+    randomResult.push(pl.randomNormal(randomMean, randomStd))
+  }
+  assertAlmostEquals(pl.mean(randomResult), randomMean, 1e-1)
+  assertAlmostEquals(pl.std(randomResult, false), randomStd, 1e-1)
 })

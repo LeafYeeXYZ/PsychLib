@@ -82,3 +82,15 @@ export function z2p(z: number): number {
       Math.exp(-absZ * absZ)
   return 0.5 * (1 + sign * erf)
 }
+
+/**
+ * Generate a random number from a normal distribution
+ *
+ * 从正态分布中生成一个随机数
+ * @param mean mean value (default: 0)
+ * @param std standard deviation (default: 1)
+ * @returns random number
+ */
+export function randomNormal(mean: number = 0, std: number = 1): number {
+  return mean + Math.abs(std) * p2z(Math.random())
+}

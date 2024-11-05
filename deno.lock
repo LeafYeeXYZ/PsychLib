@@ -3,6 +3,8 @@
   "specifiers": {
     "jsr:@std/assert@*": "1.0.6",
     "jsr:@std/internal@^1.0.4": "1.0.4",
+    "npm:@stdlib/random-base-normal@*": "0.2.1",
+    "npm:@stdlib/random@*": "0.3.1",
     "npm:@stdlib/stats-pcorrtest@~0.2.2": "0.2.2",
     "npm:@stdlib/stats-ttest2@*": "0.2.2",
     "npm:@stdlib/stats-ttest@*": "0.2.2",
@@ -186,6 +188,31 @@
         "@stdlib/assert-has-int8array-support"
       ]
     },
+    "@stdlib/array-to-json@0.2.1": {
+      "integrity": "sha512-cTLBiXSbs2/g4U5xf9nz9TY54LW67nrbLCGsnqHMp4KSKixb/wH/F7BSNCN3WLJVW+5qFInVJ7Tav+lBeSPDQQ==",
+      "dependencies": [
+        "@stdlib/array-complex128",
+        "@stdlib/array-complex64",
+        "@stdlib/array-float32",
+        "@stdlib/array-float64",
+        "@stdlib/array-int16",
+        "@stdlib/array-int32",
+        "@stdlib/array-int8",
+        "@stdlib/array-uint16",
+        "@stdlib/array-uint32",
+        "@stdlib/array-uint8",
+        "@stdlib/array-uint8c",
+        "@stdlib/assert-instance-of",
+        "@stdlib/assert-is-complex-typed-array",
+        "@stdlib/assert-is-typed-array",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/strided-base-reinterpret-complex128",
+        "@stdlib/strided-base-reinterpret-complex64",
+        "@stdlib/string-format",
+        "@stdlib/utils-constructor-name",
+        "@stdlib/utils-get-prototype-of"
+      ]
+    },
     "@stdlib/array-uint16@0.2.2": {
       "integrity": "sha512-z5c/Izw43HkKfb1pTgEUMAS8GFvhtHkkHZSjX3XJN+17P0VjknxjlSvPiCBGqaDX9jXtlWH3mn1LSyDKtJQoeA==",
       "dependencies": [
@@ -233,6 +260,9 @@
       "dependencies": [
         "@stdlib/assert-is-float64array"
       ]
+    },
+    "@stdlib/assert-has-function-name-support@0.2.2": {
+      "integrity": "sha512-8WvRrAD7uJGbJR/F4F9GF5yd39RjKssptQdiZS2MuPhnkFeXZPsSQlAVvCsQfZyZESBykL9qxoKZ8suM/XlMbA=="
     },
     "@stdlib/assert-has-generator-support@0.2.2": {
       "integrity": "sha512-TcE9BGV8i7B2OmxPlJ/2DUrAwG0W4fFS/DE7HmVk68PXVZsgyNQ/WP/IHBoazHDjhN5c3dU21c20kM/Bw007Rw==",
@@ -310,6 +340,13 @@
         "@stdlib/assert-is-uint8clampedarray"
       ]
     },
+    "@stdlib/assert-instance-of@0.2.2": {
+      "integrity": "sha512-PqVd6EzbGV5mD/gTEarFutdRTyKkyK3H0b3NZHQ7N9QbVDC1XBhI9ajR/twI3445AfsW/9OSzJoWIM95PjGaOA==",
+      "dependencies": [
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/string-format"
+      ]
+    },
     "@stdlib/assert-is-array-like-object@0.2.2": {
       "integrity": "sha512-T73aKzzi1sKhyOn1wnp1lw2yZEyCnyNfE69p1oWHyWn7EXAJN3J0wTJGGt71/mgD0DDAd3Q+5FsGCYhfmrYdsQ==",
       "dependencies": [
@@ -370,6 +407,15 @@
       "dependencies": [
         "@stdlib/complex-float32-ctor@0.0.2",
         "@stdlib/complex-float64-ctor@0.0.2"
+      ]
+    },
+    "@stdlib/assert-is-complex-typed-array@0.2.2": {
+      "integrity": "sha512-pjkKA0PDU4wwdytoBb34kr71ZCgn3WWW3Ku/c6wXdx5VsC+J/nE7qCm/odgIesdhzu34I3MnYw8dSBQNyUPuIg==",
+      "dependencies": [
+        "@stdlib/array-complex128",
+        "@stdlib/array-complex64",
+        "@stdlib/utils-constructor-name",
+        "@stdlib/utils-get-prototype-of"
       ]
     },
     "@stdlib/assert-is-float32array@0.2.2": {
@@ -487,6 +533,13 @@
         "@stdlib/utils-define-nonenumerable-read-only-property"
       ]
     },
+    "@stdlib/assert-is-positive-number@0.2.2": {
+      "integrity": "sha512-n/6Daka7uTkCmDNphgMwOXWeKOUCnM7KWhQn6aCclzCmL6szB/lsxnHFR/BCW5TmJGZlqvq07x84hfh57UkvJg==",
+      "dependencies": [
+        "@stdlib/assert-is-number",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
     "@stdlib/assert-is-regexp@0.2.2": {
       "integrity": "sha512-2JtiUtRJxPaVXL7dkWoV3n5jouI65DwYDXsDXg3xo23TXlTNGgU/HhKO4FWC1Yqju7YMZi0hcZSW6E9v8ISqeQ==",
       "dependencies": [
@@ -507,6 +560,24 @@
       "dependencies": [
         "@stdlib/assert-is-nonnegative-integer",
         "@stdlib/constants-array-max-typed-array-length"
+      ]
+    },
+    "@stdlib/assert-is-typed-array@0.2.2": {
+      "integrity": "sha512-PI7TpItESx9ztgyJUlJzg4vqlqEKRXT6bIvYg3S68u+7pluBam3xamxlkWrST5X/w44jiJK400UrPZArCz6tog==",
+      "dependencies": [
+        "@stdlib/array-float32",
+        "@stdlib/array-float64",
+        "@stdlib/array-int16",
+        "@stdlib/array-int32",
+        "@stdlib/array-int8",
+        "@stdlib/array-uint16",
+        "@stdlib/array-uint32",
+        "@stdlib/array-uint8",
+        "@stdlib/array-uint8c",
+        "@stdlib/assert-has-float64array-support",
+        "@stdlib/utils-constructor-name",
+        "@stdlib/utils-function-name",
+        "@stdlib/utils-get-prototype-of"
       ]
     },
     "@stdlib/assert-is-uint16array@0.2.2": {
@@ -949,6 +1020,9 @@
         "@stdlib/complex-float64-reim",
         "@stdlib/utils-library-manifest"
       ]
+    },
+    "@stdlib/math-base-ops-umul@0.2.2": {
+      "integrity": "sha512-OOPSTw3AZ7w47JFUhWGAPZZgy5EI9ZsXQtAfuvRUslermF6Uw50MvF1ZdCeRSRcYpbeTKGsCuyOIUQkItSj4Hw=="
     },
     "@stdlib/math-base-special-abs@0.2.2": {
       "integrity": "sha512-cw5CXj05c/L0COaD9J+paHXwmoN5IBYh+Spk0331f1pEMvGxSO1KmCREZaooUEEFKPhKDukEHKeitja2yAQh4Q==",
@@ -1847,6 +1921,86 @@
     "@stdlib/process-cwd@0.2.2": {
       "integrity": "sha512-8Q/nA/ud5d5PEzzG6ZtKzcOw+RMLm5CWR8Wd+zVO5vcPj+JD7IV7M2lBhbzfUzr63Torrf/vEhT3cob8vUHV/A=="
     },
+    "@stdlib/random-base-improved-ziggurat@0.2.1": {
+      "integrity": "sha512-BZpx/MxKKKS3qqpUn4uI9dsVL/hpBqJRvZycA4+wxLlbo2nsr0pknWs9KzWvk3VbYXdxcb7dpjrCaZMNKEN1Ew==",
+      "dependencies": [
+        "@stdlib/array-to-json",
+        "@stdlib/assert-has-own-property",
+        "@stdlib/assert-is-boolean",
+        "@stdlib/assert-is-function",
+        "@stdlib/assert-is-plain-object",
+        "@stdlib/assert-is-uint32array",
+        "@stdlib/constants-uint32-max",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/math-base-special-abs",
+        "@stdlib/math-base-special-exp",
+        "@stdlib/math-base-special-floor",
+        "@stdlib/math-base-special-ln",
+        "@stdlib/math-base-special-sqrt",
+        "@stdlib/random-base-mt19937",
+        "@stdlib/string-format",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-accessor",
+        "@stdlib/utils-define-nonenumerable-read-only-property",
+        "@stdlib/utils-define-nonenumerable-read-write-accessor",
+        "@stdlib/utils-noop"
+      ]
+    },
+    "@stdlib/random-base-mt19937@0.2.1": {
+      "integrity": "sha512-k6EelL+OfM/ygS7L1m9Fx+AuFBlPtFgyRikVcixCuyEB8xfyYkzn1+LtoqlQLcLb6IwmkKgYX4/dSL9XBL1Gew==",
+      "dependencies": [
+        "@stdlib/array-to-json",
+        "@stdlib/array-uint32",
+        "@stdlib/assert-has-own-property",
+        "@stdlib/assert-is-boolean",
+        "@stdlib/assert-is-collection",
+        "@stdlib/assert-is-plain-object",
+        "@stdlib/assert-is-positive-integer",
+        "@stdlib/assert-is-uint32array",
+        "@stdlib/blas-base-gcopy",
+        "@stdlib/constants-float64-max-safe-integer",
+        "@stdlib/constants-uint32-max",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/math-base-ops-umul",
+        "@stdlib/math-base-special-floor",
+        "@stdlib/math-base-special-max@0.2.1",
+        "@stdlib/random-base-shared",
+        "@stdlib/string-format",
+        "@stdlib/utils-define-nonenumerable-read-only-accessor",
+        "@stdlib/utils-define-nonenumerable-read-only-property",
+        "@stdlib/utils-define-nonenumerable-read-write-accessor"
+      ]
+    },
+    "@stdlib/random-base-normal@0.2.1": {
+      "integrity": "sha512-k9tua7+S2hP0natk446LaizPh6n9gWY3PycUVqi7RY6ipiHbexOXJVW89l9Oh+teGDeMrfBclPyEZeWaZwN01g==",
+      "dependencies": [
+        "@stdlib/array-to-json",
+        "@stdlib/assert-has-own-property",
+        "@stdlib/assert-is-function",
+        "@stdlib/assert-is-nan",
+        "@stdlib/assert-is-number",
+        "@stdlib/assert-is-plain-object",
+        "@stdlib/assert-is-positive-number",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/random-base-improved-ziggurat",
+        "@stdlib/string-format",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-accessor",
+        "@stdlib/utils-define-nonenumerable-read-only-property",
+        "@stdlib/utils-define-nonenumerable-read-write-accessor",
+        "@stdlib/utils-noop"
+      ]
+    },
+    "@stdlib/random-base-shared@0.1.1": {
+      "integrity": "sha512-G0tLkWZviO2zfiTwTPI4r/nEjvpw+5fTrqEd15iAVT9rJG8H14sqbZJli1w+Kbuqb3ZrBJJNR9+N0FDUZwJrWg=="
+    },
+    "@stdlib/random@0.3.1": {
+      "integrity": "sha512-zhgjp47LKDTROgFv2xiAP6NRexBM1Bc0JqEYRDxdayNOqlO31s/L1cpcpfe+tVFZHrvUmd13lAR6dw2SC/Osqw==",
+      "dependencies": [
+        "@stdlib/utils"
+      ]
+    },
     "@stdlib/regexp-extended-length-path@0.2.2": {
       "integrity": "sha512-z3jqauEsaxpsQU3rj1A1QnOgu17pyW5kt+Az8QkoTk7wqNE8HhPikI6k4o7XBHV689rSFWZCl4c4W+7JAiNObQ==",
       "dependencies": [
@@ -2123,6 +2277,12 @@
         "@stdlib/utils-define-property"
       ]
     },
+    "@stdlib/utils-define-nonenumerable-read-write-accessor@0.2.2": {
+      "integrity": "sha512-uMw4hQNrZxzrDC8Vyq8+JENBXacX+VARslxEj8gCW2HRVOaS9461XeEsC7RDWpXPJzR4R9dIjy9PJCEzMuX/yQ==",
+      "dependencies": [
+        "@stdlib/utils-define-property"
+      ]
+    },
     "@stdlib/utils-define-property@0.2.4": {
       "integrity": "sha512-XlMdz7xwuw/sqXc9LbsV8XunCzZXjbZPC+OAdf4t4PBw4ZRwGzlTI6WED+f4PYR5Tp9F1cHgLPyMYCIBfA2zRg==",
       "dependencies": [
@@ -2146,6 +2306,16 @@
     },
     "@stdlib/utils-eval@0.2.2": {
       "integrity": "sha512-MaFpWZh3fGcTjUeozju5faXqH8w4MRVfpO/M5pon3osTM0by8zrKiI5D9oWqNVygb9JBd+etE+4tj2L1nr5j2A=="
+    },
+    "@stdlib/utils-function-name@0.2.2": {
+      "integrity": "sha512-zsXSalwNmGvkhnINJ7z61Z/R7q88nyQHrBdpB1pYdjmTER1PIricaxrs/7ccSw2C2np+8ZzgGZj+TI0Ok0uCrg==",
+      "dependencies": [
+        "@stdlib/assert-has-function-name-support",
+        "@stdlib/assert-is-function",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/regexp-function-name",
+        "@stdlib/string-format"
+      ]
     },
     "@stdlib/utils-get-prototype-of@0.2.2": {
       "integrity": "sha512-eDb1BAvt7GW/jduBkfuQrUsA9p09mV8RW20g0DWPaxci6ORYg/UB0tdbAA23aZz2QUoxdYY5s/UJxlq/GHwoKQ==",
@@ -2190,6 +2360,9 @@
         "@stdlib/assert-has-tostringtag-support",
         "@stdlib/symbol-ctor"
       ]
+    },
+    "@stdlib/utils-noop@0.2.2": {
+      "integrity": "sha512-QlHCBCExrFlNFFqDBOvxPeHkvAuMBHsbQYWRjSG2FD6QumEDn9EqBAcJZNr+xYdkw/6SVRJ0ySTyroReg5vcAA=="
     },
     "@stdlib/utils-type-of@0.2.2": {
       "integrity": "sha512-RLGFxPNgY9AtVVrFGdKO6Y3pOd/Ov2WA4O2/czZN/AbgYzbPdoF0KkfvHRIney6k+TtvoyYB8YqZXJ4G88f9BQ==",
