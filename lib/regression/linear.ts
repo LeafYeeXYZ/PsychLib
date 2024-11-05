@@ -5,20 +5,25 @@ import { f2p, t2p } from '../distribution/index.ts'
  * One-variable linear regression
  *
  * 一元线性回归
- * @param x independent variable
- * @param y dependent variable
- * @throws {Error} The x and y data of linear regression must be equal
- * @example
- * ```typescript
- * import { LinearRegressionOne } from '@psych/lib'
- * const x = [1, 2, 3, 4, 5]
- * const y = [2, 3, 4, 5, 6]
- * const lr = new LinearRegressionOne(x, y)
- * console.log(lr.b0, lr.b1)
- * console.log(lr.calc(6))
- * ```
  */
 export class LinearRegressionOne {
+  /**
+   * One-variable linear regression
+   *
+   * 一元线性回归
+   * @param x independent variable
+   * @param y dependent variable
+   * @throws {Error} The x and y data of linear regression must be equal
+   * @example
+   * ```typescript
+   * import { LinearRegressionOne } from '@psych/lib'
+   * const x = [1, 2, 3, 4, 5]
+   * const y = [2, 3, 4, 5, 6]
+   * const lr = new LinearRegressionOne(x, y)
+   * console.log(lr.b0, lr.b1)
+   * console.log(lr.calc(6))
+   * ```
+   */
   constructor(x: number[], y: number[]) {
     if (x.length !== y.length) {
       throw new Error('The x and y data of linear regression must be equal')
@@ -173,23 +178,28 @@ export class LinearRegressionOne {
  * Two-variable linear regression
  *
  * 二元线性回归
- * @param x1 first independent variable
- * @param x2 second independent variable
- * @param y dependent variable
- * @param type use Standard Regression or Sequential Regression
- * @throws {TypeError} The x and y data of linear regression must be equal
- * @example
- * ```typescript
- * import { LinearRegressionTwoStd } from '@psych/lib'
- * const x1 = [1, 2, 3, 4, 10]
- * const x2 = [1, 3, 5, 7, 9]
- * const y = [6, 14, 22, 30, 48]
- * const lr = new LinearRegressionTwo(x1, x2, y)
- * console.log(lr.b0, lr.b1, lr.b2)
- * console.log(lr.calc(6, 7))
- * ```
  */
 export class LinearRegressionTwo {
+  /**
+   * Two-variable linear regression
+   *
+   * 二元线性回归
+   * @param x1 first independent variable
+   * @param x2 second independent variable
+   * @param y dependent variable
+   * @param type use Standard Regression or Sequential Regression
+   * @throws {TypeError} The x and y data of linear regression must be equal
+   * @example
+   * ```typescript
+   * import { LinearRegressionTwoStd } from '@psych/lib'
+   * const x1 = [1, 2, 3, 4, 10]
+   * const x2 = [1, 3, 5, 7, 9]
+   * const y = [6, 14, 22, 30, 48]
+   * const lr = new LinearRegressionTwo(x1, x2, y)
+   * console.log(lr.b0, lr.b1, lr.b2)
+   * console.log(lr.calc(6, 7))
+   * ```
+   */
   constructor(
     x1: number[],
     x2: number[],

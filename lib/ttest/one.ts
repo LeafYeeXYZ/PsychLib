@@ -5,21 +5,26 @@ import { p2t, t2p } from '../distribution/index.ts'
  * One sample Student's t-test
  *
  * 单样本 t 检验
- * @param data numbers
- * @param mu population mean
- * @param twoside two side or not (default is true)
- * @param alpha significance level (default is 0.05) (only for confidence interval)
- * @returns t test result
- * @example
- * ```typescript
- * import { OneSampleTTest } from '@psych/lib'
- * const data = [1, 2, 3, 4, 5]
- * const mu = 3
- * const ttest = new OneSampleTTest(data, mu)
- * console.log(ttest.p, ttest.t)
- * ```
  */
 export class OneSampleTTest {
+  /**
+   * One sample Student's t-test
+   *
+   * 单样本 t 检验
+   * @param data numbers
+   * @param mu population mean
+   * @param twoside two side or not (default is true)
+   * @param alpha significance level (default is 0.05) (only for confidence interval)
+   * @returns t test result
+   * @example
+   * ```typescript
+   * import { OneSampleTTest } from '@psych/lib'
+   * const data = [1, 2, 3, 4, 5]
+   * const mu = 3
+   * const ttest = new OneSampleTTest(data, mu)
+   * console.log(ttest.p, ttest.t)
+   * ```
+   */
   constructor(
     data: number[],
     mu: number,

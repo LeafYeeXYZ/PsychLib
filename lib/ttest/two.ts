@@ -5,22 +5,27 @@ import { p2t, t2p } from '../distribution/index.ts'
  * Two sample Student's t-test
  *
  * 独立样本 t 检验
- * @param a numbers array a
- * @param b numbers array b
- * @param twoside two side or not (default is true)
- * @param mu population mean difference (default is 0)
- * @param alpha significance level (default is 0.05) (only for confidence interval)
- * @returns t test result
- * @example
- * ```typescript
- * import { TwoSampleTTest } from '@psych/lib'
- * const a = [1, 2, 3, 4, 5]
- * const b = [6, 7, 8, 9, 10]
- * const ttest = new TwoSampleTTest(a, b)
- * console.log(ttest.p, ttest.t)
- * ```
  */
 export class TwoSampleTTest {
+  /**
+   * Two sample Student's t-test
+   *
+   * 独立样本 t 检验
+   * @param a numbers array a
+   * @param b numbers array b
+   * @param twoside two side or not (default is true)
+   * @param mu population mean difference (default is 0)
+   * @param alpha significance level (default is 0.05) (only for confidence interval)
+   * @returns t test result
+   * @example
+   * ```typescript
+   * import { TwoSampleTTest } from '@psych/lib'
+   * const a = [1, 2, 3, 4, 5]
+   * const b = [6, 7, 8, 9, 10]
+   * const ttest = new TwoSampleTTest(a, b)
+   * console.log(ttest.p, ttest.t)
+   * ```
+   */
   constructor(
     a: number[],
     b: number[],

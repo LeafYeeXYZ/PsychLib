@@ -170,7 +170,7 @@ export function min(data: number[], sorted: boolean = false): number {
   if (sorted) return data[0]
   let r = data[0]
   for (let i = 1; i < data.length; i++) {
-    (data[i] < r) && (r = data[i])
+    ;(data[i] < r) && (r = data[i])
   }
   return r
 }
@@ -192,7 +192,7 @@ export function max(data: number[], sorted: boolean = false): number {
   if (sorted) return data[data.length - 1]
   let r = data[0]
   for (let i = 1; i < data.length; i++) {
-    (data[i] > r) && (r = data[i])
+    ;(data[i] > r) && (r = data[i])
   }
   return r
 }

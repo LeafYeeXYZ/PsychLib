@@ -5,23 +5,29 @@ import { p2t, t2p } from '../distribution/index.ts'
  * Welch's t-test
  *
  * 韦尔奇 t 检验 (不等方差 t 检验)
- * @param a numbers array a
- * @param b numbers array b
- * @param twoside two side or not (default is true)
- * @param mu population mean difference (default is 0)
- * @param alpha significance level (default is 0.05) (only for confidence interval)
- * @returns t test result
- * @example
- * ```typescript
- * import { WelchTTest } from '@psych/lib'
- * const a = [1, 2, 3, 4, 5]
- * const b = [6, 7, 8, 9, 10]
- * const ttest = new WelchTTest(a, b)
- * console.log(ttest.p, ttest.t)
- * ```
  * @see https://en.wikipedia.org/wiki/Welch%27s_t-test
  */
 export class WelchTTest {
+  /**
+   * Welch's t-test
+   *
+   * 韦尔奇 t 检验 (不等方差 t 检验)
+   * @param a numbers array a
+   * @param b numbers array b
+   * @param twoside two side or not (default is true)
+   * @param mu population mean difference (default is 0)
+   * @param alpha significance level (default is 0.05) (only for confidence interval)
+   * @returns t test result
+   * @example
+   * ```typescript
+   * import { WelchTTest } from '@psych/lib'
+   * const a = [1, 2, 3, 4, 5]
+   * const b = [6, 7, 8, 9, 10]
+   * const ttest = new WelchTTest(a, b)
+   * console.log(ttest.p, ttest.t)
+   * ```
+   * @see https://en.wikipedia.org/wiki/Welch%27s_t-test
+   */
   constructor(
     a: number[],
     b: number[],
@@ -45,12 +51,13 @@ export class WelchTTest {
     const semB = this.stdB / Math.sqrt(b.length)
     this.sem = Math.sqrt((semA ** 2) + (semB ** 2))
     const up = ((variA / a.length) + (variB / b.length)) ** 2
-    const down1 = (variA ** 2) / (((a.length ** 2) * this.dfA))
-    const down2 = (variB ** 2) / (((b.length ** 2) * this.dfB))
+    const down1 = (variA ** 2) / ((a.length ** 2) * this.dfA)
+    const down2 = (variB ** 2) / ((b.length ** 2) * this.dfB)
     this.df = up / (down1 + down2)
     this.t = (this.meanDiff - this.mu) / this.sem
     this.p = t2p(this.t, this.df, this.twoside)
-    const variance = (variA * this.dfA + variB * this.dfB) / (this.dfA + this.dfB)
+    const variance = (variA * this.dfA + variB * this.dfB) /
+      (this.dfA + this.dfB)
     this.cohenD = (this.meanDiff - this.mu) / Math.sqrt(variance)
     this.r2 = (this.t ** 2) / (this.t ** 2 + this.df)
     const ciT = p2t(this.alpha, this.df)
