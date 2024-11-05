@@ -8,6 +8,8 @@ const t2p: (t: number, df: number) => number = (t, df) => 2 * (1 - jt.studentt.c
 const p2t: (p: number, df: number) => number = (p, df) => jt.studentt.inv(1 - p / 2, df)
 const f2p: (f: number, df1: number, df2: number) => number = (f, df1, df2) => 1 - jt.centralF.cdf(f, df1, df2)
 const p2f: (p: number, df1: number, df2: number) => number = (p, df1, df2) => jt.centralF.inv(1 - p, df1, df2)
+const c2p: (c: number, df: number) => number = (c, df) => 1 - jt.chisquare.cdf(c, df)
+const p2c: (p: number, df: number) => number = (p, df) => jt.chisquare.inv(1 - p, df)
 
 Deno.test('Distribution Test', () => {
   for (let i = 0; i < 1000; i++) {
@@ -16,19 +18,17 @@ Deno.test('Distribution Test', () => {
       (Math.random() - 0.5) * 10,
       Math.random() * 20,
     ]
-    const sigs = [
-      Math.random(),
-      Math.random(),
-      Math.random(),
-    ]
-    const df1 = (Math.random() + 1) * 5
+    const sig = Math.random()
+    const df1 = (Math.random() + 1) * 10
     const df2 = (Math.random() + 1) * 100
     assertAlmostEquals(pl.z2p(stats[0]), z2p(stats[0]), 1e-6)
-    assertAlmostEquals(pl.p2z(sigs[0]), p2z(sigs[0]), 1e-6)
+    assertAlmostEquals(pl.p2z(sig), p2z(sig), 1e-6)
     assertAlmostEquals(pl.t2p(stats[1], df2), t2p(stats[1], df2), 1e-6)
-    assertAlmostEquals(pl.p2t(sigs[1], df2), p2t(sigs[1], df2), 1e-3)
-    assertAlmostEquals(pl.f2p(stats[2], df1, df2, false), f2p(stats[2], df1, df2), 1e-6)
-    assertAlmostEquals(pl.p2f(sigs[2], df1, df2, false), p2f(sigs[2], df1, df2), 1e-3)
+    assertAlmostEquals(pl.p2t(sig, df2), p2t(sig, df2), 1e-3)
+    assertAlmostEquals(pl.f2p(stats[2], df1, df2), f2p(stats[2], df1, df2), 1e-6)
+    assertAlmostEquals(pl.p2f(sig, df1, df2), p2f(sig, df1, df2), 1e-3)
+    assertAlmostEquals(pl.c2p(stats[2], df1), c2p(stats[2], df1), 1e-6)
+    assertAlmostEquals(pl.p2c(sig, df1), p2c(sig, df1), 0.5)
   }
   const randomResult: number[] = []
   const randomMean = Math.random() * 10
