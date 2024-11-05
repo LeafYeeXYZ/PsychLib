@@ -43,7 +43,7 @@ console.log(p2f(0.05, 5, 5).toFixed(2)) // 7.15
 
 # Development
 
-If you haven't installed `deno` yet, please install it referring to the <https://deno.com>. Then, clone this repository and install dependencies.
+If you haven't installed `deno` yet, please install it referring to the <https://deno.com>. Then, clone this repository.
 
 ```bash
 git clone https://github.com/LeafYeeXYZ/PsychLib.git
