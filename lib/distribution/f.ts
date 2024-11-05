@@ -96,9 +96,9 @@ function ibeta(x: number, a: number, b: number): number {
  * @param df2 degree of freedom 2
  * @param twoside two side or not (default is true)
  * @returns p value
- * @throws {Error} f must be greater than 0
  * @throws {Error} df1 must be greater than 0
  * @throws {Error} df2 must be greater than 0
+ * @throws {Error} f must be greater than or equal to 0
  */
 export function f2p(
   f: number,
@@ -106,15 +106,17 @@ export function f2p(
   df2: number,
   twoside: boolean = true,
 ): number {
-  if (f <= 0) {
-    throw new Error('f must be greater than 0')
-  }
   if (df1 <= 0) {
     throw new Error('df1 must be greater than 0')
   }
   if (df2 <= 0) {
     throw new Error('df2 must be greater than 0')
   }
+  if (f < 0) {
+    throw new Error('f must be greater than or equal to 0')
+  }
+  if (f === 0) return 1
+  if (f === Infinity) return 0
   const x: number = df2 / (df2 + df1 * f)
   const p: number = ibeta(x, df2 / 2, df1 / 2)
   return twoside ? 2 * Math.min(p, 1 - p) : p
@@ -132,9 +134,8 @@ export function f2p(
  * @param df1 degree of freedom 1
  * @param df2 degree of freedom 2
  * @param twoside two side or not (default is true)
- * @param precision precision (default is 0.00001)
+ * @param precision precision (default is 1e-8)
  * @returns f value
- * @throws {Error} p value must be in the range (0, 1)
  * @throws {Error} df1 must be greater than 0
  * @throws {Error} df2 must be greater than 0
  */
@@ -143,27 +144,48 @@ export function p2f(
   df1: number,
   df2: number,
   twoside: boolean = true,
-  precision: number = 0.000001,
+  precision: number = 1e-8,
 ): number {
-  if (p <= 0 || p >= 1) {
-    throw new Error('p value must be in the range (0, 1)')
-  }
+  // 参数验证
   if (df1 <= 0) {
     throw new Error('df1 must be greater than 0')
   }
   if (df2 <= 0) {
     throw new Error('df2 must be greater than 0')
   }
-  let min: number = 0.0
-  let max: number = 1000000.0
-  let f: number = 0.0
-  while (max - min > precision) {
+  // 特殊值快速处理
+  if (p === 1) return 0
+  if (p === 0) return Infinity
+  // 处理双侧情况
+  const _p = twoside ? p / 2 : p
+  // 初始搜索范围
+  const maxIter = 100
+  let min = 0
+  let max = 100
+  let f: number
+  let pval: number
+  // 动态扩展搜索范围
+  while (f2p(max, df1, df2, false) > _p) {
+    min = max
+    max *= 2
+  }
+  // 二分查找，添加最大迭代限制
+  for (let i = 0; i < maxIter; i++) {
     f = (min + max) / 2
-    if (f2p(f, df1, df2, twoside) < p) {
-      max = f
-    } else {
+    pval = f2p(f, df1, df2, false)
+    // 精度满足要求则提前返回
+    if (Math.abs(pval - _p) < precision) {
+      return f
+    }
+    if (pval > _p) {
       min = f
+    } else {
+      max = f
+    }
+    // 区间收敛检查
+    if (Math.abs(max - min) < precision) {
+      return (max + min) / 2
     }
   }
-  return f
+  return (max + min) / 2
 }

@@ -4,12 +4,14 @@
  * 把标准正态分布的累积概率值 p 转换为 z 值
  * @param p p value
  * @returns z value
- * @throws {Error} p must be in the range (0, 1)
+ * @throws {Error} p must be between 0 and 1
  */
 export function p2z(p: number): number {
-  if (p <= 0 || p >= 1) {
-    throw new Error('p must be in the range (0, 1)')
+  if (p < 0 || p > 1) {
+    throw new Error('p must be between 0 and 1')
   }
+  if (p === 0) return -Infinity
+  if (p === 1) return Infinity
   // Coefficients for the approximation
   const a1 = -3.969683028665376e+01
   const a2 = 2.209460984245205e+02
@@ -64,6 +66,8 @@ export function p2z(p: number): number {
  * @returns p value
  */
 export function z2p(z: number): number {
+  if (z === Infinity) return 1
+  if (z === -Infinity) return 0
   const p = 0.3275911
   const a1 = 0.254829592
   const a2 = -0.284496736
