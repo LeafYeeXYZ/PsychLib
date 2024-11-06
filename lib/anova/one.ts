@@ -1,6 +1,5 @@
 import { sum, ss } from '../base.ts'
 import { f2p, t2p } from '../distribution/index.ts'
-import { getQProb } from './utils.ts'
 
 /**
  * One-way ANOVA
@@ -183,37 +182,7 @@ export class OneWayAnova {
    */
   dfW: number
   /**
-   * Tukey's HSD post hoc test
-   * 
-   * Tukey's HSD 事后检验
-   * @returns Tukey's HSD post hoc test result
-   */
-  tukey(): TukeyResult[] {
-    const results: TukeyResult[] = []
-    // 调和平均数
-    const harmonicN = this.groups.length / 
-      this.groupsCount.reduce((acc, n) => acc + 1/n, 0)
-    // 标准误
-    const se = Math.sqrt(this.MSw / harmonicN)
-    // 两两比较
-    for(let i = 0; i < this.groups.length - 1; i++) {
-      for(let j = i + 1; j < this.groups.length; j++) {
-        const diff = this.groupsMean[i] - this.groupsMean[j]
-        const q = Math.abs(diff) / se
-        const p = getQProb(q, this.groups.length, this.dfW)
-        results.push({
-          groupA: this.groups[i],
-          groupB: this.groups[j], 
-          diff,
-          q: q,
-          p: p,
-        })
-      }
-    }
-    return results
-  }
-  /**
-   * Scheffe post hoc test
+   * Scheffe post hoc test  
    * 
    * Scheffe 事后检验
    * @returns Scheffe post hoc test result
@@ -242,12 +211,15 @@ export class OneWayAnova {
     return results
   }
   /**
-   * Bonferroni post hoc test
+   * Bonferroni post hoc test  
+   * Sp^2 = MSw
    * 
-   * Bonferroni 事后检验
+   * Bonferroni 事后检验  
+   * Sp^2 使用 MSw 代替
    * @returns Bonferroni post hoc test result
    */
   bonferroni(): BonferroniResult[] {
+    const sig = 0.05 / (this.groups.length * (this.groups.length - 1) / 2)
     const results: BonferroniResult[] = []
     // 两两比较
     for(let i = 0; i < this.groups.length - 1; i++) {
@@ -262,6 +234,7 @@ export class OneWayAnova {
           diff,
           t: t,
           p: p,
+          sig,
         })
       }
     }
@@ -275,6 +248,12 @@ export class OneWayAnova {
  * 方差分析事后检验结果 (Bonferroni)
  */
 export type BonferroniResult = {
+  /**
+   * Significance level critical value (control total type I error rate to 0.05)
+   * 
+   * 显著性水平临界值 (控制总一类错误率为 0.05)
+   */
+  sig: number
   /**
    * Group A
    * 
@@ -337,44 +316,6 @@ export type ScheffeResult = {
    * F值
    */
   f: number
-  /**
-   * p value
-   * 
-   * p值
-   */
-  p: number
-}
-
-/**
- * ANOVA Post Hoc Test Result (Tukey)
- * 
- * 方差分析事后检验结果 (Tukey)
- */
-export type TukeyResult = {
-  /**
-   * Group A
-   * 
-   * A组
-   */
-  groupA: string | number
-  /**
-   * Group B
-   * 
-   * B组
-   */
-  groupB: string | number
-  /**
-   * Difference of mean
-   * 
-   * 均值差异
-   */
-  diff: number
-  /**
-   * q value
-   * 
-   * q值
-   */
-  q: number
   /**
    * p value
    * 

@@ -11,7 +11,6 @@ Deno.test('Anova Test', () => {
     const sl_res = sl(value, group)
     assertAlmostEquals(pl_res.f, sl_res.statistic, 1e-6)
     assertAlmostEquals(pl_res.p, sl_res.pValue, 1e-6)
-    pl_res.tukey()
     pl_res.scheffe()
     pl_res.bonferroni()
   }
