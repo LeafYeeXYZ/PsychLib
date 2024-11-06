@@ -69,9 +69,6 @@ export class OneWayAnova {
     this.p = f2p(this.f, this.dfB, this.dfW)
     this.r2 = this.SSb / this.SSt
     this.cohenF = Math.sqrt(this.r2 / (1 - this.r2))
-    // 实现 Tukey HSD 事后检验...
-    // 实现 Scheffe 事后检验...
-    // 实现 Bonferroni 事后检验...
   } 
   /**
    * Measure effect size Cohen's f

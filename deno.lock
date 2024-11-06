@@ -19,6 +19,7 @@
     "npm:@stdlib/stats-base-min@*": "0.2.2",
     "npm:@stdlib/stats-base-stdev@*": "0.2.2",
     "npm:@stdlib/stats-base-variance@*": "0.2.2",
+    "npm:@stdlib/stats-levene-test@*": "0.2.2",
     "npm:@stdlib/stats-pcorrtest@~0.2.2": "0.2.2",
     "npm:@stdlib/stats-ttest2@*": "0.2.2",
     "npm:@stdlib/stats-ttest@*": "0.2.2",
@@ -2222,6 +2223,9 @@
         "@stdlib/utils-define-nonenumerable-read-only-property"
       ]
     },
+    "@stdlib/stats-incr-mean@0.2.2": {
+      "integrity": "sha512-5FEFw8vxMMNI/OsHK4IWCXv86/Ruqanl3BfJ4Kq2jTNhX5DhylJXfmX5LNL576npMOjREwU3dIO+C6Liej1SaQ=="
+    },
     "@stdlib/stats-incr-stdev@0.2.2": {
       "integrity": "sha512-FSFpFsKenV+4WiTzXxb0pgu0wpHq2XM11ddlJZNdo7sl5OEukLHs/zbLum+GdGBtV6aZirED3IT4jH0QtJi8bw==",
       "dependencies": [
@@ -2230,6 +2234,25 @@
         "@stdlib/math-base-assert-is-nan",
         "@stdlib/math-base-special-sqrt",
         "@stdlib/string-format"
+      ]
+    },
+    "@stdlib/stats-levene-test@0.2.2": {
+      "integrity": "sha512-H3hcoaMX9JaqAQIIBEAhxA8BegKZyKzAq1Y5FnNgkruFg/1WitCnKLAYZYv5PTWc740kltSrrzRrPUQPIyFxtw==",
+      "dependencies": [
+        "@stdlib/assert-has-own-property",
+        "@stdlib/assert-is-array",
+        "@stdlib/assert-is-boolean",
+        "@stdlib/assert-is-nan",
+        "@stdlib/assert-is-number",
+        "@stdlib/assert-is-plain-object",
+        "@stdlib/assert-is-positive-integer",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/math-base-special-abs",
+        "@stdlib/math-base-special-roundn",
+        "@stdlib/stats-anova1",
+        "@stdlib/stats-incr-mean",
+        "@stdlib/string-format",
+        "@stdlib/utils-define-read-only-property"
       ]
     },
     "@stdlib/stats-pcorrtest@0.2.2": {

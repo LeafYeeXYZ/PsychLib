@@ -49,7 +49,9 @@ If you haven't installed `deno` yet, please install it referring to the <https:/
 git clone https://github.com/LeafYeeXYZ/PsychLib.git
 ```
 
-Now you can write `TypeScript` code in `/lib/**/*.ts` and export functions in `/lib/index.ts`. After writing the code, remember to add test cases in `/tests/*.test.ts`. You can run the test cases using the following command.
+Now you can write `TypeScript` code in `/lib/**/*.ts` and export functions in `/lib/index.ts`. Note that you should not import base functions from `/lib/index.ts` to avoid circular dependencies. Instead, you can import them directly from `/lib/base.ts` or `/lib/xxx/index.ts`.
+
+After writing the code, remember to add test cases in `/tests/*.test.ts`. You can run the test cases using the following command.
 
 ```bash
 deno test -A
@@ -113,13 +115,14 @@ summary
 
 benchmark                                        time/iter (avg)        iter/s      (min … max)           p75      p99     p995
 ------------------------------------------------ ----------------------------- --------------------- --------------------------
-@psych/lib - n=1000 - One Way Anova                      51.5 µs        19,410 ( 37.5 µs … 222.9 µs)  54.8 µs 103.0 µs 112.6 µs
-@psych/lib - n=1000 - One Sample T Test                  15.2 µs        65,960 ( 10.8 µs … 126.8 µs)  17.1 µs  24.4 µs  53.8 µs
-@psych/lib - n=1000 - Two Sample T Test                  44.4 µs        22,510 ( 35.2 µs … 386.4 µs)  47.1 µs  58.6 µs 101.0 µs
-@psych/lib - n=1000 - Paired T Test                      28.5 µs        35,080 ( 23.2 µs … 146.8 µs)  33.2 µs  43.4 µs  83.0 µs
-@psych/lib - n=1000 - Welch T Test                       43.2 µs        23,160 ( 29.2 µs … 212.5 µs)  46.4 µs  53.9 µs 101.1 µs
-@psych/lib - n=1000 - Pearson Correlation Test           31.9 µs        31,330 ( 15.9 µs … 163.0 µs)  39.5 µs  42.8 µs  84.8 µs
-@psych/lib - n=1000 - Linear Regression One              78.8 µs        12,690 ( 49.1 µs … 209.7 µs)  79.7 µs 140.6 µs 149.5 µs
-@psych/lib - n=1000 - Linear Regression Two             127.7 µs         7,833 ( 63.7 µs … 284.6 µs) 140.8 µs 213.5 µs 238.2 µs
-@psych/lib - n=1000 - Bootstrap CI (B=1000)              21.8 ms          45.9 ( 21.3 ms …  22.4 ms)  22.0 ms  22.4 ms  22.4 ms
+@psych/lib - n=1000 - Levene Test                       132.3 µs         7,558 (116.0 µs … 530.0 µs) 132.0 µs 193.7 µs 207.4 µs
+@psych/lib - n=1000 - One Way Anova                      52.6 µs        19,000 ( 41.1 µs … 138.9 µs)  55.0 µs  98.5 µs 106.2 µs
+@psych/lib - n=1000 - One Sample T Test                  14.9 µs        67,100 ( 10.9 µs … 114.0 µs)  16.2 µs  25.8 µs  57.6 µs
+@psych/lib - n=1000 - Two Sample T Test                  45.6 µs        21,950 ( 35.7 µs … 385.7 µs)  48.5 µs  58.8 µs 103.8 µs
+@psych/lib - n=1000 - Paired T Test                      31.6 µs        31,620 ( 22.2 µs … 301.7 µs)  33.9 µs  58.8 µs  83.7 µs
+@psych/lib - n=1000 - Welch T Test                       42.2 µs        23,690 ( 24.2 µs … 149.8 µs)  46.3 µs  53.7 µs  93.5 µs
+@psych/lib - n=1000 - Pearson Correlation Test           32.4 µs        30,850 ( 15.8 µs … 134.8 µs)  39.5 µs  45.1 µs  91.8 µs
+@psych/lib - n=1000 - Linear Regression One              79.0 µs        12,660 ( 48.0 µs … 207.0 µs)  79.8 µs 140.9 µs 155.4 µs
+@psych/lib - n=1000 - Linear Regression Two             127.2 µs         7,862 ( 64.5 µs … 283.5 µs) 139.9 µs 214.5 µs 225.1 µs
+@psych/lib - n=1000 - Bootstrap CI (B=1000)              21.6 ms          46.4 ( 21.5 ms …  21.8 ms)  21.6 ms  21.8 ms  21.8 ms
 ```
