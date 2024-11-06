@@ -14,7 +14,6 @@ export class OneWayAnova {
    * 单因素方差分析
    * @param value dependent variable
    * @param group independent variable
-   * @param alpha significance level (default is 0.05) (only for confidence interval)
    * @returns one-way anova result
    * @example
    * ```typescript
@@ -29,13 +28,11 @@ export class OneWayAnova {
   constructor(
     value: number[], 
     group: (string | number)[],
-    alpha: number = 0.05,
   ) {
     const n = value.length
     if (n !== group.length) {
       throw new Error('length of value and group should be equal')
     }
-    this.alpha = alpha
     this.groups = Array.from(new Set(group)).sort((a, b) => a > b ? 1 : -1)
     const k = this.groups.length
     this.dfT = n - 1
@@ -167,12 +164,6 @@ export class OneWayAnova {
    * 分组数据
    */
   values: number[][]
-  /**
-   * alpha significance level
-   * 
-   * 显著性水平
-   */
-  alpha: number
   /**
    * Total degrees of freedom
    * 
