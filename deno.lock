@@ -5,6 +5,7 @@
     "jsr:@std/internal@^1.0.4": "1.0.4",
     "npm:@stdlib/random-base-normal@*": "0.2.1",
     "npm:@stdlib/random@*": "0.3.1",
+    "npm:@stdlib/stats-anova1@*": "0.2.2",
     "npm:@stdlib/stats-base-dists-chisquare-cdf@*": "0.2.2",
     "npm:@stdlib/stats-base-dists-chisquare-quantile@*": "0.2.2",
     "npm:@stdlib/stats-base-dists-f-cdf@*": "0.2.2",
@@ -2026,6 +2027,28 @@
         "@stdlib/utils-define-nonenumerable-read-only-property"
       ]
     },
+    "@stdlib/stats-anova1@0.2.2": {
+      "integrity": "sha512-DH43nLnMbKGZaUNmSOZgrxSjI2UQONCSqH6msCio7fv2SrhI4pYlWYv7gT0yrqVzb+JgYzB+DBWVQDCu20po3g==",
+      "dependencies": [
+        "@stdlib/assert-has-own-property",
+        "@stdlib/assert-is-array",
+        "@stdlib/assert-is-boolean",
+        "@stdlib/assert-is-nan",
+        "@stdlib/assert-is-number",
+        "@stdlib/assert-is-number-array",
+        "@stdlib/assert-is-plain-object",
+        "@stdlib/assert-is-positive-integer",
+        "@stdlib/assert-is-typed-array-like",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/math-base-special-max@0.3.0",
+        "@stdlib/math-base-special-roundn",
+        "@stdlib/stats-base-dists-f-cdf",
+        "@stdlib/stats-incr-stdev",
+        "@stdlib/string-format",
+        "@stdlib/string-repeat",
+        "@stdlib/utils-define-read-only-property"
+      ]
+    },
     "@stdlib/stats-base-dists-chisquare-cdf@0.2.2": {
       "integrity": "sha512-vfXA+CYFYRcSCizJ8VlaB7VAIX/+LCaq4q4+6vglpzQeCBSAc/zqgFtTYu7XzudD+DgDjxIRUNZvA5xhzblsyw==",
       "dependencies": [
@@ -2199,6 +2222,16 @@
         "@stdlib/utils-define-nonenumerable-read-only-property"
       ]
     },
+    "@stdlib/stats-incr-stdev@0.2.2": {
+      "integrity": "sha512-FSFpFsKenV+4WiTzXxb0pgu0wpHq2XM11ddlJZNdo7sl5OEukLHs/zbLum+GdGBtV6aZirED3IT4jH0QtJi8bw==",
+      "dependencies": [
+        "@stdlib/assert-is-number",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-sqrt",
+        "@stdlib/string-format"
+      ]
+    },
     "@stdlib/stats-pcorrtest@0.2.2": {
       "integrity": "sha512-a8uxvkduwNMx68r99bZfo0+Fu3ihK+GM8ua7+aKtLYB8+As22u/zQg7Gj/BjKhg11e2TmILltc4kbBXjDKYtng==",
       "dependencies": [
@@ -2310,6 +2343,9 @@
     "@stdlib/string-base-lowercase@0.4.0": {
       "integrity": "sha512-IH35Z5e4T+S3b3SfYY39mUhrD2qvJVp4VS7Rn3+jgj4+C3syocuAPsJ8C4OQXWGfblX/N9ymizbpFBCiVvMW8w=="
     },
+    "@stdlib/string-base-repeat@0.2.2": {
+      "integrity": "sha512-mH/DfDMHvBRv8ENJ2AoE+17mGV1hdB8/yowW2GVTqju5x20zGnHlRQ3NV60lFG4q8MHNzWPjj+PQv0/VhiAnsw=="
+    },
     "@stdlib/string-base-replace@0.2.2": {
       "integrity": "sha512-Y4jZwRV4Uertw7AlA/lwaYl1HjTefSriN5+ztRcQQyDYmoVN3gzoVKLJ123HPiggZ89vROfC+sk/6AKvly+0CA=="
     },
@@ -2318,6 +2354,16 @@
       "dependencies": [
         "@stdlib/string-base-format-interpolate",
         "@stdlib/string-base-format-tokenize"
+      ]
+    },
+    "@stdlib/string-repeat@0.2.2": {
+      "integrity": "sha512-NSV9PZNoQ1vgJtkZZwDSQAkW+JKhH2fM6jJGjL1B1Z+RlVFLY4QXZmCiXDVGUu/S81yjLSV52Y7/dQrxNnUdVg==",
+      "dependencies": [
+        "@stdlib/assert-is-nonnegative-integer",
+        "@stdlib/assert-is-string",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/string-base-repeat",
+        "@stdlib/string-format"
       ]
     },
     "@stdlib/string-replace@0.2.2": {

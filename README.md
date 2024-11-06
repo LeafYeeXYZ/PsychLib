@@ -61,11 +61,7 @@ You can also add benchmark cases in `/benchs/*.bench.ts` and run the benchmark u
 deno bench -A
 ```
 
-This project publishes to <https://jsr.io>, so you don't need to compile the code to JavaScript. Just use the following command to publish the code.
-
-```bash
-deno publish
-```
+This project publishes to <https://jsr.io>, so you don't need to compile the code to JavaScript. And you also don't need to publish the package manually. Just modify `deno.json` and push the code to the repository. The `GitHub Action` will do the rest for you.
 
 # Benchmark
 
@@ -113,4 +109,17 @@ summary
   @psych/lib
      7.59x slower than jstat-esm
      9.92x faster than @stdlib/stats
+
+
+benchmark                                        time/iter (avg)        iter/s      (min … max)           p75      p99     p995
+------------------------------------------------ ----------------------------- --------------------- --------------------------
+@psych/lib - n=1000 - One Way Anova                      51.5 µs        19,410 ( 37.5 µs … 222.9 µs)  54.8 µs 103.0 µs 112.6 µs
+@psych/lib - n=1000 - One Sample T Test                  15.2 µs        65,960 ( 10.8 µs … 126.8 µs)  17.1 µs  24.4 µs  53.8 µs
+@psych/lib - n=1000 - Two Sample T Test                  44.4 µs        22,510 ( 35.2 µs … 386.4 µs)  47.1 µs  58.6 µs 101.0 µs
+@psych/lib - n=1000 - Paired T Test                      28.5 µs        35,080 ( 23.2 µs … 146.8 µs)  33.2 µs  43.4 µs  83.0 µs
+@psych/lib - n=1000 - Welch T Test                       43.2 µs        23,160 ( 29.2 µs … 212.5 µs)  46.4 µs  53.9 µs 101.1 µs
+@psych/lib - n=1000 - Pearson Correlation Test           31.9 µs        31,330 ( 15.9 µs … 163.0 µs)  39.5 µs  42.8 µs  84.8 µs
+@psych/lib - n=1000 - Linear Regression One              78.8 µs        12,690 ( 49.1 µs … 209.7 µs)  79.7 µs 140.6 µs 149.5 µs
+@psych/lib - n=1000 - Linear Regression Two             127.7 µs         7,833 ( 63.7 µs … 284.6 µs) 140.8 µs 213.5 µs 238.2 µs
+@psych/lib - n=1000 - Bootstrap CI (B=1000)              21.8 ms          45.9 ( 21.3 ms …  22.4 ms)  22.0 ms  22.4 ms  22.4 ms
 ```
