@@ -20,7 +20,6 @@
  */
 
 export * from './base.ts'
-export * from './utils.ts'
 export * from './regression/index.ts'
 export * from './mediation/index.ts'
 export * from './ttest/index.ts'

@@ -1,8 +1,14 @@
 import * as pl from '../lib/index.ts'
 import sl from 'npm:@stdlib/stats-levene-test'
-import { assertAlmostEquals } from 'jsr:@std/assert'
+import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
+
+const x: number[] = new Array(1000).fill(0).map(() => Math.random() * 100)
 
 Deno.test('Non-param Test', () => {
+  assertEquals(typeof pl.kurtosisTest(x).p, 'number')
+  assertEquals(typeof pl.skewnessTest(x).p, 'number')
+  assertEquals(typeof pl.kurtosisTest(x).z, 'number')
+  assertEquals(typeof pl.skewnessTest(x).z, 'number')
   for (let i = 0; i < 10; i++) {
     const levels = Math.floor(Math.random() * 8) + 3
     const group: number[] = new Array(1000).fill(0).map(() => Math.floor(Math.random() * levels))
