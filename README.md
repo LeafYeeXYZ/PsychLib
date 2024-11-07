@@ -1,5 +1,7 @@
 # Introduction
 
+[![JSR Version](https://jsr.io/badges/@psych/lib)](https://jsr.io/@psych/lib) [![JSR Scope](https://jsr.io/badges/@psych)](https://jsr.io/@psych) [![JSR Score](https://jsr.io/badges/@psych/lib/score)](https://jsr.io/@psych/lib/score)
+
 **PsychLib** is a TypeScript library for math, statistics, and data analysis. Featured in psychological and educational research.
 
 - PsychLib can be used in all modern JavaScript/TypeScript environments, including browsers, Node.js, Deno, and Bun.
