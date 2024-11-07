@@ -9,7 +9,7 @@ Deno.test('Mediation Test', () => {
   assertEquals(pl.bootstrapSample(x, m, y)[0].length, x.length)
   assertEquals(pl.bootstrapSample(x, m, y)[1].length, m.length)
   assertEquals(pl.bootstrapSample(x, m, y)[2].length, y.length)
-  const bootstrap = pl.bootstrapTest(x, m, y, 1000, 0.05)
+  const bootstrap = pl.bootstrapTest('ab', 1000, 0.05, x, m, y)
   assertEquals(typeof bootstrap[0], 'number')
   assertEquals(typeof bootstrap[1], 'number')
   assertEquals(bootstrap[0] < bootstrap[1], true)

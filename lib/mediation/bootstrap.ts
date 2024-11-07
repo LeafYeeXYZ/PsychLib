@@ -1,4 +1,4 @@
-import { sort, mean, ss, std, sp } from '../base.ts'
+import { sort, median, mean, ss, std, sp } from '../base.ts'
 
 /**
  * Bootstrap sampling
@@ -24,44 +24,64 @@ export function bootstrapSample<T>(...args: T[][]): T[][] {
 }
 
 /**
- * Simple mediation model nonparametric Bootstrap test
+ * Bootstrap statistic
+ * @description mean: mean
+ * @description median: median
+ * @description ab: mediation effect
+ */
+export type BootstrapStat = 'mean' | 'median' | 'ab'
+
+/**
+ * Bootstrap test (calculate the confidence interval of the statistic)
  *
- * 简单中介效应模型的中介效应非参数 Bootstrap 检验
- * @param x independent variable
- * @param m mediator variable
- * @param y dependent variable
+ * 非参数 Bootstrap 检验 (计算统计量的置信区间)
+ * @param stat statistic to be calculated or a function to calculate the statistic
  * @param B sampling times
  * @param a signifiance level
+ * @param args datas to be sampled and calculated
  * @returns confidence interval
  * @example
  * ```typescript
  * import { bootstrapTest } from '@psych/lib'
- * bootstrapTest([1, 2, 3], [4, 5, 6], [7, 8, 9], 1000, 0.05)
+ * bootstrapTest('ab', 1000, 0.05, [1, 2, 3], [4, 5, 6], [7, 8, 9])
  * ```
+ * @throws {Error} at least one argument is needed
+ * @throws {Error} calculate ab needs three arguments
  * @throws {Error} the length of x, m and y must be the same
  */
 export function bootstrapTest(
-  x: number[],
-  m: number[],
-  y: number[],
+  stat: BootstrapStat | ((...args: number[][]) => number),
   B: number,
   a: number,
+  ...args: number[][]
 ): number[] {
-  if (x.length != m.length || x.length != y.length) {
-    throw new Error('the length of x, m and y must be the same')
+  if (args.length === 0) {
+    throw new Error('at least one argument is needed')
   }
-  const ab: number[] = []
+  if (stat === 'mean') {
+    stat = mean
+  } else if (stat === 'median') {
+    stat = (x: number[]) => median(x)
+  } else if (stat === 'ab') {
+    if (args.length !== 3) {
+      throw new Error('calculate ab needs three arguments')
+    } else if (args[0].length !== args[1].length || args[0].length !== args[2].length) {
+      throw new Error('the length of x, m and y must be the same')
+    }
+    stat = calculateAB
+  }
+  const statistic: number[] = []
   for (let i = 0; i < B; i++) {
-    const [_x, _m, _y] = bootstrapSample(x, m, y)
-    ab.push(calculate(_x, _m, _y))
+    const sample = bootstrapSample(...args)
+    statistic.push(stat(...sample))
   }
-  const sorted = sort(ab)
+  const sorted = sort(statistic)
   const lower = sorted[Math.floor(B * a / 2)]
   const upper = sorted[Math.floor(B * (1 - a / 2))]
   return [lower, upper]
 }
 
-function calculate(x: number[], m: number[], y: number[]): number {
+function calculateAB(x: number[], m: number[], y: number[]): number {
   const xm: number = mean(x)
   const mm: number = mean(m)
   const ym: number = mean(y)

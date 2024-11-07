@@ -113,16 +113,18 @@ summary
      9.92x faster than @stdlib/stats
 
 
-benchmark                                        time/iter (avg)        iter/s      (min … max)           p75      p99     p995
------------------------------------------------- ----------------------------- --------------------- --------------------------
-@psych/lib - n=1000 - Levene Test                       132.3 µs         7,558 (116.0 µs … 530.0 µs) 132.0 µs 193.7 µs 207.4 µs
-@psych/lib - n=1000 - One Way Anova                      52.6 µs        19,000 ( 41.1 µs … 138.9 µs)  55.0 µs  98.5 µs 106.2 µs
-@psych/lib - n=1000 - One Sample T Test                  14.9 µs        67,100 ( 10.9 µs … 114.0 µs)  16.2 µs  25.8 µs  57.6 µs
-@psych/lib - n=1000 - Two Sample T Test                  45.6 µs        21,950 ( 35.7 µs … 385.7 µs)  48.5 µs  58.8 µs 103.8 µs
-@psych/lib - n=1000 - Paired T Test                      31.6 µs        31,620 ( 22.2 µs … 301.7 µs)  33.9 µs  58.8 µs  83.7 µs
-@psych/lib - n=1000 - Welch T Test                       42.2 µs        23,690 ( 24.2 µs … 149.8 µs)  46.3 µs  53.7 µs  93.5 µs
-@psych/lib - n=1000 - Pearson Correlation Test           32.4 µs        30,850 ( 15.8 µs … 134.8 µs)  39.5 µs  45.1 µs  91.8 µs
-@psych/lib - n=1000 - Linear Regression One              79.0 µs        12,660 ( 48.0 µs … 207.0 µs)  79.8 µs 140.9 µs 155.4 µs
-@psych/lib - n=1000 - Linear Regression Two             127.2 µs         7,862 ( 64.5 µs … 283.5 µs) 139.9 µs 214.5 µs 225.1 µs
-@psych/lib - n=1000 - Bootstrap CI (B=1000)              21.6 ms          46.4 ( 21.5 ms …  21.8 ms)  21.6 ms  21.8 ms  21.8 ms
+benchmark                                           time/iter (avg)        iter/s      (min … max)           p75      p99     p995
+--------------------------------------------------- ----------------------------- --------------------- --------------------------
+@psych/lib - n=1000 - Levene Test                          134.3 µs         7,446 (114.8 µs … 593.9 µs) 135.0 µs 224.7 µs 240.5 µs
+@psych/lib - n=1000 - One Way Anova                         53.7 µs        18,610 ( 40.5 µs … 239.4 µs)  55.8 µs 111.8 µs 126.2 µs
+@psych/lib - n=1000 - One Sample T Test                     14.9 µs        67,180 ( 10.9 µs … 139.1 µs)  16.0 µs  26.7 µs  54.5 µs
+@psych/lib - n=1000 - Two Sample T Test                     45.0 µs        22,230 ( 35.2 µs … 410.2 µs)  48.0 µs  58.3 µs 102.0 µs
+@psych/lib - n=1000 - Paired T Test                         31.5 µs        31,710 ( 22.2 µs … 187.8 µs)  33.8 µs  59.0 µs  84.8 µs
+@psych/lib - n=1000 - Welch T Test                          42.0 µs        23,820 ( 23.5 µs … 139.6 µs)  46.2 µs  53.3 µs  92.2 µs
+@psych/lib - n=1000 - Pearson Correlation Test              31.7 µs        31,580 ( 15.6 µs … 133.5 µs)  39.3 µs  43.1 µs  77.7 µs
+@psych/lib - n=1000 - Linear Regression One                 78.3 µs        12,770 ( 48.7 µs … 177.3 µs)  79.4 µs 125.7 µs 146.4 µs
+@psych/lib - n=1000 - Linear Regression Two                125.8 µs         7,950 ( 63.3 µs … 242.1 µs) 139.2 µs 201.5 µs 209.2 µs
+@psych/lib - n=100,B=1000 - Bootstrap CI (ab)                5.7 ms         175.6 (  5.6 ms …   5.8 ms)   5.7 ms   5.8 ms   5.8 ms
+@psych/lib - n=100,B=1000 - Bootstrap CI (mean)              5.3 ms         188.8 (  5.2 ms …   5.4 ms)   5.4 ms   5.4 ms   5.4 ms
+@psych/lib - n=100,B=1000 - Bootstrap CI (median)            8.5 ms         117.1 (  8.5 ms …   8.6 ms)   8.6 ms   8.6 ms   8.6 ms
 ```
