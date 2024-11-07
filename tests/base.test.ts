@@ -28,5 +28,7 @@ Deno.test('Base Test', () => {
   assertAlmostEquals(pl.ssDiff(x, y), x.map((v, i) => (v - y[i]) ** 2).reduce((a, b) => a + b), 1e-6)
   assertAlmostEquals(pl.sp(x, y), x.map((v, i) => (v - ss.mean(x)) * (y[i] - ss.mean(y))).reduce((a, b) => a + b), 1e-6)
   assertAlmostEquals(pl.sem(x), ss.sampleStandardDeviation(x) / Math.sqrt(x.length), 1e-6)
+  assertAlmostEquals(pl.centralize(x)[0], x[0] - ss.mean(x), 1e-6)
+  assertAlmostEquals(pl.standardize(x)[0], (x[0] - ss.mean(x)) / ss.sampleStandardDeviation(x), 1e-6)
 })
 

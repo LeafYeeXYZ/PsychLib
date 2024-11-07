@@ -533,3 +533,64 @@ export function mode(data: number[]): number {
     return 3 * median(data) - 2 * mean(data)
   }
 }
+
+/**
+ * Centralize the array
+ * 
+ * 中心化数组
+ * @param data numbers
+ * @param stat statistics to refer to (default is mean)
+ * @param abs whether to absolute the centralized array (default is false)
+ * @param _stat statistics if already calculated
+ * @returns centralized array
+ * @example
+ * ```typescript
+ * import { centralize } from '@psych/lib'
+ * console.log(centralize([1, 2, 3, 4, 5])) // [-2, -1, 0, 1, 2]
+ * ```
+ */
+export function centralize(
+  data: number[],
+  stat: 'mean' | 'median' = 'mean',
+  abs: boolean = false,
+  _stat?: number,
+): number[] {
+  const r: number[] = []
+  const c = _stat ?? (stat == 'mean' ? mean(data) : median(data))
+  for (let i = 0; i < data.length; i++) {
+    r.push(abs ? Math.abs(data[i] - c) : (data[i] - c))
+  }
+  return r
+}
+
+/**
+ * Standardize the array
+ * 
+ * 标准化数组
+ * @param data numbers
+ * @param sample whether to calculate the sample standard deviation (default is true)
+ * @param abs whether to absolute the standardized array (default is false)
+ * @param _mean mean if already calculated
+ * @param _std standard deviation if already calculated
+ * @returns standardized array
+ * @example
+ * ```typescript
+ * import { standardize } from '@psych/lib'
+ * console.log(standardize([1, 2, 3, 4, 5], false, true)) // [1.264..., 0.632..., 0, 0.632..., 1.264...]
+ * ```
+ */
+export function standardize(
+  data: number[],
+  sample: boolean = true,
+  abs: boolean = false,
+  _mean?: number,
+  _std?: number,
+): number[] {
+  const r: number[] = []
+  const m = _mean ?? mean(data)
+  const s = _std ?? std(data, sample, m)
+  for (let i = 0; i < data.length; i++) {
+    r.push(abs ? Math.abs((data[i] - m) / s) : ((data[i] - m) / s))
+  }
+  return r
+}
