@@ -1,35 +1,26 @@
-import { mean, sort, sp, ss, std } from '../base.ts'
+import { sort, mean, ss, std, sp } from '../base.ts'
 
 /**
  * Bootstrap sampling
  *
  * Bootstrap 抽样
- * @param x data to be sampled
- * @param m data to be sampled
- * @param y data to be sampled
+ * @param args datas to be sampled
  * @returns a bootstrap sample
  * @example
  * ```typescript
  * import { bootstrapSample } from '@psych/lib'
  * bootstrapSample([1, 2, 3], [4, 5, 6], [7, 8, 9])
- * // maybe { x: [1, 2, 2], m: [4, 5, 5], y: [7, 8, 8] }
- * ```
+ * // maybe [[1, 2, 2], [4, 5, 5], [7, 8, 8]]
  */
-export function bootstrapSample(
-  x: number[],
-  m: number[],
-  y: number[],
-): { x: number[]; m: number[]; y: number[] } {
-  const xS: number[] = []
-  const mS: number[] = []
-  const yS: number[] = []
-  for (let i = 0; i < x.length; i++) {
-    const r = Math.floor(Math.random() * x.length)
-    xS.push(x[r])
-    mS.push(m[r])
-    yS.push(y[r])
+export function bootstrapSample<T>(...args: T[][]): T[][] {
+  const samples: T[][] = Array.from({ length: args[0].length }, () => [])
+  for (let i = 0; i < args.length; i++) {
+    for (let j = 0; j < args[i].length; j++) {
+      const r = Math.floor(Math.random() * args[i].length)
+      samples[i].push(args[i][r])
+    }
   }
-  return { x: xS, m: mS, y: yS }
+  return samples
 }
 
 /**
@@ -61,8 +52,8 @@ export function bootstrapTest(
   }
   const ab: number[] = []
   for (let i = 0; i < B; i++) {
-    const sample = bootstrapSample(x, m, y)
-    ab.push(calculate(sample.x, sample.m, sample.y))
+    const [_x, _m, _y] = bootstrapSample(x, m, y)
+    ab.push(calculate(_x, _m, _y))
   }
   const sorted = sort(ab)
   const lower = sorted[Math.floor(B * a / 2)]
