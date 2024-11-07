@@ -19,6 +19,7 @@
     "npm:@stdlib/stats-base-min@*": "0.2.2",
     "npm:@stdlib/stats-base-stdev@*": "0.2.2",
     "npm:@stdlib/stats-base-variance@*": "0.2.2",
+    "npm:@stdlib/stats-kstest@*": "0.2.2",
     "npm:@stdlib/stats-levene-test@*": "0.2.2",
     "npm:@stdlib/stats-pcorrtest@~0.2.2": "0.2.2",
     "npm:@stdlib/stats-ttest2@*": "0.2.2",
@@ -986,6 +987,13 @@
         "@stdlib/utils-library-manifest"
       ]
     },
+    "@stdlib/math-base-assert-is-nonnegative-integer@0.2.1": {
+      "integrity": "sha512-WSD5fblgbQW7DR5qoTJu6oQa062Xz8Eboe6Igghe5fX7Up7GZ3vdnMpSgmsu0cRKm8W6ua2rVJKlXcoDZEnRLw==",
+      "dependencies": [
+        "@stdlib/math-base-special-floor",
+        "@stdlib/utils-library-manifest"
+      ]
+    },
     "@stdlib/math-base-assert-is-odd@0.2.1": {
       "integrity": "sha512-V4qQuCO6/AA5udqlNatMRZ8R/MgpqD8mPIkFrpSZJdpLcGYSz815uAAf3NBOuWXkE2Izw0/Tg/hTQ+YcOW2g5g==",
       "dependencies": [
@@ -1069,6 +1077,30 @@
         "@stdlib/utils-library-manifest"
       ]
     },
+    "@stdlib/math-base-special-atan2@0.2.1": {
+      "integrity": "sha512-YvBikUZw4p+Kkd1sKqfDtIDzfjiBphy14QO9kxsENxDrwl87sV4AVvhF/pCqmVwffo1CQe7EzmaDtulgQIlZDA==",
+      "dependencies": [
+        "@stdlib/constants-float64-pi",
+        "@stdlib/constants-float64-pinf",
+        "@stdlib/math-base-assert-is-infinite",
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-atan",
+        "@stdlib/math-base-special-copysign",
+        "@stdlib/number-float64-base-signbit"
+      ]
+    },
+    "@stdlib/math-base-special-atan@0.2.3": {
+      "integrity": "sha512-BeOdd3gMWr5Yc97b1+yEfO30wEBBp1T0x6jmBl7nXKddH1clR7+WRmRxfkDJ3xLnNxa5fvppySfukBL6vFgNVw==",
+      "dependencies": [
+        "@stdlib/constants-float64-fourth-pi",
+        "@stdlib/constants-float64-half-pi",
+        "@stdlib/constants-float64-ninf",
+        "@stdlib/constants-float64-pinf",
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-napi-unary",
+        "@stdlib/utils-library-manifest"
+      ]
+    },
     "@stdlib/math-base-special-atanh@0.2.3": {
       "integrity": "sha512-fmjehlGiFgBx+4qXbvvJUOVqCqtOh/78n7GxCpk8Gc+eA99Se8UVwvvNcMSd0S/Xj6TyycQXh3BmpiWgJWJrDQ==",
       "dependencies": [
@@ -1101,6 +1133,21 @@
         "@stdlib/math-base-special-kernel-betainc"
       ]
     },
+    "@stdlib/math-base-special-betaln@0.2.2": {
+      "integrity": "sha512-/PUE6gOGCcsOlognxHpF2rNbfPPJ88ehaD1xlbm0ObIu71Bjq4mfMcAVuylvjl5xLGoXyrUAFLO0mykruoPHiA==",
+      "dependencies": [
+        "@stdlib/constants-float64-ln-sqrt-two-pi",
+        "@stdlib/constants-float64-ninf",
+        "@stdlib/constants-float64-pinf",
+        "@stdlib/math-base-special-gamma@0.3.0",
+        "@stdlib/math-base-special-gammaln",
+        "@stdlib/math-base-special-ln",
+        "@stdlib/math-base-special-log1p",
+        "@stdlib/math-base-special-max@0.3.0",
+        "@stdlib/math-base-special-min",
+        "@stdlib/math-base-special-pow@0.3.0"
+      ]
+    },
     "@stdlib/math-base-special-binomcoef@0.2.3": {
       "integrity": "sha512-RxnQ/QGgKUeqTvBL+7IH8rNKQYCfGs0I3PsFYfb0e9V1O2yIVvthURUpzjukurZM89JRapK1dN6aeZ5UM71Zgw==",
       "dependencies": [
@@ -1111,6 +1158,17 @@
         "@stdlib/math-base-assert-is-odd@0.3.0",
         "@stdlib/math-base-special-floor",
         "@stdlib/math-base-special-gcd"
+      ]
+    },
+    "@stdlib/math-base-special-binomcoefln@0.2.2": {
+      "integrity": "sha512-7hSOIpC+YRoCbyPy3YW+hhPaQU4oyzYmfYlN1xcFLFWA07OCBdfuiQnMnFi8t77BYLCKYbWUgzE9FEGl7eMF8g==",
+      "dependencies": [
+        "@stdlib/constants-float64-ninf",
+        "@stdlib/math-base-assert-is-integer",
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-abs",
+        "@stdlib/math-base-special-betaln",
+        "@stdlib/math-base-special-ln"
       ]
     },
     "@stdlib/math-base-special-ceil@0.2.2": {
@@ -1896,6 +1954,13 @@
         "@stdlib/utils-library-manifest"
       ]
     },
+    "@stdlib/number-float64-base-signbit@0.2.3": {
+      "integrity": "sha512-+0/Q5/ADKBd9PXSqdzORL4YfZY4znQ5VDflDCIdU6BFHCnM2DtkvJuBY4j3S+EqJYYse3TFCPmf8Bl7YcerdYA==",
+      "dependencies": [
+        "@stdlib/number-float64-base-get-high-word",
+        "@stdlib/utils-library-manifest"
+      ]
+    },
     "@stdlib/number-float64-base-to-float32@0.2.2": {
       "integrity": "sha512-T5snDkVNZY6pomrSW/qLWQfZ9JHgqCFLi8jaaarfNj2o+5NMUuvvRifLUIacTm8/uC96xB0j3+wKTh1zbIV5ig==",
       "dependencies": [
@@ -2050,6 +2115,54 @@
         "@stdlib/utils-define-read-only-property"
       ]
     },
+    "@stdlib/stats-base-dists-arcsine-cdf@0.2.2": {
+      "integrity": "sha512-fL48mjmSRMp+VgXhepNWKlOcHjNBOlT75YVKqlCudCmpKoX5L6d9rbZoKqvv+DRA0nLFvACMtDvLcxu+7oT4Xw==",
+      "dependencies": [
+        "@stdlib/constants-float64-pi",
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-asin",
+        "@stdlib/math-base-special-sqrt",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-beta-cdf@0.2.2": {
+      "integrity": "sha512-hYEINOA7hmK36yuUF3B2ParupSJZpB6HsmPalUKIwRw7prAVfgy+Wb+Brj3zrHgtTLlKhCoX6C3SWS+2wZuK6g==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-betainc",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-betaprime-cdf@0.2.2": {
+      "integrity": "sha512-ot747359tVxqMwnwiyisuME4fb1ZRptDqJ1TVfJPyhstFdK/O1vqtxiwXMd54L573uhvsaNjWoMQRLoco0W0BQ==",
+      "dependencies": [
+        "@stdlib/constants-float64-pinf",
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/stats-base-dists-beta-cdf",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-cauchy-cdf@0.2.2": {
+      "integrity": "sha512-QmuEL2LbCIZwJb+oM7SfZLRgvZiSdnHyXqYpHuxasuGb9ap1Al9eUkUu/ehqK0F9y126gXwwNL91vQQSkgzPfg==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-atan2",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-chi-cdf@0.2.2": {
+      "integrity": "sha512-jdOsOaruEiwqXfxxRbAkGYqGlSDecL12RmbJiXfmwm1eRz9k5bmnhmfbpBW6iY5v2cw6du7p2diUUtSCYEeaKw==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/stats-base-dists-degenerate-cdf",
+        "@stdlib/stats-base-dists-gamma-cdf",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
     "@stdlib/stats-base-dists-chisquare-cdf@0.2.2": {
       "integrity": "sha512-vfXA+CYFYRcSCizJ8VlaB7VAIX/+LCaq4q4+6vglpzQeCBSAc/zqgFtTYu7XzudD+DgDjxIRUNZvA5xhzblsyw==",
       "dependencies": [
@@ -2061,6 +2174,17 @@
       "integrity": "sha512-m1n1tUbO79Wh4iNk5ItL1Fnf5AJ4plfMG0ukDgEZ6eqWDj0PlC0714pxCb4ITsKeFsHqF1HF6lRhbZoxCHX4YA==",
       "dependencies": [
         "@stdlib/stats-base-dists-gamma-quantile",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-cosine-cdf@0.2.2": {
+      "integrity": "sha512-JZrLJRx1VKTKq5A0ZJwP42pFnE/HhivYMSxUFA95gzgJo9V64HaBeuKXddlAXLeQLAzh4nRdZXz6Cd0Q4FhIYQ==",
+      "dependencies": [
+        "@stdlib/constants-float64-pi",
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-sinpi",
+        "@stdlib/stats-base-dists-degenerate-cdf",
+        "@stdlib/utils-constant-function",
         "@stdlib/utils-define-nonenumerable-read-only-property"
       ]
     },
@@ -2076,6 +2200,25 @@
       "integrity": "sha512-hCVG6ma3Zl8d5MGLP7I9w/4oB2QdD5lqoB2q9Rr6C+hB4fcLYRbF67DHeTrEY67ekxlHo1v/z7HXlz4wa6EVuA==",
       "dependencies": [
         "@stdlib/math-base-assert-is-nan",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-erlang-cdf@0.2.2": {
+      "integrity": "sha512-Mtwze3pZ3g2+XKtfElRl6c6s298iOUWvWYDl+10XZgL34eyr8/4HDFACaL0YihBFxfBv69EnRzE3ldwvervQEw==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nonnegative-integer",
+        "@stdlib/stats-base-dists-gamma-cdf",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-exponential-cdf@0.2.2": {
+      "integrity": "sha512-3z3+OMfpDCIlPQbCsHWUsu67HdxtrB4cjz5pGtl4/zQWUzqriq9iyJcs8FrJIcIVCRQ+8Ga+WsFxg8n/hVOb3A==",
+      "dependencies": [
+        "@stdlib/constants-float64-pinf",
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-exp",
         "@stdlib/utils-constant-function",
         "@stdlib/utils-define-nonenumerable-read-only-property"
       ]
@@ -2099,6 +2242,16 @@
         "@stdlib/utils-define-nonenumerable-read-only-property"
       ]
     },
+    "@stdlib/stats-base-dists-frechet-cdf@0.2.2": {
+      "integrity": "sha512-gz8lShCpH6zyLBahPmvDCUc7Hl8bqH1aGS+o53yzxHCIuWu7zIlSaWipMOAAGC4097RUtx/iCBGlbD6T8QeDwg==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-exp",
+        "@stdlib/math-base-special-pow@0.3.0",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
     "@stdlib/stats-base-dists-gamma-cdf@0.2.2": {
       "integrity": "sha512-xXu2jkr90niX9VgOXFOcDMi7ET/IWD6v8er6twtigR7xF/PGCNwRxKKCWpwkubCtSIklxehtGp62etrbOGSOjg==",
       "dependencies": [
@@ -2116,6 +2269,72 @@
         "@stdlib/math-base-assert-is-nan",
         "@stdlib/math-base-special-gammaincinv",
         "@stdlib/stats-base-dists-degenerate-quantile",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-gumbel-cdf@0.2.2": {
+      "integrity": "sha512-J/g6L1NNNWR+vRMgXDj7C1W30qxJw2/+vKatbYTZKXKufksqx0L6Njg8NUnUWoMK9nIEt69IscgiAkAgOSLIyA==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-exp",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-invgamma-cdf@0.2.2": {
+      "integrity": "sha512-N+E5GgyQ/Mgy7ifzylwybO9NDh1QPyq5+xNjvwH2/RYhmtq3/YCoIA1D2wHbX3Y04R3NkOc9Me+2bQIGk37Xmw==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-gammainc",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-kumaraswamy-cdf@0.2.2": {
+      "integrity": "sha512-ns7/vGBdMp70v7aQ6OByna+r6T9NapvHCFyagJndVxiP02muwL8tlYdfUFJCYqkc3tNBwwXOVH0LaqYagfGSbQ==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-pow@0.3.0",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-laplace-cdf@0.2.2": {
+      "integrity": "sha512-mHpeF9oCtELk2D1B9WT6EJk01RnH5p5PGkkSXAO85Wxk3Js0aygNBwYDw2KnvghRrEcChtVBiaEWpJC3JYGMyg==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-exp",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-levy-cdf@0.2.2": {
+      "integrity": "sha512-oYanuL2CtWILj4qLD+3r2QFM79BlEH5w496p6Zz/CDbSM10tZvdSaadhwFRp958xqu6nU0DD4cofXPc7zQ8Pog==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-erfc",
+        "@stdlib/math-base-special-sqrt",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-logistic-cdf@0.2.2": {
+      "integrity": "sha512-3rsOJDAgyW2eFihVMOGP9+A4rYmfXwqnkH0LTYoSBqSiOh9FcK1ErIfCxIRNJxoiilcsef6qt53mG5/2jf5SjQ==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-exp",
+        "@stdlib/stats-base-dists-degenerate-cdf",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-lognormal-cdf@0.2.2": {
+      "integrity": "sha512-tVrgSv1zjIlrH3KxRiXDFgIjCWNGdjTH8cVHmGM3lY/zKPB9YiBL/AerwfhCvKx4JHo48zhTM7bwC6b471ZfFA==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-ln",
+        "@stdlib/stats-base-dists-normal-cdf",
         "@stdlib/utils-constant-function",
         "@stdlib/utils-define-nonenumerable-read-only-property"
       ]
@@ -2142,6 +2361,26 @@
         "@stdlib/utils-define-nonenumerable-read-only-property"
       ]
     },
+    "@stdlib/stats-base-dists-pareto-type1-cdf@0.2.2": {
+      "integrity": "sha512-DdN6CFlmFeVDzitOHWls2bumAjhaA9xOP1/rreRzaeixEaRHuRhjVBPDoJhYkpv0aGfLrw9G1TSKCtfOdN4Nhg==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-pow@0.2.1",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-rayleigh-cdf@0.2.2": {
+      "integrity": "sha512-avBYOdLns+j1B+Dqmk475ShUGJdRDMzx3MNFwkVx6ELDtmkIM1LYvL/3hdi2ACpBCJasoJSs3OSbVddrDGdvgQ==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-exp",
+        "@stdlib/math-base-special-pow@0.3.0",
+        "@stdlib/stats-base-dists-degenerate-cdf",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
     "@stdlib/stats-base-dists-t-cdf@0.2.2": {
       "integrity": "sha512-Oi64G193xMRxdgcfOXS7sID+WQ9HqlqcgzBPkNKJsbQvkAKSaeKKMt9yccYEPLVO7cEPLSLCXO9s4W1lrf4TGA==",
       "dependencies": [
@@ -2159,6 +2398,33 @@
         "@stdlib/math-base-special-kernel-betaincinv",
         "@stdlib/math-base-special-signum",
         "@stdlib/math-base-special-sqrt",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-triangular-cdf@0.2.2": {
+      "integrity": "sha512-xx3aHAS/Rm0stsMoAc/NefJy4Tw+5H63BYlQaicXgcqSYmlzokCutuDbnJ9k/LmvPVgSkXN/3mIsBCFtg4H6+w==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-pow@0.2.1",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-uniform-cdf@0.2.2": {
+      "integrity": "sha512-vF8WGGlOJRwX4+eJOgHeOUVu7THqI7xbAREDnySOeBqHQiIeOfiQhViY6YiC0KXMj+9wBVn4qo/VM0PFGSMjfA==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/utils-constant-function",
+        "@stdlib/utils-define-nonenumerable-read-only-property"
+      ]
+    },
+    "@stdlib/stats-base-dists-weibull-cdf@0.2.2": {
+      "integrity": "sha512-xRP3W6Ga0vxq93cVoy993qevdEgJzivmb/VDzx1kCDVoU/DwbF4SqPtT9dIgjD0MFMH5BJjZuBmoRLkNCG9qiw==",
+      "dependencies": [
+        "@stdlib/math-base-assert-is-nan",
+        "@stdlib/math-base-special-expm1",
+        "@stdlib/math-base-special-pow@0.2.1",
         "@stdlib/utils-constant-function",
         "@stdlib/utils-define-nonenumerable-read-only-property"
       ]
@@ -2234,6 +2500,59 @@
         "@stdlib/math-base-assert-is-nan",
         "@stdlib/math-base-special-sqrt",
         "@stdlib/string-format"
+      ]
+    },
+    "@stdlib/stats-kstest@0.2.2": {
+      "integrity": "sha512-AVFk3eivhEvDPXPYTNi7tl/l+IR09se/fcn3HQsPGTn6U4Je3hT81L0ImV0CsxFrljMH7FiRKbcbsI2+3t1XEw==",
+      "dependencies": [
+        "@stdlib/array-float64",
+        "@stdlib/assert-has-own-property",
+        "@stdlib/assert-is-boolean",
+        "@stdlib/assert-is-function",
+        "@stdlib/assert-is-nan",
+        "@stdlib/assert-is-number",
+        "@stdlib/assert-is-number-array",
+        "@stdlib/assert-is-plain-object",
+        "@stdlib/assert-is-positive-integer",
+        "@stdlib/assert-is-string",
+        "@stdlib/assert-is-typed-array-like",
+        "@stdlib/error-tools-fmtprodmsg",
+        "@stdlib/math-base-special-binomcoefln",
+        "@stdlib/math-base-special-exp",
+        "@stdlib/math-base-special-floor",
+        "@stdlib/math-base-special-ln",
+        "@stdlib/math-base-special-pow@0.3.0",
+        "@stdlib/math-base-special-roundn",
+        "@stdlib/math-base-special-sqrt",
+        "@stdlib/stats-base-dists-arcsine-cdf",
+        "@stdlib/stats-base-dists-beta-cdf",
+        "@stdlib/stats-base-dists-betaprime-cdf",
+        "@stdlib/stats-base-dists-cauchy-cdf",
+        "@stdlib/stats-base-dists-chi-cdf",
+        "@stdlib/stats-base-dists-chisquare-cdf",
+        "@stdlib/stats-base-dists-cosine-cdf",
+        "@stdlib/stats-base-dists-erlang-cdf",
+        "@stdlib/stats-base-dists-exponential-cdf",
+        "@stdlib/stats-base-dists-f-cdf",
+        "@stdlib/stats-base-dists-frechet-cdf",
+        "@stdlib/stats-base-dists-gamma-cdf",
+        "@stdlib/stats-base-dists-gumbel-cdf",
+        "@stdlib/stats-base-dists-invgamma-cdf",
+        "@stdlib/stats-base-dists-kumaraswamy-cdf",
+        "@stdlib/stats-base-dists-laplace-cdf",
+        "@stdlib/stats-base-dists-levy-cdf",
+        "@stdlib/stats-base-dists-logistic-cdf",
+        "@stdlib/stats-base-dists-lognormal-cdf",
+        "@stdlib/stats-base-dists-normal-cdf",
+        "@stdlib/stats-base-dists-pareto-type1-cdf",
+        "@stdlib/stats-base-dists-rayleigh-cdf",
+        "@stdlib/stats-base-dists-t-cdf",
+        "@stdlib/stats-base-dists-triangular-cdf",
+        "@stdlib/stats-base-dists-uniform-cdf",
+        "@stdlib/stats-base-dists-weibull-cdf",
+        "@stdlib/stats-base-max",
+        "@stdlib/string-format",
+        "@stdlib/utils-define-read-only-property"
       ]
     },
     "@stdlib/stats-levene-test@0.2.2": {

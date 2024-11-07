@@ -127,4 +127,5 @@ benchmark                                           time/iter (avg)        iter/
 @psych/lib - n=100,B=1000 - Bootstrap CI (ab)                5.7 ms         175.6 (  5.6 ms …   5.8 ms)   5.7 ms   5.8 ms   5.8 ms
 @psych/lib - n=100,B=1000 - Bootstrap CI (mean)              5.3 ms         188.8 (  5.2 ms …   5.4 ms)   5.4 ms   5.4 ms   5.4 ms
 @psych/lib - n=100,B=1000 - Bootstrap CI (median)            8.5 ms         117.1 (  8.5 ms …   8.6 ms)   8.6 ms   8.6 ms   8.6 ms
+@psych/lib - n=1000 - One Sample KS Test                   156.8 µs         6,379 (138.7 µs … 252.7 µs) 156.5 µs 228.7 µs 231.2 µs
 ```

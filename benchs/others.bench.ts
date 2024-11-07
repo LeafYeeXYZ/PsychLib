@@ -24,3 +24,4 @@ Deno.bench('@psych/lib - n=1000 - Linear Regression Two', () => { new pl.LinearR
 Deno.bench('@psych/lib - n=100,B=1000 - Bootstrap CI (ab)', () => { pl.bootstrapTest('ab', 1000, 0.05, getData(100), getData(100), getData(100)) })
 Deno.bench('@psych/lib - n=100,B=1000 - Bootstrap CI (mean)', () => { pl.bootstrapTest('mean', 1000, 0.05, getData(100), getData(100), getData(100)) })
 Deno.bench('@psych/lib - n=100,B=1000 - Bootstrap CI (median)', () => { pl.bootstrapTest('median', 1000, 0.05, getData(100), getData(100), getData(100)) })
+Deno.bench('@psych/lib - n=1000 - One Sample KS Test', () => { new pl.OneSampleKSTest(getData(1000)) })

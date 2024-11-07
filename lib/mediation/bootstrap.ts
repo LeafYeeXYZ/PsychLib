@@ -1,4 +1,4 @@
-import { sort, median, mean, ss, std, sp } from '../base.ts'
+import { mean, median, sort, sp, ss, std } from '../base.ts'
 
 /**
  * Bootstrap sampling
@@ -65,7 +65,9 @@ export function bootstrapTest(
   } else if (stat === 'ab') {
     if (args.length !== 3) {
       throw new Error('calculate ab needs three arguments')
-    } else if (args[0].length !== args[1].length || args[0].length !== args[2].length) {
+    } else if (
+      args[0].length !== args[1].length || args[0].length !== args[2].length
+    ) {
       throw new Error('the length of x, m and y must be the same')
     }
     stat = calculateAB

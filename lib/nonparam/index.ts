@@ -1,4 +1,5 @@
 export * from './levene.ts'
+export * from './ks.ts'
 
 import { kurtosis, skewness } from '../base.ts'
 import { z2p } from '../distribution/index.ts'
