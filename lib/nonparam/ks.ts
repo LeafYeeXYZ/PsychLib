@@ -1,4 +1,4 @@
-import { mean, sort, std } from '../base.ts'
+import { mean, sort, std, max } from '../base.ts'
 import { z2p } from '../distribution/index.ts'
 
 /**
@@ -38,10 +38,10 @@ export class OneSampleKSTest {
     const edf1 = standard.map((_, i) => (i + 1) / this.count) // 右极限
     const edf0 = standard.map((_, i) => i / this.count) // 左极限
     // 计算四个差距
-    const dplus1 = Math.max(...edf1.map((f, i) => f - cdf[i]))
-    const dplus0 = Math.max(...edf0.map((f, i) => f - cdf[i]))
-    const dminus1 = Math.max(...cdf.map((f, i) => f - edf1[i]))
-    const dminus0 = Math.max(...cdf.map((f, i) => f - edf0[i]))
+    const dplus1 = max(edf1.map((f, i) => f - cdf[i]))
+    const dplus0 = max(edf0.map((f, i) => f - cdf[i]))
+    const dminus1 = max(cdf.map((f, i) => f - edf1[i]))
+    const dminus0 = max(cdf.map((f, i) => f - edf0[i]))
     // 取所有差距中的最大值
     this.d = Math.max(dplus1, dplus0, dminus1, dminus0)
     // 计算渐进p值
