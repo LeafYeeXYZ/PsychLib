@@ -31,7 +31,7 @@ export class PartialCorrMatrix {
     this.corrMatrix = Array.from({ length: data.length }, () => Array.from({ length: data.length }, () => 0))
     for (let i = 0; i < data.length; i++) {
       for (let j = i; j < data.length; j++) {
-        this.corrMatrix[i][j] = corr(data[i], data[j])
+        this.corrMatrix[i][j] = (i === j) ? 1 : corr(data[i], data[j])
         this.corrMatrix[j][i] = this.corrMatrix[i][j]
       }
     }

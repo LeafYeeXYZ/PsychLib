@@ -28,6 +28,7 @@
     "npm:jstat-esm@*": "2.0.2",
     "npm:jstat-esm@2": "2.0.2",
     "npm:jstat-esm@2.0.2": "2.0.2",
+    "npm:m@*": "1.9.0",
     "npm:mathjs@13": "13.2.0",
     "npm:ml-matrix@6.12.0": "6.12.0",
     "npm:ml@*": "8.0.0",
@@ -2990,6 +2991,9 @@
     },
     "jstat-esm@2.0.2": {
       "integrity": "sha512-D/TKdqsiS4Xa1QfzXsllvOtVArr6xlNkZ9JdboCRuaQh5Uj85+lER4NAJON73tphu2bqGc5FIm9l3WDbDR4lOw=="
+    },
+    "m@1.9.0": {
+      "integrity": "sha512-Lrq5A8PF9nSkWSIgsZLTAvcgI+9WjeGQmdHVnY7QUXiDMMIU0XbWFZDEhiMe1naYK6CVO0TlcBQXMoXit1mDdg=="
     },
     "mathjs@13.2.0": {
       "integrity": "sha512-P5PZoiUX2Tkghkv3tsSqlK0B9My/ErKapv1j6wdxd0MOrYQ30cnGE4LH/kzYB2gA5rN46Njqc4cFgJjaxgijoQ==",

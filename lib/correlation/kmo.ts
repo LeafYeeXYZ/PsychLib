@@ -8,9 +8,13 @@ import { ss } from '../base.ts'
  */
 export class KMOTest {
   /**
-   * Kaiser-Meyer-Olkin (KMO) Test
+   * Kaiser-Meyer-Olkin (KMO) Test  
+   * The result indicates the proportion of shared variance among all observed variables  
+   * Before Factor Analysis, we need at least 0.6 (better 0.8-0.9) of this test
    * 
-   * 凯撒-迈尔-奥尔金（KMO）检验
+   * 凯撒-迈尔-奥尔金（KMO）检验  
+   * 结果表示所有观察变量之间共享方差的比例  
+   * 在因子分析之前，我们需要至少 0.6（最好 0.8-0.9）的 KMO 值
    * @param data variables data
    * @returns KMO Test Result
    * @example

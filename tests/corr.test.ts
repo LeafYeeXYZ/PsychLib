@@ -3,6 +3,7 @@ import pc from 'npm:@stdlib/stats-pcorrtest@^0.2.2'
 import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
 
 Deno.test('Correlation Test', () => {
+  const spheric: number[] = []
   for (let i = 0; i < 1000; i++) {
     const x: number[] = new Array(1000).fill(0).map(() => Math.random() * 100)
     const y: number[] = new Array(1000).fill(0).map(() => Math.random() * 100)
@@ -19,5 +20,11 @@ Deno.test('Correlation Test', () => {
     assertEquals(partialCorrMatrix.every((row) => row.length === 3), true)
     assertEquals(partialCorrMatrix[0][0], -1)
     assertAlmostEquals(kmo, 0.5, 1e-1)
+    const bartlett_spheric = new pl.BartlettSphericityTest(x, y, z)
+    assertEquals(bartlett_spheric.df, 3)
+    assertEquals(bartlett_spheric.corrMatrix.length, 3)
+    assertEquals(bartlett_spheric.corrMatrix.every((row) => row.length === 3), true)
+    spheric.push(bartlett_spheric.p)
   }
+  assertAlmostEquals(pl.mean(spheric), 0.5, 1e-1)
 })
