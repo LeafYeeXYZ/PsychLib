@@ -1,5 +1,6 @@
 import { ss, sum } from '../base.ts'
 import { f2p, t2p } from '../distribution/index.ts'
+import { tukey } from 'npm:jstat-esm@2.0.2'
 
 /**
  * One-way ANOVA
@@ -241,6 +242,39 @@ export class OneWayAnova {
     }
     return results
   }
+  /**
+   * Tukey's HSD post hoc test
+   *
+   * Tukey's HSD 事后检验
+   * @returns Tukey's HSD post hoc test result
+   * @throws {Error} Tukey HSD test requires equal group size
+   */
+  tukey(): TukeyResult[] {
+    if (new Set(this.groupsCount).size !== 1) {
+      throw new Error('Tukey HSD test requires equal group size')
+    }
+    const peers = (this.groups.length * (this.groups.length - 1)) / 2
+    const results: TukeyResult[] = []
+    const sem = Math.sqrt(this.MSw / this.groupsCount[0])
+    const HSD = tukey.inv(0.05, peers, this.dfW) * sem
+    // 两两比较
+    for (let i = 0; i < this.groups.length - 1; i++) {
+      for (let j = i + 1; j < this.groups.length; j++) {
+        const diff = this.groupsMean[i] - this.groupsMean[j]
+        const q = Math.abs(diff) / sem
+        const p = tukey.cdf(q, peers, this.dfW)
+        results.push({
+          groupA: this.groups[i],
+          groupB: this.groups[j],
+          diff,
+          HSD,
+          q,
+          p,
+        })
+      }
+    }
+    return results
+  }
 }
 
 /**
@@ -317,6 +351,50 @@ export type ScheffeResult = {
    * F值
    */
   f: number
+  /**
+   * p value
+   *
+   * p值
+   */
+  p: number
+}
+
+/**
+ * ANOVA Post Hoc Test Result (Tukey's HSD)
+ * 
+ * 方差分析事后检验结果 (Tukey's HSD)
+ */
+export type TukeyResult = {
+  /**
+   * Group A
+   *
+   * A组
+   */
+  groupA: string | number
+  /**
+   * Group B
+   *
+   * B组
+   */
+  groupB: string | number
+  /**
+   * Difference of mean
+   *
+   * 均值差异
+   */
+  diff: number
+  /**
+   * Tukey's HSD
+   *
+   * HSD 值
+   */
+  HSD: number
+  /**
+   * q value
+   *
+   * q值
+   */
+  q: number
   /**
    * p value
    *
