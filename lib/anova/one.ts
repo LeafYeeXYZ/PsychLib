@@ -262,7 +262,7 @@ export class OneWayAnova {
       for (let j = i + 1; j < this.groups.length; j++) {
         const diff = this.groupsMean[i] - this.groupsMean[j]
         const q = Math.abs(diff) / sem
-        const p = tukey.cdf(q, peers, this.dfW)
+        const p = (1 - tukey.cdf(q, peers, this.dfW)) * 2
         results.push({
           groupA: this.groups[i],
           groupB: this.groups[j],
