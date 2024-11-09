@@ -13,7 +13,6 @@ const jt = {
   p2c: (p: number, df: number): number => _jt.chisquare.inv(1 - p, df),
 }
 
-
 Deno.test('Distribution Test', () => {
   for (let i = 0; i < 1000; i++) {
     const stats = [
@@ -27,12 +26,11 @@ Deno.test('Distribution Test', () => {
     assertAlmostEquals(pl.z2p(stats[0]), jt.z2p(stats[0]), 1e-6)
     assertAlmostEquals(pl.p2z(sig), jt.p2z(sig), 1e-6)
     assertAlmostEquals(pl.t2p(stats[1], df2), jt.t2p(stats[1], df2), 1e-6)
-    assertAlmostEquals(pl.p2t(sig, df2), jt.p2t(sig, df2), 1e-3)
+    assertAlmostEquals(pl.p2t(sig, df2), jt.p2t(sig, df2), 1e-6)
     assertAlmostEquals(pl.f2p(stats[2], df1, df2), jt.f2p(stats[2], df1, df2), 1e-6)
-    assertAlmostEquals(pl.p2f(sig, df1, df2), jt.p2f(sig, df1, df2), 1e-3)
+    assertAlmostEquals(pl.p2f(sig, df1, df2), jt.p2f(sig, df1, df2), 1e-6)
     assertAlmostEquals(pl.c2p(stats[2], df1), jt.c2p(stats[2], df1), 1e-6)
-    assertAlmostEquals(_jt.chisquare.inv(1 - sig, df1), jt.p2c(sig, df1), 1e-9)
-    assertAlmostEquals(pl.p2c(sig, df1, 1e-6), jt.p2c(sig, df1), 1e-1)
+    assertAlmostEquals(pl.p2c(sig, df1), jt.p2c(sig, df1), 1e-6)
   }
   const randomResult: number[] = []
   const randomMean = Math.random() * 10

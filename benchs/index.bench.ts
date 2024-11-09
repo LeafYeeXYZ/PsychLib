@@ -45,6 +45,8 @@ Deno.bench(`@psych/lib - n=${N} - Two Sample T Test`, () => { new pl.TwoSampleTT
 Deno.bench(`@psych/lib - n=${N} - Paired T Test`, () => { new pl.PeerSampleTTest(getData(), getData()) })
 Deno.bench(`@psych/lib - n=${N} - Welch T Test`, () => { new pl.WelchTTest(getData(), getData()) })
 Deno.bench(`@psych/lib - n=${N} - Pearson Correlation Test`, () => { new pl.PearsonCorrTest(getData(), getData()) })
+Deno.bench(`@psych/lib - n=100,10x10 - Partial Correlation Matrix`, () => { new pl.PartialCorrMatrix(...new Array(10).fill(0).map(() => getData(100))) })
+Deno.bench(`@psych/lib - n=100,10x10 - KMO Test`, () => { new pl.KMOTest(...new Array(10).fill(0).map(() => getData(100))) })
 Deno.bench(`@psych/lib - n=${N} - Linear Regression One`, () => { new pl.LinearRegressionOne(getData(), getData()) })
 Deno.bench(`@psych/lib - n=${N} - Linear Regression Two`, () => { new pl.LinearRegressionTwo(getData(), getData(), getData()) })
 Deno.bench(`@psych/lib - n=${N},B=1000 - Bootstrap CI (ab)`, () => { pl.bootstrapTest('ab', 1000, 0.05, getData(), getData(), getData()) })

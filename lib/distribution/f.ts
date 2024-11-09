@@ -1,4 +1,5 @@
 import { ibeta } from './utils.ts'
+import { centralF } from 'npm:jstat-esm@2.0.2'
 
 /**
  * F distribution f value to p value
@@ -51,7 +52,6 @@ export function f2p(
  * @param df1 degree of freedom 1
  * @param df2 degree of freedom 2
  * @param twoside two side or not (default is false)
- * @param precision precision (default is 1e-8)
  * @returns f value
  * @throws {Error} df1 must be greater than 0
  * @throws {Error} df2 must be greater than 0
@@ -61,7 +61,6 @@ export function p2f(
   df1: number,
   df2: number,
   twoside: boolean = false,
-  precision: number = 1e-8,
 ): number {
   // 参数验证
   if (df1 <= 0) {
@@ -73,36 +72,7 @@ export function p2f(
   // 特殊值快速处理
   if (p === 1) return 0
   if (p === 0) return Infinity
-  // 处理双侧情况
+  // 调整p值(单侧转换)
   const _p = twoside ? p / 2 : p
-  // 初始搜索范围
-  const maxIter = 100
-  let min = 0
-  let max = 100
-  let f: number
-  let pval: number
-  // 动态扩展搜索范围
-  while (f2p(max, df1, df2, false) > _p) {
-    min = max
-    max *= 2
-  }
-  // 二分查找，添加最大迭代限制
-  for (let i = 0; i < maxIter; i++) {
-    f = (min + max) / 2
-    pval = f2p(f, df1, df2, false)
-    // 精度满足要求则提前返回
-    if (Math.abs(pval - _p) < precision) {
-      return f
-    }
-    if (pval > _p) {
-      min = f
-    } else {
-      max = f
-    }
-    // 区间收敛检查
-    if (Math.abs(max - min) < precision) {
-      return (max + min) / 2
-    }
-  }
-  return (max + min) / 2
+  return centralF.inv(1 - _p, df1, df2)
 }

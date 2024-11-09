@@ -1,4 +1,5 @@
 import { ibeta } from './utils.ts'
+import { studentt } from 'npm:jstat-esm@2.0.2'
 
 /**
  * Student's t-distribution t value to p value
@@ -41,7 +42,6 @@ export function t2p(t: number, df: number, twoside: boolean = true): number {
  * @param p p value
  * @param df degree of freedom
  * @param twoside two side or not (default is true)
- * @param precision precision (default is 1e-8)
  * @returns t value
  * @throws {Error} degree of freedom must be greater than 0
  */
@@ -49,7 +49,6 @@ export function p2t(
   p: number,
   df: number,
   twoside: boolean = true,
-  precision: number = 1e-8,
 ): number {
   if (df <= 0) throw new Error('degree of freedom must be greater than 0')
   if (p === 0.5 && twoside) return 0
@@ -57,33 +56,5 @@ export function p2t(
   if (p === 0) return Infinity
   // 调整p值(单侧转换)
   const _p = twoside ? p / 2 : p
-  // 初始搜索范围
-  const maxIter = 100
-  let min = 0
-  let max = 1000
-  let mid: number
-  let pval: number
-  // 扩展搜索范围直到找到合适的区间
-  while (t2p(max, df, false) > _p) {
-    min = max
-    max *= 2
-  }
-  // 二分查找
-  for (let i = 0; i < maxIter; i++) { // 最大迭代次数限制
-    mid = (min + max) / 2
-    pval = t2p(mid, df, false)
-    if (Math.abs(pval - _p) < precision) {
-      return mid
-    }
-    if (pval > _p) {
-      min = mid
-    } else {
-      max = mid
-    }
-    // 额外的收敛检查
-    if (Math.abs(max - min) < precision) {
-      return (max + min) / 2
-    }
-  }
-  return (max + min) / 2
+  return studentt.inv(1 - _p, df)
 }

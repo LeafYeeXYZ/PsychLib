@@ -1,5 +1,5 @@
 import { lowRegGamma } from './utils.ts'
-import { p2z } from './z.ts'
+import { chisquare } from 'npm:jstat-esm@2.0.2'
 
 /**
  * Chi-square distribution chi-square value to p value
@@ -33,7 +33,6 @@ export function c2p(c: number, df: number): number {
  * p 值表示卡方值右尾的概率
  * @param p p value
  * @param df degree of freedom
- * @param precision precision (default is 1e-4) (Note: too small precision may cause VERY slow calculation)
  * @returns chi-square value
  * @throws {Error} degree of freedom must be greater than or equal to 1
  * @throws {Error} p value must be between 0 and 1
@@ -41,7 +40,6 @@ export function c2p(c: number, df: number): number {
 export function p2c(
   p: number,
   df: number,
-  precision: number = 1e-4,
 ): number {
   if (df < 1) {
     throw new Error('degree of freedom must be greater than 0')
@@ -51,18 +49,5 @@ export function p2c(
   }
   if (p === 0) return Infinity
   if (p === 1) return 0
-  const z = p2z(1 - p)
-  const a = 2 / (9 * df)
-  const b = 1 - a + z * Math.sqrt(a)
-  let c = df * (b ** 3)
-  let _p = c2p(c, df)
-  while (Math.abs(_p - p) > precision) {
-    if (_p < p) {
-      c -= precision
-    } else {
-      c += precision
-    }
-    _p = c2p(c, df)
-  }
-  return c
+  return chisquare.inv(1 - p, df)
 }
