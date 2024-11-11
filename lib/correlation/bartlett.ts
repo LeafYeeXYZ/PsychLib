@@ -1,21 +1,21 @@
 import { corr } from '../base.ts'
 import { c2p } from '../distribution/index.ts'
-import { Matrix, determinant } from 'npm:ml-matrix@6.12.0'
+import { determinant, Matrix } from 'npm:ml-matrix@6.12.0'
 
 /**
  * Bartlett's Test of Sphericity
- * 
+ *
  * 巴特利特球形检验
  */
 export class BartlettSphericityTest {
   /**
-   * Bartlett's Test of Sphericity  
-   * H0: The variables are uncorrelated (The correlation matrix is an identity matrix)  
+   * Bartlett's Test of Sphericity
+   * H0: The variables are uncorrelated (The correlation matrix is an identity matrix)
    * Before Factor Analysis, we need a significant result of this test
-   * 
-   * 巴特利特球形检验  
-   * H0：变量不相关（相关矩阵为单位矩阵）  
-   * 在因子分析之前，我们需要这个检验的显著结果  
+   *
+   * 巴特利特球形检验
+   * H0：变量不相关（相关矩阵为单位矩阵）
+   * 在因子分析之前，我们需要这个检验的显著结果
    * @param data variables data
    * @returns Bartlett's Test Result
    * @example
@@ -34,7 +34,7 @@ export class BartlettSphericityTest {
     }
     const p = data.length
     this.df = p * (p - 1) / 2
-    const partA = - (n - 1 - (2 * p + 5) / 6)
+    const partA = -(n - 1 - (2 * p + 5) / 6)
     this.corrMatrix = Array.from({ length: p }, () => new Array(p).fill(0))
     for (let i = 0; i < p; i++) {
       for (let j = i; j < p; j++) {
@@ -48,25 +48,25 @@ export class BartlettSphericityTest {
   }
   /**
    * Correlation Matrix
-   * 
+   *
    * 相关矩阵
    */
   corrMatrix: number[][]
   /**
    * Chi-Square Value
-   * 
+   *
    * 卡方值
    */
   c: number
   /**
    * Degree of Freedom
-   * 
+   *
    * 自由度
    */
   df: number
   /**
    * P Value
-   * 
+   *
    * P 值
    */
   p: number

@@ -1,5 +1,5 @@
 import { f2p } from '../distribution/index.ts'
-import { mean, median, ss, sum, centralize } from '../base.ts'
+import { centralize, mean, median, ss, sum } from '../base.ts'
 
 /**
  * Levene's test for homogeneity of variances
@@ -53,7 +53,12 @@ export class LeveneTest {
       this.groupsCount.push(this.valuesR[i].length)
       this.groupsMeanR.push(mean(this.valuesR[i]))
       this.groupsMedianR.push(median(this.valuesR[i]))
-      const centered = centralize(this.valuesR[i], center, true, center === 'mean' ? this.groupsMeanR[i] : this.groupsMedianR[i])
+      const centered = centralize(
+        this.valuesR[i],
+        center,
+        true,
+        center === 'mean' ? this.groupsMeanR[i] : this.groupsMedianR[i],
+      )
       this.valuesC[i] = centered
       _mean += sum(centered)
       this.groupsMeanC.push(mean(centered))

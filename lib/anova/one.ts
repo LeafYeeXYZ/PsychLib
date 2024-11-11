@@ -361,7 +361,7 @@ export type ScheffeResult = {
 
 /**
  * ANOVA Post Hoc Test Result (Tukey's HSD)
- * 
+ *
  * 方差分析事后检验结果 (Tukey's HSD)
  */
 export type TukeyResult = {

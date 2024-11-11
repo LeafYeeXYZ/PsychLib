@@ -1,20 +1,20 @@
-import { mean, sort, std, max, standardize } from '../base.ts'
+import { max, mean, sort, standardize, std } from '../base.ts'
 import { z2p } from '../distribution/index.ts'
 
 /**
- * One-sample Kolmogorov-Smirnov test for Normal distribution  
+ * One-sample Kolmogorov-Smirnov test for Normal distribution
  * **For small sample size, the p-value may not be accurate, please refer to `rejected` and `decide` for decision making**
  *
- * 单样本 Kolmogorov-Smirnov 正态分布检验  
+ * 单样本 Kolmogorov-Smirnov 正态分布检验
  * **对于小样本量，p值可能不准确，请参考 `rejected` 和 `decide` 进行决策**
  * @see https://en.wikipedia.org/wiki/Kolmogorov–Smirnov_test
  */
 export class OneSampleKSTest {
   /**
-   * One-sample Kolmogorov-Smirnov test for Normal distribution  
+   * One-sample Kolmogorov-Smirnov test for Normal distribution
    * **For small sample size, the p-value may not be accurate, please refer to `rejected` and `decide` for decision making**
    *
-   * 单样本 Kolmogorov-Smirnov 正态分布检验  
+   * 单样本 Kolmogorov-Smirnov 正态分布检验
    * **对于小样本量，p值可能不准确，请参考 `rejected` 和 `decide` 进行决策**
    * @param data sample data
    * @returns One-sample Kolmogorov-Smirnov test result
@@ -56,7 +56,7 @@ export class OneSampleKSTest {
   }
   /**
    * Decision table for small (<=50) sample size (alpha = 0.05)
-   * 
+   *
    * 小样本量 (<=50) 的决策表 (alpha = 0.05)
    */
   static DECIDE_TABLE: Map<number, number> = new Map([
@@ -113,7 +113,7 @@ export class OneSampleKSTest {
   ])
   /**
    * Whether to reject the null hypothesis (p < 0.05)
-   * 
+   *
    * 是否拒绝原假设 (p < 0.05)
    */
   rejected: boolean
@@ -125,7 +125,7 @@ export class OneSampleKSTest {
   d: number
   /**
    * Decision point (alpha = 0.05)
-   * 
+   *
    * 决策点 (alpha = 0.05)
    */
   decide: number

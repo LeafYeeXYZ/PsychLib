@@ -536,7 +536,7 @@ export function mode(data: number[]): number {
 
 /**
  * Centralize the array
- * 
+ *
  * 中心化数组
  * @param data numbers
  * @param stat statistics to refer to (default is mean)
@@ -565,7 +565,7 @@ export function centralize(
 
 /**
  * Standardize the array
- * 
+ *
  * 标准化数组
  * @param data numbers
  * @param sample whether to calculate the sample standard deviation (default is true)
