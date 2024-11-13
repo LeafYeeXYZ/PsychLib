@@ -1,4 +1,4 @@
-import { mean, median, sort, sp, ss, corr } from '../base.ts'
+import { mean, median, sort, sp, ss, corr, std } from '../base.ts'
 
 /**
  * Bootstrap sampling
@@ -87,7 +87,9 @@ function calculateAB(x: number[], m: number[], y: number[]): number {
   const xm: number = mean(x)
   const mm: number = mean(m)
   const ym: number = mean(y)
-  const a = corr(x, m, [xm, mm])
+  const xstd: number = std(x, true, xm)
+  const mstd: number = std(m, true, mm)
+  const a = corr(x, m, [xm, mm]) * mstd / xstd
   const spxm: number = sp(x, m, [xm, mm])
   const spxy: number = sp(x, y, [xm, ym])
   const spmy: number = sp(m, y, [mm, ym])
