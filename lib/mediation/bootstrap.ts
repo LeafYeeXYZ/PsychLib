@@ -1,4 +1,4 @@
-import { mean, median, sort, sp, ss, std } from '../base.ts'
+import { mean, median, sort, sp, ss, corr } from '../base.ts'
 
 /**
  * Bootstrap sampling
@@ -78,7 +78,7 @@ export function bootstrapTest(
     statistic.push(stat(...sample))
   }
   const sorted = sort(statistic)
-  const lower = sorted[Math.floor(B * a / 2)]
+  const lower = sorted[Math.floor(B * (a / 2))]
   const upper = sorted[Math.floor(B * (1 - a / 2))]
   return [lower, upper]
 }
@@ -87,15 +87,12 @@ function calculateAB(x: number[], m: number[], y: number[]): number {
   const xm: number = mean(x)
   const mm: number = mean(m)
   const ym: number = mean(y)
-  const ssx: number = ss(x, xm)
-  const ssm: number = ss(m, mm)
-  const stdx: number = std(x, true, xm)
-  const stdm: number = std(m, true, mm)
+  const a = corr(x, m, [xm, mm])
   const spxm: number = sp(x, m, [xm, mm])
   const spxy: number = sp(x, y, [xm, ym])
   const spmy: number = sp(m, y, [mm, ym])
-  const c: number = spxm / Math.sqrt(ssx * ssm)
-  const a: number = c * stdm / stdx
-  const b: number = (spmy * ssx - spxy * spxm) / (ssx * ssm - spxm ** 2)
+  const ssx: number = ss(x, xm)
+  const ssm: number = ss(m, mm)
+  const b = (spmy * ssx - spxy * spxm) / (ssx * ssm - spxm ** 2)
   return a * b
 }
