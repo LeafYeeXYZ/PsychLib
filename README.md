@@ -27,17 +27,17 @@ yarn dlx jsr add @psych/lib # if using yarn
 ```typescript
 import { z2p, p2f, bootstrapTest } from '@psych/lib'
 
-console.log(bootstrapTest(
-  [1, 2, 3, 4, 5],
-  [123, 44, 765, 23, 1],
-  [43, 23, 12, 4, 5],
-  1000,
-  0.05
-)) // [xxx, xxx]: 95% confidence interval of ab (mediation effect)
-
 console.log(z2p(1.96).toFixed(3)) // 0.975
 console.log(z2p(-2.58).toFixed(3)) // 0.005
 console.log(p2f(0.05, 5, 5).toFixed(2)) // 7.15
+console.log(bootstrapTest(
+  'ab',
+  1000,
+  0.05,
+  new Array(100).fill(0).map(() => Math.random() * 10),
+  new Array(100).fill(0).map(() => Math.random() * 10),
+  new Array(100).fill(0).map(() => Math.random() * 10)
+)) // [xxx, xxx]: 95% confidence interval of ab (mediation effect)
 ```
 
 **For full documentation, see <https://jsr.io/@psych/lib/doc>.**
