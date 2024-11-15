@@ -1,6 +1,5 @@
 /**
  * @module @psych/lib
- * @description PsychLib is a TypeScript library for math, statistics, and data analysis. Featured in psychological and educational research.
  * @example Quick Start
  * ```typescript
  * import { z2p, p2f, bootstrapTest } from '@psych/lib'
@@ -16,6 +15,24 @@
  *   new Array(100).fill(0).map(() => Math.random() * 10),
  *   new Array(100).fill(0).map(() => Math.random() * 10)
  * )) // [xxx, xxx]: 95% confidence interval of ab (mediation effect)
+ * ```
+ * @example Use with @psych/sheet
+ * ```typescript
+ * import { importSheet } from '@psych/sheet'
+ * import { WelchTTest } from '@psych/lib'
+ * import { readFile } from 'node:fs/promises'
+ * import { resolve } from 'node:path'
+ * 
+ * // Import data from Excel file
+ * const filePath = resolve(import.meta.dirname, 'data.xlsx')
+ * const fileBuffer = await readFile(filePath)
+ * const sheet = await importSheet(fileBuffer)
+ * // Get independent and dependent variables
+ * const independentVariable = sheet.map((row) => row['independentVariable'])
+ * const dependentVariable = sheet.map((row) => row['dependentVariable'])
+ * // Perform Welch's t-test
+ * const test = new WelchTTest(independentVariable, dependentVariable)
+ * console.log(test.t, test.df, test.p)
  * ```
  */
 
