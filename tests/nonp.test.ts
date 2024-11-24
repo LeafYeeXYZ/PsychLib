@@ -3,7 +3,7 @@ import sl_le from 'npm:@stdlib/stats-levene-test'
 import sl_ks from 'npm:@stdlib/stats-kstest'
 import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
 
-const x = () => new Array(50).fill(0).map(() => Math.random() * 100)
+const x = (n: number = 50) => new Array(n).fill(0).map(() => Math.random() * 100)
 
 Deno.test('Non-param Test', () => {
   assertEquals(typeof pl.kurtosisTest(x()).p, 'number')
@@ -27,5 +27,13 @@ Deno.test('Non-param Test', () => {
     const sl_res = sl_ks(_x.map((v) => (v - _mean) / _std), 'normal', 0, 1)
     assertAlmostEquals(pl_res.d, sl_res.statistic, 1e-4)
     assertEquals(pl_res.rejected, sl_res.rejected)
+  }
+  for (let i = 0; i < 20; i++) {
+    const _x = x(1000)
+    const _mean = pl.mean(_x)
+    const _std = pl.std(_x, true, _mean)
+    const pl_res = new pl.OneSampleKSTest(_x)
+    const sl_res = sl_ks(_x.map((v) => (v - _mean) / _std), 'normal', 0, 1)
+    assertAlmostEquals(pl_res.p, sl_res.pValue, 1e-3)
   }
 })

@@ -35,6 +35,8 @@
     "npm:@stdlib/stats-ttest2@*": "0.2.2",
     "npm:@stdlib/stats-ttest@*": "0.2.2",
     "npm:@stdlib/stats@*": "0.3.1",
+    "npm:@types/chance@*": "1.1.6",
+    "npm:chance@1.1.12": "1.1.12",
     "npm:jstat-esm@*": "2.0.2",
     "npm:jstat-esm@2": "2.0.2",
     "npm:jstat-esm@2.0.2": "2.0.2",
@@ -44,6 +46,7 @@
     "npm:ml@*": "8.0.0",
     "npm:psych-wasm@2.4.0": "2.4.0_typescript@5.6.3",
     "npm:pyodide@0.26.4": "0.26.4",
+    "npm:seedrandom@3.0.5": "3.0.5",
     "npm:simple-statistics@7": "7.8.7"
   },
   "jsr": {
@@ -11745,6 +11748,9 @@
     "@stdlib/utils@0.3.1": {
       "integrity": "sha512-5KdqdKCgCkhmWunahIzx3j8VS/C34f5YDEZLvufLI9O3a58IPBP/V2p3cBil9GPgCBmVD95xSK3v+El7f+uGDw=="
     },
+    "@types/chance@1.1.6": {
+      "integrity": "sha512-V+pm3stv1Mvz8fSKJJod6CglNGVqEQ6OyuqitoDkWywEODM/eJd1eSuIp9xt6DrX8BWZ2eDSIzbw1tPCUTvGbQ=="
+    },
     "ansi-regex@5.0.1": {
       "integrity": "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ=="
     },
@@ -11766,6 +11772,9 @@
         "ansi-styles@4.3.0",
         "supports-color"
       ]
+    },
+    "chance@1.1.12": {
+      "integrity": "sha512-vVBIGQVnwtUG+SYe0ge+3MvF78cvSpuCOEUJr7sVEk2vSBuMW6OXNJjSzdtzrlxNUEaoqH2GBd5Y/+18BEB01Q=="
     },
     "cheminfo-types@1.8.1": {
       "integrity": "sha512-FRcpVkox+cRovffgqNdDFQ1eUav+i/Vq/CUd1hcfEl2bevntFlzznL+jE8g4twl6ElB7gZjCko6pYpXyMn+6dA=="
