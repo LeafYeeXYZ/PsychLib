@@ -1,6 +1,6 @@
 /**
  * @module @psych/lib
- * @example Quick Start
+ * @example Quick start
  * ```typescript
  * import { z2p, p2f, bootstrapTest } from '@psych/lib'
  *

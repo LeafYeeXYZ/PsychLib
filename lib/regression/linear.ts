@@ -270,9 +270,10 @@ export class LinearRegressionTwo {
       this.b2t = this.b2 / this.SEb2
       this.b2p = t2p(this.b2t, df)
     } else {
+      this.r2increase = this.r2 - one.r2
       this.b1F = one.F
       this.b1p = one.p
-      this.b2F = (this.r2 - one.r2) / ((1 - this.r2) / this.dfE)
+      this.b2F = this.r2increase / ((1 - this.r2) / this.dfE)
       this.b2p = f2p(Math.abs(this.b2F), this.dfR, this.dfE, false)
     }
   }
@@ -449,6 +450,12 @@ export class LinearRegressionTwo {
    * 调整后的测定系数
    */
   r2adj: number
+  /**
+   * The increase of r2 when adding x2 to the model (sequential regression only)
+   * 
+   * 当将 x2 加入模型时 r2 的增加量 (仅序列回归)
+   */
+  r2increase?: number
   /**
    * Regression degrees of freedom
    *

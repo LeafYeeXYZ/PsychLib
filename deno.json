@@ -1,6 +1,6 @@
 {
   "name": "@psych/lib",
-  "version": "1.12.6",
+  "version": "1.13.0",
   "fmt": {
     "semiColons": false,
     "singleQuote": true,

@@ -43,6 +43,7 @@
     "npm:ml-matrix@6.12.0": "6.12.0",
     "npm:ml@*": "8.0.0",
     "npm:psych-wasm@2.4.0": "2.4.0_typescript@5.6.3",
+    "npm:pyodide@0.26.4": "0.26.4",
     "npm:simple-statistics@7": "7.8.7"
   },
   "jsr": {
@@ -12438,6 +12439,12 @@
         "typescript"
       ]
     },
+    "pyodide@0.26.4": {
+      "integrity": "sha512-z2CHsjVlhhJi5tYBF0AYAfNEPo3zq/z+xOpFtk1tweJkRaTqU4UK/7pLvo8DBU2VDPH31vB3pSI+8fnoqrVrFg==",
+      "dependencies": [
+        "ws"
+      ]
+    },
     "random-js@2.1.0": {
       "integrity": "sha512-CRUyWmnzmZBA7RZSVGq0xMqmgCyPPxbiKNLFA5ud7KenojVX2s7Gv+V7eB52beKTPGxWRnVZ7D/tCIgYJJ8vNQ=="
     },
@@ -12484,6 +12491,9 @@
     },
     "typescript@5.6.3": {
       "integrity": "sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw=="
+    },
+    "ws@8.18.0": {
+      "integrity": "sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw=="
     }
   }
 }
