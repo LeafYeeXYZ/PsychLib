@@ -20,10 +20,11 @@
  * const fileBuffer = await readFile(filePath)
  * const sheet = await importSheet(fileBuffer)
  * 
- * const independentVariable = sheet.map((row) => row['independentVariable'])
- * const dependentVariable = sheet.map((row) => row['dependentVariable'])
- * 
- * const tTest = new WelchTTest(independentVariable, dependentVariable)
+ * const data = sheet.map((row) => row['data'])
+ * const group = sheet.map((row) => row['group'])
+ * const groupA = data.filter((_, i) => group[i] === 'A')
+ * const groupB = data.filter((_, i) => group[i] === 'B')
+ * const tTest = new WelchTTest(groupA, groupB)
  * console.log(tTest.t, tTest.df, tTest.p)
  * ```
  */

@@ -13,13 +13,14 @@
 export type SortAlgorithm = 'quickSort' | 'native' | 'mergeSort' | 'heapSort'
 
 /**
- * Sort numbers in ascending or descending order by quick sort algorithm
- * returns a copy of the sorted numbers
+ * Sort numbers in ascending or descending order
  *
- * 使用快速排序算法对数字进行升序或降序排序
- * 不会改变原数组
+ * 对数字进行升序或降序排序
  * @param data numbers
  * @param ascending whether to sort in ascending order (default is true)
+ * @param algorithm sort algorithm (default is 'quickSort')
+ * @param modify whether to modify the original array (default is false)
+ * 
  * @returns sorted numbers
  */
 export function sort(
