@@ -25,19 +25,12 @@ yarn dlx jsr add @psych/lib # if using yarn
 ```
 
 ```typescript
-import { z2p, p2f, bootstrapTest } from '@psych/lib'
+import { randomNormal, WelchTTest } from '@psych/lib'
 
-console.log(z2p(1.96).toFixed(3)) // 0.975
-console.log(z2p(-2.58).toFixed(3)) // 0.005
-console.log(p2f(0.05, 5, 5).toFixed(2)) // 7.15
-console.log(bootstrapTest(
-  'ab',
-  1000,
-  0.05,
-  new Array(100).fill(0).map(() => Math.random() * 10),
-  new Array(100).fill(0).map(() => Math.random() * 10),
-  new Array(100).fill(0).map(() => Math.random() * 10)
-)) // [xxx, xxx]: 95% confidence interval of ab (mediation effect)
+const groupA = new Array(500).fill(0).map(() => randomNormal(10, 2))
+const groupB = new Array(500).fill(0).map(() => randomNormal(11, 2))
+const tTest = new WelchTTest(groupA, groupB)
+console.log(tTest.t, tTest.df, tTest.p) // Maybe -6.5..., 997.4..., 0.0...
 ```
 
 **For full documentation, see <https://jsr.io/@psych/lib/doc>.**

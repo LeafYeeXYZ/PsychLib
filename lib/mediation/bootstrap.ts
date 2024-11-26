@@ -111,16 +111,8 @@ export function bootstrapTest(
  * @param m mediator variable
  * @param y dependent variable
  * @returns mediation effect
- * @example
- * ```typescript
- * import { getMediationEffect } from '@psych/lib'
- * const x = Array.from({ length: 200 }, () => Math.random())
- * const m = Array.from({ length: 200 }, (_, i) => 0.5 * x[i] + Math.random())
- * const y = Array.from({ length: 200 }, (_, i) => 0.3 * x[i] + 0.5 * m[i] + Math.random())
- * console.log(getMediationEffect(x, m, y))
- * ```
  */
-export function calculateMediationEffect(x: number[], m: number[], y: number[]): number {
+function calculateMediationEffect(x: number[], m: number[], y: number[]): number {
   const xm: number = mean(x)
   const mm: number = mean(m)
   const ym: number = mean(y)
