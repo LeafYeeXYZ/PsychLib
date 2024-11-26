@@ -1,4 +1,5 @@
-import { max, mean, sort, standardize, std } from '../base.ts'
+import { max, mean, standardize, std } from '../base.ts'
+import { sort } from '../sort.ts'
 import { z2p } from '../distribution/index.ts'
 
 /**

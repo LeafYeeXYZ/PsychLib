@@ -37,6 +37,7 @@
  */
 
 export * from './base.ts'
+export * from './sort.ts'
 export * from './regression/index.ts'
 export * from './mediation/index.ts'
 export * from './ttest/index.ts'

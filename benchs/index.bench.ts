@@ -1,32 +1,44 @@
 import * as pl from '../lib/index.ts'
 
-const getData = (n: number = 500) => new Array(n).fill(0).map(() => Math.random() * 10)
-const getGroup = (n: number = 500) => {
+const N = 500
+const B = 5000
+const MEAN = 10
+const STD = 3
+const getData = (n: number = N, mean: number = MEAN, std: number = STD) => new Array(n).fill(0).map(() => pl.randomNormal(mean, std))
+const getGroup = (n: number = N) => {
   const levels = Math.floor(Math.random() * 8) + 3
   const group: number[] = new Array(n).fill(0).map(() => Math.floor(Math.random() * levels))
   const value: number[] = group.map((v) => Math.random() * 10 + v)
   return { value, group }
 }
-const N = 500
+Deno.bench(`Baseline (Generate Data) - n=${N},1 - number after n means generate times`, () => { getData() })
+Deno.bench(`Baseline (Generate Data) - n=${N},2 - number after n means generate times`, () => { getData(); getData() })
+Deno.bench(`Baseline (Generate Data) - n=${N},3 - number after n means generate times`, () => { getData(); getData(); getData() })
+Deno.bench(`Baseline (Generate Group) - n=${N} - for ANOVA & Levene test`, () => { getGroup() })
+Deno.bench(`Baseline (Math.random) - for distribution benchmarks`, () => { Math.random() })
 // Bases
-Deno.bench(`@psych/lib - n=${N} - Sum`, () => { pl.sum(getData()) })
-Deno.bench(`@psych/lib - n=${N} - Mean`, () => { pl.mean(getData()) })
-Deno.bench(`@psych/lib - n=${N} - Max`, () => { pl.max(getData()) })
-Deno.bench(`@psych/lib - n=${N} - Min`, () => { pl.min(getData()) })
-Deno.bench(`@psych/lib - n=${N} - Median`, () => { pl.median(getData()) })
-Deno.bench(`@psych/lib - n=${N} - Mode`, () => { pl.mode(getData()) })
-Deno.bench(`@psych/lib - n=${N} - Quantile`, () => { pl.quantile(getData(), 0.25) })
-Deno.bench(`@psych/lib - n=${N} - Range`, () => { pl.range(getData()) })
-Deno.bench(`@psych/lib - n=${N} - Variance`, () => { pl.vari(getData()) })
-Deno.bench(`@psych/lib - n=${N} - Std`, () => { pl.std(getData()) })
-Deno.bench(`@psych/lib - n=${N} - Cov`, () => { pl.cov(getData(), getData()) })
-Deno.bench(`@psych/lib - n=${N} - Corr`, () => { pl.corr(getData(), getData()) })
-Deno.bench(`@psych/lib - n=${N} - Kurtosis`, () => { pl.kurtosis(getData()) })
-Deno.bench(`@psych/lib - n=${N} - Skewness`, () => { pl.skewness(getData()) })
-Deno.bench(`@psych/lib - n=${N} - SS`, () => { pl.ss(getData()) })
-Deno.bench(`@psych/lib - n=${N} - SSDiff`, () => { pl.ssDiff(getData(), getData()) })
-Deno.bench(`@psych/lib - n=${N} - SEM`, () => { pl.sem(getData()) })
-Deno.bench(`@psych/lib - n=${N} - Sort`, () => { pl.sort(getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - Sum`, () => { pl.sum(getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - Mean`, () => { pl.mean(getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - Max`, () => { pl.max(getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - Min`, () => { pl.min(getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - Median`, () => { pl.median(getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - Mode`, () => { pl.mode(getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - Quantile`, () => { pl.quantile(getData(), 0.25) })
+Deno.bench(`@psych/lib - n=${N},1 - Range`, () => { pl.range(getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - Variance`, () => { pl.vari(getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - Std`, () => { pl.std(getData()) })
+Deno.bench(`@psych/lib - n=${N},2 - Cov`, () => { pl.cov(getData(), getData(N, MEAN + 2, STD + 1)) })
+Deno.bench(`@psych/lib - n=${N},2 - Corr`, () => { pl.corr(getData(), getData(N, MEAN + 2, STD + 1)) })
+Deno.bench(`@psych/lib - n=${N},1 - Kurtosis`, () => { pl.kurtosis(getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - Skewness`, () => { pl.skewness(getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - SS`, () => { pl.ss(getData()) })
+Deno.bench(`@psych/lib - n=${N},2 - SSDiff`, () => { pl.ssDiff(getData(), getData(N, MEAN + 2, STD + 1)) })
+Deno.bench(`@psych/lib - n=${N},1 - SEM`, () => { pl.sem(getData()) })
+// Sort
+Deno.bench(`@psych/lib - n=${N},1 - Array.prototype.sort`, () => { pl.sort(getData(), true, 'native') })
+Deno.bench(`@psych/lib - n=${N},1 - Quick Sort`, () => { pl.sort(getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - Merge Sort`, () => { pl.sort(getData(), true, 'mergeSort') })
+Deno.bench(`@psych/lib - n=${N},1 - Heap Sort`, () => { pl.sort(getData(), true, 'heapSort') })
 // Distributions
 Deno.bench(`@psych/lib - Z Score to P Value`, () => { pl.z2p((Math.random() - 0.5) * 10) })
 Deno.bench(`@psych/lib - P Value to Z Score`, () => { pl.p2z(Math.random()) })
@@ -39,14 +51,14 @@ Deno.bench(`@psych/lib - df=6 - P Value to Chi2`, () => { pl.p2c(Math.random(), 
 // Tests
 Deno.bench(`@psych/lib - n=${N} - One Way Anova`, () => { const { value, group } = getGroup(); new pl.OneWayAnova(value, group) })
 Deno.bench(`@psych/lib - n=${N} - Levene Test`, () => { const { value, group } = getGroup(); new pl.LeveneTest(value, group) })
-Deno.bench(`@psych/lib - n=${N} - One Sample KS Test`, () => { new pl.OneSampleKSTest(getData()) })
-Deno.bench(`@psych/lib - n=${N} - One Sample T Test`, () => { new pl.OneSampleTTest(getData(), 0) })
-Deno.bench(`@psych/lib - n=${N} - Two Sample T Test`, () => { new pl.TwoSampleTTest(getData(), getData()) })
-Deno.bench(`@psych/lib - n=${N} - Paired T Test`, () => { new pl.PeerSampleTTest(getData(), getData()) })
-Deno.bench(`@psych/lib - n=${N} - Welch T Test`, () => { new pl.WelchTTest(getData(), getData()) })
-Deno.bench(`@psych/lib - n=${N} - Pearson Correlation Test`, () => { new pl.PearsonCorrTest(getData(), getData()) })
-Deno.bench(`@psych/lib - n=${N} - Linear Regression One`, () => { new pl.LinearRegressionOne(getData(), getData()) })
-Deno.bench(`@psych/lib - n=${N} - Linear Regression Two`, () => { new pl.LinearRegressionTwo(getData(), getData(), getData()) })
-Deno.bench(`@psych/lib - n=${N},B=1000 - Bootstrap CI (ab)`, () => { pl.bootstrapTest('ab', 1000, 0.05, getData(), getData(), getData()) })
-Deno.bench(`@psych/lib - n=${N},B=1000 - Bootstrap CI (mean)`, () => { pl.bootstrapTest('mean', 1000, 0.05, getData(), getData(), getData()) })
-Deno.bench(`@psych/lib - n=${N},B=1000 - Bootstrap CI (median)`, () => { pl.bootstrapTest('median', 1000, 0.05, getData(), getData(), getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - One Sample KS Test`, () => { new pl.OneSampleKSTest(getData()) })
+Deno.bench(`@psych/lib - n=${N},1 - One Sample T Test`, () => { new pl.OneSampleTTest(getData(), 0) })
+Deno.bench(`@psych/lib - n=${N},2 - Two Sample T Test`, () => { new pl.TwoSampleTTest(getData(), getData(N, MEAN + 2, STD + 1)) })
+Deno.bench(`@psych/lib - n=${N},2 - Paired T Test`, () => { new pl.PeerSampleTTest(getData(), getData(N, MEAN + 2, STD + 1)) })
+Deno.bench(`@psych/lib - n=${N},2 - Welch T Test`, () => { new pl.WelchTTest(getData(), getData(N, MEAN + 2, STD + 1)) })
+Deno.bench(`@psych/lib - n=${N},2 - Pearson Correlation Test`, () => { new pl.PearsonCorrTest(getData(), getData(N, MEAN + 2, STD + 1)) })
+Deno.bench(`@psych/lib - n=${N},2 - Linear Regression One`, () => { new pl.LinearRegressionOne(getData(), getData(N, MEAN + 2, STD + 1)) })
+Deno.bench(`@psych/lib - n=${N},3 - Linear Regression Two`, () => { new pl.LinearRegressionTwo(getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)) })
+Deno.bench(`@psych/lib - n=${N},3,B=${B} - Bootstrap CI (ab)`, () => { pl.bootstrapTest('ab', B, 0.05, getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)) })
+Deno.bench(`@psych/lib - n=${N},3,B=${B} - Bootstrap CI (mean)`, () => { pl.bootstrapTest('mean', B, 0.05, getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)) })
+Deno.bench(`@psych/lib - n=${N},3,B=${B} - Bootstrap CI (median)`, () => { pl.bootstrapTest('median', B, 0.05, getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)) })

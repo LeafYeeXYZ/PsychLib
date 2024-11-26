@@ -1,4 +1,5 @@
-import { mean, median, sort, sp, ss, std } from '../base.ts'
+import { mean, median, sp, ss, std } from '../base.ts'
+import { sort } from '../sort.ts'
 
 /**
  * Bootstrap sampling
