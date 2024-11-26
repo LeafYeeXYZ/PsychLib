@@ -51,3 +51,14 @@ export function p2c(
   if (p === 1) return 0
   return chisquare.inv(1 - p, df)
 }
+
+/**
+ * Generate a random number from chi-square distribution
+ * 
+ * 从卡方分布中生成一个随机数
+ * @param df degree of freedom
+ * @returns random number from chi-square distribution
+ */
+export function randomChi2(df: number): number {
+  return chisquare.sample(df)
+}

@@ -58,3 +58,14 @@ export function p2t(
   const _p = twoside ? p / 2 : p
   return studentt.inv(1 - _p, df)
 }
+
+/**
+ * Generate a random number from a t distribution
+ * 
+ * 从 t 分布中生成一个随机数
+ * @param df degree of freedom
+ * @returns random number from a t distribution
+ */
+export function randomT(df: number): number {
+  return studentt.sample(df)
+}

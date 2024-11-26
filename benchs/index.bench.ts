@@ -48,6 +48,11 @@ Deno.bench(`@psych/lib - df=5,30 - F to P Value`, () => { pl.f2p(Math.random() *
 Deno.bench(`@psych/lib - df=5,30 - P Value to F`, () => { pl.p2f(Math.random(), 5, 30) })
 Deno.bench(`@psych/lib - df=6 - Chi2 to P Value`, () => { pl.c2p(Math.random() * 10, 6) })
 Deno.bench(`@psych/lib - df=6 - P Value to Chi2`, () => { pl.p2c(Math.random(), 6) })
+// Distributions - Random
+Deno.bench(`@psych/lib - Random Normal Distribution`, () => { pl.randomNormal() })
+Deno.bench(`@psych/lib - df=30 - Random T Distribution`, () => { pl.randomT(30) })
+Deno.bench(`@psych/lib - df=5,30 - Random F Distribution`, () => { pl.randomF(5, 30) })
+Deno.bench(`@psych/lib - df=6 - Random Chi2 Distribution`, () => { pl.randomChi2(6) })
 // Tests
 Deno.bench(`@psych/lib - n=${N} - One Way Anova`, () => { const { value, group } = getGroup(); new pl.OneWayAnova(value, group) })
 Deno.bench(`@psych/lib - n=${N} - Levene Test`, () => { const { value, group } = getGroup(); new pl.LeveneTest(value, group) })

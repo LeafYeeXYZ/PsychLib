@@ -76,3 +76,15 @@ export function p2f(
   const _p = twoside ? p / 2 : p
   return centralF.inv(1 - _p, df1, df2)
 }
+
+/**
+ * Generate a random number from a f distribution
+ * 
+ * 从 f 分布中生成一个随机数
+ * @param df1 degree of freedom 1
+ * @param df2 degree of freedom 2
+ * @returns random number from a f distribution
+ */
+export function randomF(df1: number, df2: number): number {
+  return centralF.sample(df1, df2)
+}

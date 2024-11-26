@@ -89,7 +89,7 @@ export function z2p(z: number): number {
  * 从正态分布中生成一个随机数
  * @param mean mean value (default: 0)
  * @param std standard deviation (default: 1)
- * @returns random number
+ * @returns random number from a normal distribution
  */
 export function randomNormal(mean: number = 0, std: number = 1): number {
   return mean + Math.abs(std) * p2z(Math.random())
