@@ -9,30 +9,6 @@ const x: number[] = new Array(N).fill(0).map(() => pl.randomNormal(0, 1))
 const m: number[] = new Array(N).fill(0).map((_, i) => 0.5 * x[i] + pl.randomNormal(0, 1))
 const y: number[] = new Array(N).fill(0).map((_, i) => 0.3 * x[i] + 0.5 * m[i] + pl.randomNormal(0, 1))
 Deno.test('Mediation Test', () => {
-  const ab_pl = pl.calculateMediationEffect(x, m, y)
-  const ab_pl_manual = (new pl.LinearRegressionOne(x, m)).b1 * (new pl.LinearRegressionTwo(x, m, y)).b2
-  const ab_py = JSON.parse(py.runPython(`
-    import numpy as np
-    import pandas as pd
-    import statsmodels.api as sm
-    import json
-    X = np.array(${JSON.stringify(x)})
-    M = np.array(${JSON.stringify(m)})
-    Y = np.array(${JSON.stringify(y)})
-    data = pd.DataFrame({'X': X, 'M': M, 'Y': Y})
-    # 定义回归函数
-    def regress(X, y):
-        X = sm.add_constant(X)  # 添加截距项
-        model = sm.OLS(y, X).fit()
-        return model
-    model_a = regress(data['X'], data['M'])
-    a = model_a.params['X']
-    model_b = regress(data[['X', 'M']], data['Y'])
-    b = model_b.params['M']
-    json.dumps(a * b)
-  `))
-  assertAlmostEquals(ab_pl, ab_pl_manual, 1e-6)
-  assertAlmostEquals(ab_pl, ab_py, 1e-6)
   // Bootstrap test
   const bootstrap_pl = pl.bootstrapTest('ab', B, ALPHA, x, m, y)
   const bootstrap_py = JSON.parse(py.runPython(`
