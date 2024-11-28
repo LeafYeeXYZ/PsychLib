@@ -29,22 +29,29 @@ export function sort(
   algorithm: SortAlgorithm = 'quickSort', 
   modify: boolean = false,
 ): number[] {
-  const source = modify ? data : data.slice()
-  switch (algorithm) {
-    case 'quickSort':
-      quickSort(source, 0, source.length - 1, ascending)
-      break
-    case 'native':
-      ascending ? source.sort((a, b) => a - b) : source.sort((a, b) => b - a)
-      break
-    case 'mergeSort':
-      mergeSort(source, 0, source.length - 1, ascending)
-      break
-    case 'heapSort':
-      heapSort(source, ascending)
-      break
+  try {
+    const source = modify ? data : data.slice()
+    switch (algorithm) {
+      case 'quickSort':
+        quickSort(source, 0, source.length - 1, ascending)
+        break
+      case 'native':
+        ascending ? source.sort((a, b) => a - b) : source.sort((a, b) => b - a)
+        break
+      case 'mergeSort':
+        mergeSort(source, 0, source.length - 1, ascending)
+        break
+      case 'heapSort':
+        heapSort(source, ascending)
+        break
+    }
+    return source
+  } catch {
+    // 避免 Max Call Stack Size Exceeded 错误
+    return modify ? 
+      data.sort(ascending ? ((a, b) => a - b) : ((a, b) => b - a)) : 
+      data.toSorted(ascending ? ((a, b) => a - b) : ((a, b) => b - a))
   }
-  return source
 }
 
 /**
