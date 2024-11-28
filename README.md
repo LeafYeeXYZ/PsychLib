@@ -68,55 +68,55 @@ Runtime | Deno 2.1.1 (aarch64-apple-darwin)
 
 benchmark                                                                  time/iter (avg)        iter/s      (min … max)           p75      p99     p995
 -------------------------------------------------------------------------- ----------------------------- --------------------- --------------------------
-Baseline (Generate Data) - n=500,1 - number after n means generate times            8.5 µs       117,900 (  7.0 µs … 119.3 µs)   8.3 µs  12.6 µs  16.2 µs
-Baseline (Generate Data) - n=500,2 - number after n means generate times           17.8 µs        56,030 ( 14.4 µs …  95.2 µs)  19.2 µs  27.0 µs  61.9 µs
-Baseline (Generate Data) - n=500,3 - number after n means generate times           28.6 µs        34,940 ( 21.9 µs … 108.6 µs)  33.8 µs  68.5 µs  77.5 µs
-Baseline (Generate Group) - n=500 - for ANOVA & Levene test                         9.8 µs       102,300 (  8.0 µs … 392.2 µs)   9.6 µs  13.4 µs  16.7 µs
-Baseline (Math.random) - for distribution benchmarks                                3.9 ns   256,800,000 (  3.2 ns … 163.8 ns)   3.6 ns  10.2 ns  14.4 ns
-@psych/lib - n=500,1 - Sum                                                          9.6 µs       104,000 (  7.3 µs … 128.2 µs)  11.1 µs  14.0 µs  14.9 µs
-@psych/lib - n=500,1 - Mean                                                         9.5 µs       105,000 (  7.2 µs …  99.2 µs)  11.0 µs  13.4 µs  14.6 µs
-@psych/lib - n=500,1 - Max                                                          9.2 µs       108,100 (  8.6 µs …  14.5 µs)   8.8 µs  14.5 µs  14.5 µs
-@psych/lib - n=500,1 - Min                                                          8.9 µs       112,900 (  8.6 µs …  11.0 µs)   8.8 µs  11.0 µs  11.0 µs
-@psych/lib - n=500,1 - Median                                                      32.0 µs        31,260 ( 27.0 µs … 171.2 µs)  33.7 µs  39.1 µs  43.4 µs
-@psych/lib - n=500,1 - Mode                                                        53.3 µs        18,770 ( 45.3 µs … 433.4 µs)  54.2 µs  80.0 µs 122.0 µs
-@psych/lib - n=500,1 - Quantile                                                    33.5 µs        29,890 ( 27.1 µs …   1.6 ms)  33.5 µs  64.1 µs 116.2 µs
-@psych/lib - n=500,1 - Range                                                        9.6 µs       104,300 (  7.6 µs … 215.7 µs)   9.2 µs  14.1 µs  15.9 µs
-@psych/lib - n=500,1 - Variance                                                    10.0 µs       100,200 (  7.5 µs … 128.9 µs)   9.2 µs  17.2 µs  18.8 µs
-@psych/lib - n=500,1 - Std                                                          9.4 µs       106,200 (  7.6 µs … 118.0 µs)   9.2 µs  13.0 µs  14.6 µs
-@psych/lib - n=500,2 - Cov                                                         20.1 µs        49,630 ( 15.2 µs … 169.2 µs)  22.1 µs  28.8 µs  42.9 µs
-@psych/lib - n=500,2 - Corr                                                        21.8 µs        45,790 ( 15.8 µs … 163.7 µs)  24.8 µs  36.2 µs  39.0 µs
-@psych/lib - n=500,1 - Kurtosis                                                    26.4 µs        37,930 ( 23.1 µs … 180.0 µs)  27.4 µs  34.0 µs  36.7 µs
-@psych/lib - n=500,1 - Skewness                                                    27.9 µs        35,830 ( 23.2 µs …   1.1 ms)  27.8 µs  63.3 µs 115.4 µs
-@psych/lib - n=500,1 - SS                                                           9.9 µs       101,400 (  7.6 µs … 146.5 µs)   9.2 µs  16.5 µs  18.2 µs
-@psych/lib - n=500,2 - SSDiff                                                      20.4 µs        49,080 ( 14.8 µs … 134.5 µs)  24.5 µs  30.3 µs  35.3 µs
-@psych/lib - n=500,1 - SEM                                                          9.5 µs       105,500 (  7.7 µs … 127.5 µs)   9.2 µs  13.1 µs  14.8 µs
-@psych/lib - n=500,1 - Array.prototype.sort                                        68.8 µs        14,540 ( 60.0 µs … 170.8 µs)  69.1 µs  85.5 µs 140.9 µs
-@psych/lib - n=500,1 - Quick Sort                                                  31.9 µs        31,360 ( 27.2 µs … 157.2 µs)  33.5 µs  39.5 µs  41.2 µs
-@psych/lib - n=500,1 - Merge Sort                                                  44.0 µs        22,710 ( 37.9 µs … 487.2 µs)  45.2 µs  59.7 µs 102.0 µs
-@psych/lib - n=500,1 - Heap Sort                                                   59.4 µs        16,840 ( 43.9 µs …   2.5 ms)  51.6 µs 275.4 µs 450.1 µs
-@psych/lib - Z Score to P Value                                                     8.0 ns   125,500,000 (  6.4 ns … 208.5 ns)   6.6 ns  46.9 ns  69.0 ns
-@psych/lib - P Value to Z Score                                                    14.9 ns    66,960,000 ( 13.2 ns …  29.1 ns)  14.8 ns  20.8 ns  21.8 ns
-@psych/lib - df=30 - T to P Value                                                 114.7 ns     8,722,000 (107.5 ns … 129.9 ns) 116.4 ns 124.9 ns 125.9 ns
-@psych/lib - df=30 - P Value to T                                                 559.5 ns     1,787,000 (525.6 ns … 609.8 ns) 565.9 ns 588.2 ns 609.8 ns
-@psych/lib - df=5,30 - F to P Value                                                94.7 ns    10,560,000 ( 87.1 ns … 108.0 ns)  94.7 ns 101.7 ns 107.2 ns
-@psych/lib - df=5,30 - P Value to F                                               560.4 ns     1,784,000 (519.5 ns … 567.7 ns) 564.7 ns 567.7 ns 567.7 ns
-@psych/lib - df=6 - Chi2 to P Value                                                42.2 ns    23,690,000 ( 39.0 ns …  68.2 ns)  42.5 ns  50.0 ns  55.3 ns
-@psych/lib - df=6 - P Value to Chi2                                               403.1 ns     2,481,000 (380.6 ns … 420.5 ns) 411.8 ns 420.1 ns 420.5 ns
-@psych/lib - Random Normal Distribution                                            15.8 ns    63,490,000 ( 13.5 ns …  29.3 ns)  15.7 ns  21.3 ns  22.0 ns
-@psych/lib - df=30 - Random T Distribution                                        131.1 ns     7,626,000 (121.6 ns … 142.5 ns) 133.3 ns 140.7 ns 141.9 ns
-@psych/lib - df=5,30 - Random F Distribution                                      193.6 ns     5,165,000 (179.7 ns … 207.1 ns) 198.8 ns 206.2 ns 206.3 ns
-@psych/lib - df=6 - Random Chi2 Distribution                                       95.4 ns    10,480,000 ( 87.5 ns … 106.8 ns)  96.8 ns 103.4 ns 103.8 ns
-@psych/lib - n=500 - One Way Anova                                                 26.3 µs        38,080 ( 19.8 µs … 167.0 µs)  27.9 µs  33.5 µs  54.1 µs
-@psych/lib - n=500 - Levene Test                                                   60.7 µs        16,460 ( 53.0 µs … 218.5 µs)  61.2 µs  73.6 µs 128.2 µs
-@psych/lib - n=500,1 - One Sample KS Test                                          75.9 µs        13,180 ( 66.7 µs … 187.6 µs)  75.5 µs 136.6 µs 143.0 µs
-@psych/lib - n=500,1 - One Sample T Test                                           10.5 µs        94,860 (  8.5 µs … 132.9 µs)  10.1 µs  16.8 µs  17.2 µs
-@psych/lib - n=500,2 - Two Sample T Test                                           26.1 µs        38,290 ( 17.4 µs … 149.9 µs)  33.2 µs  35.2 µs  40.0 µs
-@psych/lib - n=500,2 - Paired T Test                                               23.5 µs        42,640 ( 18.7 µs … 133.3 µs)  26.6 µs  29.9 µs  45.1 µs
-@psych/lib - n=500,2 - Welch T Test                                                23.9 µs        41,870 ( 16.8 µs … 125.9 µs)  27.9 µs  35.2 µs  39.1 µs
-@psych/lib - n=500,2 - Pearson Correlation Test                                    20.9 µs        47,790 ( 17.0 µs … 127.9 µs)  24.3 µs  33.2 µs  36.0 µs
-@psych/lib - n=500,2 - Linear Regression One                                       32.7 µs        30,560 ( 21.3 µs … 126.2 µs)  46.2 µs  49.1 µs  76.2 µs
-@psych/lib - n=500,3 - Linear Regression Two                                       67.6 µs        14,800 ( 40.8 µs … 171.2 µs)  72.1 µs  92.5 µs 138.6 µs
-@psych/lib - n=500,3,B=5000 - Bootstrap CI (ab)                                    71.1 ms          14.1 ( 65.1 ms …  79.5 ms)  75.2 ms  79.5 ms  79.5 ms
-@psych/lib - n=500,3,B=5000 - Bootstrap CI (mean)                                  38.0 ms          26.3 ( 35.8 ms …  40.7 ms)  38.9 ms  40.7 ms  40.7 ms
-@psych/lib - n=500,3,B=5000 - Bootstrap CI (median)                               144.2 ms           6.9 (143.3 ms … 146.0 ms) 145.0 ms 146.0 ms 146.0 ms
+Baseline (Generate Data) - n=500,1 - number after n means generate times            8.6 µs       116,100 (  6.8 µs … 115.7 µs)   8.4 µs  12.2 µs  15.5 µs
+Baseline (Generate Data) - n=500,2 - number after n means generate times           20.1 µs        49,770 ( 14.5 µs …   1.2 ms)  21.2 µs  61.4 µs  73.3 µs
+Baseline (Generate Data) - n=500,3 - number after n means generate times           32.1 µs        31,160 ( 22.0 µs …   3.9 ms)  34.2 µs  86.3 µs 100.6 µs
+Baseline (Generate Group) - n=500 - for ANOVA & Levene test                         9.8 µs       102,200 (  8.0 µs … 295.0 µs)   9.7 µs  13.7 µs  17.3 µs
+Baseline (Math.random) - for distribution benchmarks                                3.7 ns   273,100,000 (  3.3 ns …  18.5 ns)   3.6 ns   8.4 ns   8.9 ns
+@psych/lib - n=500,1 - Sum                                                         10.1 µs        99,290 (  7.9 µs … 471.3 µs)  11.8 µs  24.0 µs  31.2 µs
+@psych/lib - n=500,1 - Mean                                                         9.8 µs       102,000 (  7.3 µs … 147.6 µs)  11.7 µs  14.5 µs  17.3 µs
+@psych/lib - n=500,1 - Max                                                          8.9 µs       112,500 (  8.7 µs …  11.0 µs)   8.8 µs  11.0 µs  11.0 µs
+@psych/lib - n=500,1 - Min                                                          9.2 µs       109,200 (  8.7 µs …  11.4 µs)   8.9 µs  11.4 µs  11.4 µs
+@psych/lib - n=500,1 - Median                                                      32.5 µs        30,740 ( 27.2 µs … 183.4 µs)  34.0 µs  40.8 µs  55.8 µs
+@psych/lib - n=500,1 - Mode                                                        53.6 µs        18,640 ( 46.9 µs … 191.5 µs)  54.2 µs  87.8 µs 115.7 µs
+@psych/lib - n=500,1 - Quantile                                                    32.3 µs        30,950 ( 27.5 µs … 178.9 µs)  33.8 µs  40.2 µs  55.0 µs
+@psych/lib - n=500,1 - Range                                                        9.5 µs       104,800 (  7.9 µs … 115.6 µs)   9.2 µs  13.5 µs  15.1 µs
+@psych/lib - n=500,1 - Variance                                                    10.0 µs        99,820 (  7.8 µs … 152.9 µs)   9.2 µs  16.6 µs  18.0 µs
+@psych/lib - n=500,1 - Std                                                          9.5 µs       105,500 (  7.7 µs … 190.3 µs)   9.2 µs  12.7 µs  13.9 µs
+@psych/lib - n=500,2 - Cov                                                         20.1 µs        49,710 ( 15.3 µs … 149.1 µs)  22.9 µs  26.9 µs  30.7 µs
+@psych/lib - n=500,2 - Corr                                                        21.7 µs        46,040 ( 17.0 µs … 195.1 µs)  24.6 µs  34.7 µs  38.5 µs
+@psych/lib - n=500,1 - Kurtosis                                                    26.9 µs        37,180 ( 23.1 µs … 189.1 µs)  28.6 µs  32.9 µs  35.0 µs
+@psych/lib - n=500,1 - Skewness                                                    27.4 µs        36,430 ( 23.3 µs … 157.8 µs)  29.0 µs  34.6 µs  37.5 µs
+@psych/lib - n=500,1 - SS                                                          10.0 µs       100,300 (  7.8 µs … 198.0 µs)   9.2 µs  17.3 µs  19.6 µs
+@psych/lib - n=500,2 - SSDiff                                                      20.5 µs        48,690 ( 15.9 µs … 140.6 µs)  25.6 µs  31.2 µs  48.4 µs
+@psych/lib - n=500,1 - SEM                                                          9.6 µs       104,500 (  8.1 µs … 247.5 µs)   9.2 µs  13.5 µs  16.6 µs
+@psych/lib - n=500,1 - Array.prototype.sort                                        69.6 µs        14,360 ( 62.6 µs … 204.3 µs)  69.5 µs  84.5 µs 143.4 µs
+@psych/lib - n=500,1 - Quick Sort                                                  32.5 µs        30,800 ( 27.4 µs … 148.3 µs)  34.0 µs  39.8 µs  41.8 µs
+@psych/lib - n=500,1 - Merge Sort                                                  54.3 µs        18,420 ( 37.9 µs …   7.3 ms)  46.2 µs 219.0 µs 379.5 µs
+@psych/lib - n=500,1 - Heap Sort                                                   53.5 µs        18,700 ( 46.5 µs …   2.5 ms)  51.9 µs  82.6 µs 146.4 µs
+@psych/lib - Z Score to P Value                                                     6.5 ns   153,100,000 (  6.4 ns …  20.2 ns)   6.5 ns   9.1 ns  12.5 ns
+@psych/lib - P Value to Z Score                                                    14.9 ns    67,110,000 ( 14.1 ns …  29.0 ns)  14.8 ns  20.6 ns  21.3 ns
+@psych/lib - df=30 - T to P Value                                                 116.7 ns     8,570,000 (107.2 ns … 134.1 ns) 117.2 ns 128.4 ns 129.5 ns
+@psych/lib - df=30 - P Value to T                                                 506.0 ns     1,976,000 (484.4 ns … 520.6 ns) 509.1 ns 517.6 ns 520.6 ns
+@psych/lib - df=5,30 - F to P Value                                                95.4 ns    10,480,000 ( 93.4 ns … 131.0 ns)  95.9 ns 105.0 ns 106.6 ns
+@psych/lib - df=5,30 - P Value to F                                               563.2 ns     1,776,000 (536.7 ns … 595.1 ns) 565.2 ns 595.1 ns 595.1 ns
+@psych/lib - df=6 - Chi2 to P Value                                                41.9 ns    23,890,000 ( 41.2 ns …  56.9 ns)  41.9 ns  44.2 ns  49.0 ns
+@psych/lib - df=6 - P Value to Chi2                                               409.3 ns     2,443,000 (381.0 ns … 427.1 ns) 411.9 ns 421.7 ns 427.1 ns
+@psych/lib - Random Normal Distribution                                            15.7 ns    63,660,000 ( 13.5 ns …  26.7 ns)  15.7 ns  21.5 ns  22.0 ns
+@psych/lib - df=30 - Random T Distribution                                        133.2 ns     7,510,000 (122.0 ns … 149.4 ns) 133.8 ns 143.9 ns 146.1 ns
+@psych/lib - df=5,30 - Random F Distribution                                      198.6 ns     5,034,000 (181.7 ns … 211.2 ns) 200.3 ns 208.9 ns 209.4 ns
+@psych/lib - df=6 - Random Chi2 Distribution                                       95.6 ns    10,470,000 ( 86.6 ns … 108.7 ns)  96.4 ns 104.1 ns 108.0 ns
+@psych/lib - n=500 - One Way Anova                                                 26.6 µs        37,650 ( 20.4 µs … 164.9 µs)  28.0 µs  34.9 µs  52.4 µs
+@psych/lib - n=500 - Levene Test                                                   61.2 µs        16,340 ( 54.8 µs … 204.5 µs)  61.4 µs  72.5 µs 124.0 µs
+@psych/lib - n=500,1 - One Sample KS Test                                         110.7 µs         9,035 (103.2 µs … 199.2 µs) 110.2 µs 176.2 µs 180.3 µs
+@psych/lib - n=500,1 - One Sample T Test                                           10.6 µs        94,580 (  9.2 µs … 109.4 µs)  10.1 µs  16.8 µs  17.2 µs
+@psych/lib - n=500,2 - Two Sample T Test                                           26.1 µs        38,260 ( 18.7 µs … 138.2 µs)  32.9 µs  36.0 µs  41.3 µs
+@psych/lib - n=500,2 - Paired T Test                                               23.7 µs        42,270 ( 19.4 µs … 483.2 µs)  26.6 µs  32.0 µs  49.8 µs
+@psych/lib - n=500,2 - Welch T Test                                                24.0 µs        41,590 ( 17.8 µs … 135.6 µs)  28.7 µs  36.5 µs  41.2 µs
+@psych/lib - n=500,2 - Pearson Correlation Test                                    34.9 µs        28,670 ( 17.2 µs …   8.3 ms)  25.5 µs 298.2 µs 571.4 µs
+@psych/lib - n=500,2 - Linear Regression One                                       35.3 µs        28,360 ( 20.3 µs …   1.7 ms)  46.2 µs  81.2 µs 122.6 µs
+@psych/lib - n=500,3 - Linear Regression Two                                       68.4 µs        14,620 ( 43.6 µs … 194.3 µs)  72.2 µs 116.9 µs 145.9 µs
+@psych/lib - n=500,3,B=5000 - Bootstrap CI (ab)                                    69.0 ms          14.5 ( 63.5 ms …  78.5 ms)  70.9 ms  78.5 ms  78.5 ms
+@psych/lib - n=500,3,B=5000 - Bootstrap CI (mean)                                  37.9 ms          26.4 ( 35.7 ms …  40.2 ms)  38.8 ms  40.2 ms  40.2 ms
+@psych/lib - n=500,3,B=5000 - Bootstrap CI (median)                               146.5 ms           6.8 (145.7 ms … 147.6 ms) 147.3 ms 147.6 ms 147.6 ms
 ```
