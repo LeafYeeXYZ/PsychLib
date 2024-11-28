@@ -46,8 +46,9 @@ export function sort(
         break
     }
     return source
-  } catch {
+  } catch (e) {
     // 避免 Max Call Stack Size Exceeded 错误
+    console.warn(`Error occurred in sorting: ${e instanceof Error ? e.message : JSON.stringify(e)}, fallback to native sort.`)
     return modify ? 
       data.sort(ascending ? ((a, b) => a - b) : ((a, b) => b - a)) : 
       data.toSorted(ascending ? ((a, b) => a - b) : ((a, b) => b - a))
