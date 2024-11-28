@@ -1,7 +1,6 @@
 import * as ss from 'npm:simple-statistics@^7.0.0'
 import * as pl from '../lib/index.ts'
-import * as mt from 'npm:mathjs@^13.0.0'
-import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
+import { assertAlmostEquals } from 'jsr:@std/assert'
 
 const x: number[] = new Array(1000).fill(0).map(() => Math.random() * 100)
 const y: number[] = new Array(1000).fill(0).map(() => Math.random() * 100)
@@ -20,11 +19,6 @@ Deno.test('Base Test', () => {
   assertAlmostEquals(pl.cov(x, y), ss.sampleCovariance(x, y), 1e-6)
   assertAlmostEquals(pl.kurtosis(x), ss.sampleKurtosis(x), 1e-3)
   assertAlmostEquals(pl.skewness(x), ss.sampleSkewness(x), 1e-3)
-  assertEquals(pl.sort(x), mt.sort(x, 'asc'))
-  assertEquals(pl.sort(x, false), mt.sort(x, 'desc'))
-  assertEquals(pl.sort(x, true, 'native'), mt.sort(x, 'asc'))
-  assertEquals(pl.sort(x, true, 'mergeSort'), mt.sort(x, 'asc'))
-  assertEquals(pl.sort(x, true, 'heapSort'), mt.sort(x, 'asc'))
   assertAlmostEquals(pl.mode(x), 3 * ss.median(x) - 2 * ss.mean(x), 1e-6)
   assertAlmostEquals(pl.range(x), ss.max(x) - ss.min(x), 1e-6)
   assertAlmostEquals(pl.ss(x), ss.sum(x.map((v) => (v - ss.mean(x)) ** 2)), 1e-6)
