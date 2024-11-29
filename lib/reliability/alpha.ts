@@ -34,13 +34,15 @@ export class AlphaRealiability {
       throw new Error('items must have at least two items')
     }
     const n = items[0].length
-    if (items.some((item) => item.length !== n) || (group && items.length !== group.length)) {
+    if (items.some((item) => item.length !== n) || (group && n !== group.length)) {
       throw new Error('items and group must have the same length')
     }
     if (group) {
       this.group = Array.from(new Set(group)).sort((a, b) => Number(a) - Number(b))
       for (const g of this.group) {
-        const _items = items.filter((_, i) => group[i] === g)
+        const _items = items
+          .map((item, i) => group[i] === g ? item : null)
+          .filter((item) => item !== null)
         const total: number[] = []
         for (let i = 0; i < n; i++) {
           total.push(sum(_items.map((item) => item[i])))
