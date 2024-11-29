@@ -28,14 +28,14 @@ export class HalfRealiability {
     lastHalf: number[] | number[][],
     group?: (number | string)[]
   ) {
-    if (firstHalf.length !== lastHalf.length || (group && firstHalf.length !== group.length)) {
-      throw new Error('firstHalf, lastHalf and group must have the same length')
-    }
     if (Array.isArray(firstHalf[0])) {
       firstHalf = firstHalf.map((x) => mean(x as number[]))
     }
     if (Array.isArray(lastHalf[0])) {
       lastHalf = lastHalf.map((x) => mean(x as number[]))
+    }
+    if (firstHalf.length !== lastHalf.length || (group && firstHalf.length !== group.length)) {
+      throw new Error('firstHalf, lastHalf and group must have the same length')
     }
     if (group) {
       this.group = Array.from(new Set(group)).sort((a, b) => Number(a) - Number(b))
