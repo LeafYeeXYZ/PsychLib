@@ -22,6 +22,8 @@ export class HalfRealiability {
     * console.log(result)
     * ```
     * @throws {Error} firstHalf, lastHalf and group must have the same length
+    * @throws {Error} firstHalf items must have the same length
+    * @throws {Error} lastHalf items must have the same length
     */
   constructor(
     firstHalf: number[] | number[][],
@@ -29,10 +31,20 @@ export class HalfRealiability {
     group?: (number | string)[]
   ) {
     if (Array.isArray(firstHalf[0])) {
-      firstHalf = firstHalf.map((x) => mean(x as number[]))
+      const n = firstHalf[0].length
+      if (firstHalf.some((item) => (item as number[]).length !== n)) {
+        throw new Error('firstHalf items must have the same length')
+      } 
+      const meanOfItems = new Array(n).fill(0).map((_, i) => mean(firstHalf.map((item) => (item as number[])[i])))
+      firstHalf = meanOfItems
     }
     if (Array.isArray(lastHalf[0])) {
-      lastHalf = lastHalf.map((x) => mean(x as number[]))
+      const n = lastHalf[0].length
+      if (lastHalf.some((item) => (item as number[]).length !== n)) {
+        throw new Error('lastHalf items must have the same length')
+      }
+      const meanOfItems = new Array(n).fill(0).map((_, i) => mean(lastHalf.map((item) => (item as number[])[i])))
+      lastHalf = meanOfItems
     }
     if (firstHalf.length !== lastHalf.length || (group && firstHalf.length !== group.length)) {
       throw new Error('firstHalf, lastHalf and group must have the same length')
