@@ -6,10 +6,10 @@ import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
 const x = (n: number = 50) => new Array(n).fill(0).map(() => Math.random() * 100)
 
 Deno.test('Non-param Test', () => {
-  assertEquals(typeof pl.kurtosisTest(x()).p, 'number')
-  assertEquals(typeof pl.skewnessTest(x()).p, 'number')
-  assertEquals(typeof pl.kurtosisTest(x()).z, 'number')
-  assertEquals(typeof pl.skewnessTest(x()).z, 'number')
+  assertEquals(typeof new pl.KurtosisTest(x()).p, 'number')
+  assertEquals(typeof new pl.SkewnessTest(x()).p, 'number')
+  assertEquals(typeof new pl.KurtosisTest(x()).z, 'number')
+  assertEquals(typeof new pl.SkewnessTest(x()).z, 'number')
   for (let i = 0; i < 20; i++) {
     const levels = Math.floor(Math.random() * 8) + 3
     const group: number[] = new Array(1000).fill(0).map(() => Math.floor(Math.random() * levels))
