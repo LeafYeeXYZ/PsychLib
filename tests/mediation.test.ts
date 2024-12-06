@@ -10,6 +10,12 @@ const m: number[] = new Array(N).fill(0).map((_, i) => 0.5 * x[i] + pl.randomNor
 const y: number[] = new Array(N).fill(0).map((_, i) => 0.3 * x[i] + 0.5 * m[i] + pl.randomNormal(0, 1))
 Deno.test('Mediation Test', () => {
   // Bootstrap test
+  const _mean = pl.bootstrapTest('mean', B, ALPHA, x)
+  const _median = pl.bootstrapTest('median', B, ALPHA, x)
+  const _custom = pl.bootstrapTest((...args) => pl.mean(args[0]) - pl.mean(args[1]), B, ALPHA, x, m)
+  assertAlmostEquals(pl.mean(_mean), pl.mean(x), 0.1)
+  assertAlmostEquals(pl.mean(_median), pl.median(x), 0.1)
+  assertAlmostEquals(pl.mean(_custom), pl.mean(x) - pl.mean(m), 0.1)
   const bootstrap_pl = pl.bootstrapTest('ab', B, ALPHA, x, m, y)
   const bootstrap_py = JSON.parse(py.runPython(`
     import numpy as np

@@ -35,10 +35,44 @@ export function bootstrapSample<T>(data: T[], B: number): T[][] {
 export type BootstrapStat = 'mean' | 'median' | 'ab'
 
 /**
- * Bootstrap test (calculate the confidence interval of the statistic)
+ * Bootstrap test (calculate the confidence interval of mean)
+ * 
+ * 非参数 Bootstrap 检验 (计算均值的置信区间)
+ * @param stat 'mean'
+ * @param B sampling times
+ * @param a signifiance level
+ * @param args data to be sampled
+ * @returns confidence interval
+ * @example
+ * ```typescript
+ * import { bootstrapTest } from '@psych/lib'
+ * bootstrapTest('mean', 1000, 0.05, [1, 2, 3])
+ * ```
+ * @throws {Error} at least one argument is needed
+ */
+export function bootstrapTest(stat: 'mean', B: number, a: number, ...args: [number[]]): number[]
+/**
+ * Bootstrap test (calculate the confidence interval of median)
  *
- * 非参数 Bootstrap 检验 (计算统计量的置信区间)
- * @param stat statistic to be calculated or a function to calculate the statistic
+ * 非参数 Bootstrap 检验 (计算中位数的置信区间)
+ * @param stat 'median'
+ * @param B sampling times
+ * @param a signifiance level
+ * @param args data to be sampled
+ * @returns confidence interval
+ * @example
+ * ```typescript
+ * import { bootstrapTest } from '@psych/lib'
+ * bootstrapTest('median', 1000, 0.05, [1, 2, 3])
+ * ```
+ * @throws {Error} at least one argument is needed
+ */
+export function bootstrapTest(stat: 'median', B: number, a: number, ...args: [number[]]): number[]
+/**
+ * Bootstrap test (calculate the confidence interval of the simple mediation effect)
+ *
+ * 非参数 Bootstrap 检验 (计算简单中介效应的置信区间)
+ * @param stat 'ab'
  * @param B sampling times
  * @param a signifiance level
  * @param args datas to be sampled and calculated
@@ -52,6 +86,24 @@ export type BootstrapStat = 'mean' | 'median' | 'ab'
  * @throws {Error} calculate ab needs three arguments
  * @throws {Error} the length of x, m and y must be the same
  */
+export function bootstrapTest(stat: 'ab', B: number, a: number, ...args: [number[], number[], number[]]): number[]
+/**
+ * Bootstrap test (calculate the confidence interval of the statistic)
+ *
+ * 非参数 Bootstrap 检验 (计算统计量的置信区间)
+ * @param stat a function to calculate the statistic
+ * @param B sampling times
+ * @param a signifiance level
+ * @param args datas to be sampled and calculated
+ * @returns confidence interval
+ * @example
+ * ```typescript
+ * import { bootstrapTest } from '@psych/lib'
+ * bootstrapTest((...args) => args[0] * args[1], 1000, 0.05, [1, 2, 3], [4, 5, 6])
+ * ```
+ * @throws {Error} at least one argument is needed
+ */
+export function bootstrapTest(stat: ((...args: number[][]) => number), B: number, a: number, ...args: number[][]): number[]
 export function bootstrapTest(
   stat: BootstrapStat | ((...args: number[][]) => number),
   B: number,
