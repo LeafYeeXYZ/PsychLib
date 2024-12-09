@@ -61,7 +61,7 @@ export function p2t(
 
 /**
  * Generate a random number from a t distribution
- * 
+ *
  * 从 t 分布中生成一个随机数
  * @param df degree of freedom
  * @returns random number from a t distribution

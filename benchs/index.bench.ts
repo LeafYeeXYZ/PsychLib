@@ -35,10 +35,11 @@ Deno.bench(`Baseline (Math.random) - for distribution benchmarks`, () => { Math.
 // Deno.bench(`@psych/lib - n=${N},2 - SSDiff`, () => { pl.ssDiff(getData(), getData(N, MEAN + 2, STD + 1)) })
 // Deno.bench(`@psych/lib - n=${N},1 - SEM`, () => { pl.sem(getData()) })
 // Sort
-Deno.bench(`@psych/lib - n=${N},1 - Array.prototype.sort`, () => { pl.sort(getData(), true, 'native', true) })
-Deno.bench(`@psych/lib - n=${N},1 - Quick Sort`, () => { pl.sort(getData(), true, 'quickSort', true) })
-Deno.bench(`@psych/lib - n=${N},1 - Merge Sort`, () => { pl.sort(getData(), true, 'mergeSort', true) })
-Deno.bench(`@psych/lib - n=${N},1 - Heap Sort`, () => { pl.sort(getData(), true, 'heapSort', true) })
+Deno.bench(`@psych/lib - n=${N*10},1 - Array.prototype.sort`, () => { pl.sort(getData(N*10), true, 'native', true) })
+Deno.bench(`@psych/lib - n=${N*10},1 - Iterative Quick Sort`, () => { pl.sort(getData(N*10), true, 'iterativeQuickSort', true) })
+Deno.bench(`@psych/lib - n=${N*10},1 - Recursive Quick Sort`, () => { pl.sort(getData(N*10), true, 'recursiveQuickSort', true) })
+Deno.bench(`@psych/lib - n=${N*10},1 - Merge Sort`, () => { pl.sort(getData(N*10), true, 'mergeSort', true) })
+Deno.bench(`@psych/lib - n=${N*10},1 - Heap Sort`, () => { pl.sort(getData(N*10), true, 'heapSort', true) })
 // Distributions
 Deno.bench(`@psych/lib - Z Score to P Value`, () => { pl.z2p((Math.random() - 0.5) * 10) })
 Deno.bench(`@psych/lib - P Value to Z Score`, () => { pl.p2z(Math.random()) })
@@ -67,7 +68,7 @@ Deno.bench(`@psych/lib - n=${N},2 - Pearson Correlation Test`, () => { new pl.Pe
 Deno.bench(`@psych/lib - n=${N},2 - Linear Regression One`, () => { new pl.LinearRegressionOne(getData(), getData(N, MEAN + 2, STD + 1)) })
 Deno.bench(`@psych/lib - n=${N},3 - Linear Regression Two`, () => { new pl.LinearRegressionTwo(getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)) })
 Deno.bench(`@psych/lib - n=${N},3,B=${B} - Bootstrap CI (ab)`, () => { pl.bootstrapTest('ab', B, 0.05, getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)) })
-Deno.bench(`@psych/lib - n=${N},3,B=${B} - Bootstrap CI (mean)`, () => { pl.bootstrapTest('mean', B, 0.05, getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)) })
-Deno.bench(`@psych/lib - n=${N},3,B=${B} - Bootstrap CI (median)`, () => { pl.bootstrapTest('median', B, 0.05, getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)) })
+Deno.bench(`@psych/lib - n=${N},3,B=${B} - Bootstrap CI (mean)`, () => { pl.bootstrapTest('mean', B, 0.05, getData()) })
+Deno.bench(`@psych/lib - n=${N},3,B=${B} - Bootstrap CI (median)`, () => { pl.bootstrapTest('median', B, 0.05, getData()) })
 // Reliability
 Deno.bench(`@psych/lib - n=${N},3 - Cronbach's Alpha`, () => { new pl.AlphaRealiability([getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)]) })

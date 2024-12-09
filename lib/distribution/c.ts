@@ -54,7 +54,7 @@ export function p2c(
 
 /**
  * Generate a random number from chi-square distribution
- * 
+ *
  * 从卡方分布中生成一个随机数
  * @param df degree of freedom
  * @returns random number from chi-square distribution

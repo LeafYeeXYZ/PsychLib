@@ -79,7 +79,7 @@ export function p2f(
 
 /**
  * Generate a random number from a f distribution
- * 
+ *
  * 从 f 分布中生成一个随机数
  * @param df1 degree of freedom 1
  * @param df2 degree of freedom 2

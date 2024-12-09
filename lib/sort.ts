@@ -1,16 +1,22 @@
 /**
  * Available sort algorithms
- * 
+ *
  * 可用的排序算法
- * 
+ *
  * | Algorithm | Time Complexity (average) | Time Complexity (worst) | Space Complexity | Stable |
  * | :-------: | :-----------------------: | :---------------------: | :--------------: | :----: |
  * | native (Array.prototype.sort) | - | - | - | Yes |
- * | quickSort | O(n log n) | O(n^2) | O(log n) | No |
+ * | recursiveQuickSort | O(n log n) | O(n^2) | O(log n) | No |
+ * | iterativeQuickSort | O(n log n) | O(n^2) | O(log n) | No |
  * | mergeSort | O(n log n) | O(n log n) | O(n) | Yes |
  * | heapSort | O(n log n) | O(n log n) | O(1) | No |
  */
-export type SortAlgorithm = 'quickSort' | 'native' | 'mergeSort' | 'heapSort'
+export type SortAlgorithm =
+  | 'native'
+  | 'mergeSort'
+  | 'heapSort'
+  | 'recursiveQuickSort'
+  | 'iterativeQuickSort'
 
 /**
  * Sort numbers in ascending or descending order
@@ -18,21 +24,24 @@ export type SortAlgorithm = 'quickSort' | 'native' | 'mergeSort' | 'heapSort'
  * 对数字进行升序或降序排序
  * @param data numbers
  * @param ascending whether to sort in ascending order (default is true)
- * @param algorithm sort algorithm (default is 'quickSort')
+ * @param algorithm sort algorithm (default is 'iterativeQuickSort')
  * @param modify whether to modify the original array (default is false)
- * 
+ *
  * @returns sorted numbers
  */
 export function sort(
-  data: number[], 
-  ascending: boolean = true, 
-  algorithm: SortAlgorithm = 'quickSort', 
+  data: number[],
+  ascending: boolean = true,
+  algorithm: SortAlgorithm = 'iterativeQuickSort',
   modify: boolean = false,
 ): number[] {
   try {
     const source = modify ? data : data.slice()
     switch (algorithm) {
-      case 'quickSort':
+      case 'iterativeQuickSort':
+        iterativeQuickSort(source, ascending)
+        break
+      case 'recursiveQuickSort':
         quickSort(source, 0, source.length - 1, ascending)
         break
       case 'native':
@@ -48,11 +57,45 @@ export function sort(
     return source
   } catch (e) {
     // 避免 Max Call Stack Size Exceeded 错误
-    console.warn(`Error occurred in sorting: ${e instanceof Error ? e.message : JSON.stringify(e)}, fallback to native sort.`)
-    return modify ? 
-      data.sort(ascending ? ((a, b) => a - b) : ((a, b) => b - a)) : 
-      data.toSorted(ascending ? ((a, b) => a - b) : ((a, b) => b - a))
+    console.warn(
+      `Error occurred in sorting: ${
+        e instanceof Error ? e.message : JSON.stringify(e)
+      }, fallback to native sort.`,
+    )
+    return modify
+      ? data.sort(ascending ? ((a, b) => a - b) : ((a, b) => b - a))
+      : data.toSorted(ascending ? ((a, b) => a - b) : ((a, b) => b - a))
   }
+}
+
+/**
+ * Sort numbers in ascending or descending order using iterative QuickSort
+ * @param arr numbers
+ * @param ascending whether to sort in ascending order (default is true)
+ * @returns sorted numbers
+ * @private
+ */
+function iterativeQuickSort(
+  arr: number[],
+  ascending: boolean = true,
+): number[] {
+  const stack: number[] = []
+  stack.push(0)
+  stack.push(arr.length - 1)
+  while (stack.length > 0) {
+    const high: number = stack.pop()!
+    const low: number = stack.pop()!
+    const pi: number = partition(arr, low, high, ascending)
+    if (pi - 1 > low) {
+      stack.push(low)
+      stack.push(pi - 1)
+    }
+    if (pi + 1 < high) {
+      stack.push(pi + 1)
+      stack.push(high)
+    }
+  }
+  return arr
 }
 
 /**
@@ -188,7 +231,12 @@ function merge(
  * @param ascending whether to sort in ascending order
  * @private
  */
-function heapify(arr: number[], n: number, i: number, ascending: boolean): void {
+function heapify(
+  arr: number[],
+  n: number,
+  i: number,
+  ascending: boolean,
+): void {
   let largest = i
   const l = 2 * i + 1
   const r = 2 * i + 2

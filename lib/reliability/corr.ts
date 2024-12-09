@@ -2,13 +2,13 @@ import { corr } from '../base.ts'
 
 /**
  * Corralation between two variables
- * 
+ *
  * 重测信度/复本信度
  */
 export class CorrRealiability {
   /**
    * Corralation between two variables
-   * 
+   *
    * 重测信度/复本信度
    * @param x1 data set 1
    * @param x2 data set 2
@@ -26,13 +26,15 @@ export class CorrRealiability {
   constructor(
     x1: number[],
     x2: number[],
-    group?: (number | string)[]
+    group?: (number | string)[],
   ) {
     if (x1.length !== x2.length || (group && x1.length !== group.length)) {
       throw new Error('x1, x2 and group must have the same length')
     }
     if (group) {
-      this.group = Array.from(new Set(group)).sort((a, b) => Number(a) - Number(b))
+      this.group = Array.from(new Set(group)).sort((a, b) =>
+        Number(a) - Number(b)
+      )
       for (const g of this.group) {
         const _x1 = x1.filter((_, i) => group[i] === g)
         const _x2 = x2.filter((_, i) => group[i] === g)
@@ -48,19 +50,19 @@ export class CorrRealiability {
   }
   /**
    * Groups
-   * 
+   *
    * 分组
    */
   group: (number | string)[] = ['-']
   /**
    * Correlation coefficient
-   * 
+   *
    * 相关系数
    */
   r: number[] = []
   /**
    * Coefficient of determination
-   * 
+   *
    * 决定系数
    */
   r2: number[] = []

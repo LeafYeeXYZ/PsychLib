@@ -36,7 +36,7 @@ export type BootstrapStat = 'mean' | 'median' | 'ab'
 
 /**
  * Bootstrap test (calculate the confidence interval of mean)
- * 
+ *
  * 非参数 Bootstrap 检验 (计算均值的置信区间)
  * @param stat 'mean'
  * @param B sampling times
@@ -50,7 +50,12 @@ export type BootstrapStat = 'mean' | 'median' | 'ab'
  * ```
  * @throws {Error} at least one argument is needed
  */
-export function bootstrapTest(stat: 'mean', B: number, a: number, ...args: [number[]]): number[]
+export function bootstrapTest(
+  stat: 'mean',
+  B: number,
+  a: number,
+  ...args: [number[]]
+): number[]
 /**
  * Bootstrap test (calculate the confidence interval of median)
  *
@@ -67,7 +72,12 @@ export function bootstrapTest(stat: 'mean', B: number, a: number, ...args: [numb
  * ```
  * @throws {Error} at least one argument is needed
  */
-export function bootstrapTest(stat: 'median', B: number, a: number, ...args: [number[]]): number[]
+export function bootstrapTest(
+  stat: 'median',
+  B: number,
+  a: number,
+  ...args: [number[]]
+): number[]
 /**
  * Bootstrap test (calculate the confidence interval of the simple mediation effect)
  *
@@ -86,7 +96,12 @@ export function bootstrapTest(stat: 'median', B: number, a: number, ...args: [nu
  * @throws {Error} calculate ab needs three arguments
  * @throws {Error} the length of x, m and y must be the same
  */
-export function bootstrapTest(stat: 'ab', B: number, a: number, ...args: [number[], number[], number[]]): number[]
+export function bootstrapTest(
+  stat: 'ab',
+  B: number,
+  a: number,
+  ...args: [number[], number[], number[]]
+): number[]
 /**
  * Bootstrap test (calculate the confidence interval of the statistic)
  *
@@ -103,7 +118,12 @@ export function bootstrapTest(stat: 'ab', B: number, a: number, ...args: [number
  * ```
  * @throws {Error} at least one argument is needed
  */
-export function bootstrapTest(stat: ((...args: number[][]) => number), B: number, a: number, ...args: number[][]): number[]
+export function bootstrapTest(
+  stat: (...args: number[][]) => number,
+  B: number,
+  a: number,
+  ...args: number[][]
+): number[]
 export function bootstrapTest(
   stat: BootstrapStat | ((...args: number[][]) => number),
   B: number,
@@ -120,13 +140,11 @@ export function bootstrapTest(
     for (let i = 0; i < B; i++) {
       statistic.push(mean(samples[i]))
     }
-
   } else if (stat === 'median') {
     const samples = bootstrapSample(args[0], B)
     for (let i = 0; i < B; i++) {
       statistic.push(median(samples[i]))
     }
-
   } else if (stat === 'ab') {
     if (args.length !== 3) {
       throw new Error('calculate ab needs three arguments')
@@ -143,7 +161,6 @@ export function bootstrapTest(
     for (let i = 0; i < B; i++) {
       statistic.push(calculateMediationEffect(x[i], m[i], y[i]))
     }
-
   } else {
     for (let i = 0; i < B; i++) {
       statistic.push(stat(...args.map((arg) => bootstrapSample(arg, 1)[0])))
@@ -157,14 +174,18 @@ export function bootstrapTest(
 
 /**
  * Calculate the mediation effect
- * 
+ *
  * 计算中介效应 (a * b)
  * @param x independent variable
  * @param m mediator variable
  * @param y dependent variable
  * @returns mediation effect
  */
-function calculateMediationEffect(x: number[], m: number[], y: number[]): number {
+function calculateMediationEffect(
+  x: number[],
+  m: number[],
+  y: number[],
+): number {
   const xm: number = mean(x)
   const mm: number = mean(m)
   const ym: number = mean(y)

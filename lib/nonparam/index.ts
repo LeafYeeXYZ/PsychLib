@@ -39,7 +39,7 @@ export class KurtosisTest {
 
 /**
  * Calculate the sample skewness and its z value and significance
- * 
+ *
  * 计算样本偏度及其 z 值和显著性
  */
 export class SkewnessTest {

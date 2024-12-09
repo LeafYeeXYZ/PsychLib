@@ -9,6 +9,7 @@ Deno.test('Sort Test', () => {
   const desc = x.toSorted((a, b) => b - a)
   assertEquals(sort(x), asc)
   assertEquals(sort(x, false), desc)
+  assertEquals(sort(x, true, 'recursiveQuickSort'), asc)
   assertEquals(sort(x, true, 'native'), asc)
   assertEquals(sort(x, true, 'mergeSort'), asc)
   assertEquals(sort(x, true, 'heapSort'), asc)

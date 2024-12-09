@@ -2,13 +2,13 @@ import { sum, vari } from '../base.ts'
 
 /**
  * Homogeneity reliability (Cronbach's alpha)
- * 
+ *
  * 同质性信度 (克伦巴赫α系数)
  */
 export class AlphaRealiability {
   /**
    * Homogeneity reliability (Cronbach's alpha)
-   * 
+   *
    * 同质性信度 (克伦巴赫α系数)
    * @param items an 2D array of items, each element in the array is an item with scores
    * @param group if provided, calculate the reliability between the items in each group
@@ -34,11 +34,15 @@ export class AlphaRealiability {
       throw new Error('items must have at least two items')
     }
     const n = items[0].length
-    if (items.some((item) => item.length !== n) || (group && n !== group.length)) {
+    if (
+      items.some((item) => item.length !== n) || (group && n !== group.length)
+    ) {
       throw new Error('items and group must have the same length')
     }
     if (group) {
-      this.group = Array.from(new Set(group)).sort((a, b) => Number(a) - Number(b))
+      this.group = Array.from(new Set(group)).sort((a, b) =>
+        Number(a) - Number(b)
+      )
       for (const g of this.group) {
         const _items = items
           .map((item, i) => group[i] === g ? item : null)
@@ -65,13 +69,13 @@ export class AlphaRealiability {
   }
   /**
    * Groups
-   * 
+   *
    * 分组
    */
   group: (number | string)[] = ['-']
   /**
    * Cronbach's alpha
-   * 
+   *
    * 克伦巴赫α系数
    */
   alpha: number[] = []

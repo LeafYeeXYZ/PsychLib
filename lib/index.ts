@@ -3,7 +3,7 @@
  * @example Quick start
  * ```typescript
  * import { randomNormal, WelchTTest } from '@psych/lib'
- * 
+ *
  * const groupA = new Array(500).fill(0).map(() => randomNormal(10, 2))
  * const groupB = new Array(500).fill(0).map(() => randomNormal(11, 2))
  * const tTest = new WelchTTest(groupA, groupB)
@@ -15,11 +15,11 @@
  * import { WelchTTest } from '@psych/lib'
  * import { readFile } from 'node:fs/promises'
  * import { resolve } from 'node:path'
- * 
+ *
  * const filePath = resolve(import.meta.dirname, 'data.xlsx')
  * const fileBuffer = await readFile(filePath)
  * const sheet = await importSheet(fileBuffer)
- * 
+ *
  * const data = sheet.map((row) => row['data'])
  * const group = sheet.map((row) => row['group'])
  * const groupA = data.filter((_, i) => group[i] === 'A')

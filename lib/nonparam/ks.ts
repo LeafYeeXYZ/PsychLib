@@ -31,7 +31,10 @@ export class OneSampleKSTest {
     this.mean = mean(data)
     this.std = std(data, true, this.mean)
     // 标准化并排序数据
-    const standard = standardize(data, true, false, this.mean, this.std).sort((a, b) => a - b)
+    const standard = standardize(data, true, false, this.mean, this.std).sort((
+      a,
+      b,
+    ) => a - b)
     // 计算理论分布函数(标准正态)
     const cdf = standard.map((x) => z2p(x))
     // 同时考虑左右极限的经验分布函数

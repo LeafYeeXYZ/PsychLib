@@ -452,7 +452,7 @@ export class LinearRegressionTwo {
   r2adj: number
   /**
    * The increase of r2 when adding x2 to the model (sequential regression only)
-   * 
+   *
    * 当将 x2 加入模型时 r2 的增加量 (仅序列回归)
    */
   r2increase?: number
