@@ -1,6 +1,7 @@
 import { ss, sum } from '../base.ts'
 import { f2p, t2p } from '../distribution/index.ts'
 import { tukey } from 'npm:jstat-esm@2.0.2'
+import type { ScheffeResult, BonferroniResult, TukeyResult } from './types.ts'
 
 /**
  * One-way ANOVA
@@ -24,6 +25,7 @@ export class OneWayAnova {
    * console.log(anova.p, anova.f)
    * ```
    * @throws {Error} length of value and group should be equal
+   * @throws {Error} group should be more than 1
    */
   constructor(
     value: number[],
@@ -35,6 +37,11 @@ export class OneWayAnova {
     }
     this.groups = Array.from(new Set(group)).sort((a, b) => a > b ? 1 : -1)
     const k = this.groups.length
+    if (k < 2) {
+      throw new Error('group should be more than 1')
+    }
+    this.n = n
+    this.k = k
     this.dfT = n - 1
     this.dfB = k - 1
     this.dfW = this.dfT - this.dfB
@@ -70,7 +77,28 @@ export class OneWayAnova {
     this.p = f2p(this.f, this.dfB, this.dfW)
     this.r2 = this.SSb / this.SSt
     this.cohenF = Math.sqrt(this.r2 / (1 - this.r2))
+    for (let i = 0; i < k - 1; i++) {
+      for (let j = i + 1; j < k; j++) {
+        const groupA = String(this.groups[i])
+        const groupB = String(this.groups[j])
+        const diff = this.groupsMean[i] - this.groupsMean[j]
+        const d = diff / Math.sqrt(this.MSw)
+        this.cohenD.push({ groupA, groupB, diff, d })
+      }
+    }
   }
+  /**
+   * Sample size
+   *
+   * 样本量
+   */
+  n: number
+  /**
+   * Number of groups
+   *
+   * 组数
+   */
+  k: number
   /**
    * Measure effect size Cohen's f
    *
@@ -78,9 +106,15 @@ export class OneWayAnova {
    */
   cohenF: number
   /**
-   * Measure effect R^2 (SSb / SSt)
+   * Cohen's d for each group pair (d = diff / sqrt(MSw))
+   * 
+   * 每组对的 Cohen's d (d = diff / sqrt(MSw))
+   */
+  cohenD: { groupA: string, groupB: string, diff: number, d: number }[] = []
+  /**
+   * Measure effect R^2 (or eta^2) (equals SSb / SSt)
    *
-   * 测量效应 R^2 (SSb / SSt)
+   * 测量效应 R^2 (或 eta^2) (等于 处理间平方和 / 总平方和)
    */
   r2: number
   /**
@@ -275,130 +309,4 @@ export class OneWayAnova {
     }
     return results
   }
-}
-
-/**
- * ANOVA Post Hoc Test Result (Bonferroni)
- *
- * 方差分析事后检验结果 (Bonferroni)
- */
-export type BonferroniResult = {
-  /**
-   * Significance level critical value (control total type I error rate to 0.05)
-   *
-   * 显著性水平临界值 (控制总一类错误率为 0.05)
-   */
-  sig: number
-  /**
-   * Group A
-   *
-   * A组
-   */
-  groupA: string | number
-  /**
-   * Group B
-   *
-   * B组
-   */
-  groupB: string | number
-  /**
-   * Difference of mean
-   *
-   * 均值差异
-   */
-  diff: number
-  /**
-   * t value
-   *
-   * t值
-   */
-  t: number
-  /**
-   * p value
-   *
-   * p值
-   */
-  p: number
-}
-
-/**
- * ANOVA Post Hoc Test Result (Scheffe)
- *
- * 方差分析事后检验结果 (Scheffe)
- */
-export type ScheffeResult = {
-  /**
-   * Group A
-   *
-   * A组
-   */
-  groupA: string | number
-  /**
-   * Group B
-   *
-   * B组
-   */
-  groupB: string | number
-  /**
-   * Difference of mean
-   *
-   * 均值差异
-   */
-  diff: number
-  /**
-   * F value
-   *
-   * F值
-   */
-  f: number
-  /**
-   * p value
-   *
-   * p值
-   */
-  p: number
-}
-
-/**
- * ANOVA Post Hoc Test Result (Tukey's HSD)
- *
- * 方差分析事后检验结果 (Tukey's HSD)
- */
-export type TukeyResult = {
-  /**
-   * Group A
-   *
-   * A组
-   */
-  groupA: string | number
-  /**
-   * Group B
-   *
-   * B组
-   */
-  groupB: string | number
-  /**
-   * Difference of mean
-   *
-   * 均值差异
-   */
-  diff: number
-  /**
-   * Tukey's HSD
-   *
-   * HSD 值
-   */
-  HSD: number
-  /**
-   * q value
-   *
-   * q值
-   */
-  q: number
-  /**
-   * p value
-   *
-   * p值
-   */
-  p: number
 }

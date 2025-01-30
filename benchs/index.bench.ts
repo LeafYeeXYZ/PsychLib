@@ -58,6 +58,7 @@ Deno.bench(`@psych/lib - df=6 - Random Chi2 Distribution`, () => { pl.randomChi2
 Deno.bench(`@psych/lib - n=${N} - Kurtosis Test`, () => { new pl.KurtosisTest(getData()) })
 Deno.bench(`@psych/lib - n=${N} - Skewness Test`, () => { new pl.SkewnessTest(getData()) })
 Deno.bench(`@psych/lib - n=${N} - One Way Anova`, () => { const { value, group } = getGroup(); new pl.OneWayAnova(value, group) })
+Deno.bench(`@psych/lib - n=${N},k=3 - RM Anova`, () => { new pl.PeerAnova([getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)]) })
 Deno.bench(`@psych/lib - n=${N} - Levene Test`, () => { const { value, group } = getGroup(); new pl.LeveneTest(value, group) })
 Deno.bench(`@psych/lib - n=${N},1 - One Sample KS Test`, () => { new pl.OneSampleKSTest(getData()) })
 Deno.bench(`@psych/lib - n=${N},1 - One Sample T Test`, () => { new pl.OneSampleTTest(getData(), 0) })
