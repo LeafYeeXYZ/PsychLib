@@ -1,5 +1,72 @@
-import { corr, mean, sp, ss, ssDiff, std } from '../base.ts'
+import { corr, mean, sp, ss, ssDiff, std, Matrix } from '../base.ts'
 import { f2p, t2p } from '../distribution/index.ts'
+
+/**
+ * Multiple independent variables linear regression
+ * 
+ * 多元线性回归
+ */
+class LinearRegression {
+  /**
+   * Multiple independent variables linear regression
+   * 
+   * 多元线性回归
+   * @param iv independent variables
+   * @param dv dependent variable
+   * @param method method of linear regression
+   * @throws {TypeError} At least one independent variable is required
+   * @throws {TypeError} The x and y data of linear regression must be equal
+   * @throws {TypeError} The dimension of independent variables must be equal
+   * @throws {TypeError} The number of data points should be greater than the number of independent variables
+   * @example
+   * ```typescript
+   * 
+   * ```
+   */
+  constructor(
+    iv: number[][], 
+    dv: number[],
+    method: 'standard' = 'standard',
+  ) {
+    const n = dv.length
+    if (iv.length !== n) {
+      throw new TypeError('The x and y data of linear regression must be equal')
+    }
+    const k = iv[0].length
+    if (k === 0) {
+      throw new TypeError('At least one independent variable is required')
+    }
+    if (!iv.every((v) => v.length === k)) {
+      throw new TypeError('The dimension of independent variables must be equal')
+    }
+    if (n <= k) {
+      throw new TypeError('The number of data points should be greater than the number of independent variables')
+    }
+    this.dv = dv
+    this.#iv = new Matrix(iv)
+
+  }
+  /**
+   * Independent variables
+   * 
+   * 自变量
+   */
+  get iv(): number[][] {
+    return this.#iv.data
+  }
+  /**
+   * Dependent variable
+   *
+   * 因变量
+   */
+  dv: number[]
+  /**
+   * Independent variables matrix
+   *
+   * 自变量矩阵
+   */
+  #iv: Matrix
+}
 
 /**
  * One-variable linear regression

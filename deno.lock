@@ -42,6 +42,7 @@
     "npm:jstat-esm@2.0.2": "2.0.2",
     "npm:m@*": "1.9.0",
     "npm:mathjs@13": "13.2.0",
+    "npm:ml-matrix@4": "4.0.0",
     "npm:ml-matrix@6.12.0": "6.12.0",
     "npm:ml@*": "8.0.0",
     "npm:psych-wasm@2.4.0": "2.4.0_typescript@5.6.3",
@@ -12021,7 +12022,7 @@
       "integrity": "sha512-f6rIj4EzbjqKLJa2Qmm5AjZ0WVgk+Y7J1N/+pQVaFr0d4oM1uZPLOh5h665LyH+bLBHTFEbvSR4OLKmJRQ8KfA==",
       "dependencies": [
         "ml-array-mean",
-        "ml-matrix"
+        "ml-matrix@6.12.0"
       ]
     },
     "ml-combinations@1.1.0": {
@@ -12043,7 +12044,7 @@
     "ml-direct@1.0.0": {
       "integrity": "sha512-DyynbcLIHGCRYiJNRW6qeWpOyV/SCYwSzYDN0VP72ucIx0jn8H4GYKRTY94e0Gk+yKlOjdu3GSNY/j6nxdl9YA==",
       "dependencies": [
-        "ml-matrix",
+        "ml-matrix@6.12.0",
         "ml-spectra-processing"
       ]
     },
@@ -12064,13 +12065,13 @@
     "ml-fcnnls@3.0.0": {
       "integrity": "sha512-zqHJW/6KUjCfUCicMaR0CkEEjox0e7NoeErNXt7/xMUqZapUkfgQzbOEaN2ZkEpzlWKoxKDEV4B4sAxMct8MLQ==",
       "dependencies": [
-        "ml-matrix"
+        "ml-matrix@6.12.0"
       ]
     },
     "ml-fnn@5.0.0": {
       "integrity": "sha512-P0gaEzyMm93uQPDTX4KTQgBmVxa+pgMO0ECManBHdZja+jnoaT8DFEmSCwvBXGskWI/BcZEwqEEQ6UYwMWWa2w==",
       "dependencies": [
-        "ml-matrix"
+        "ml-matrix@6.12.0"
       ]
     },
     "ml-gsd@12.1.8": {
@@ -12097,7 +12098,7 @@
         "heap",
         "ml-distance-euclidean",
         "ml-distance-matrix",
-        "ml-matrix"
+        "ml-matrix@6.12.0"
       ]
     },
     "ml-kernel-gaussian@2.0.2": {
@@ -12119,14 +12120,14 @@
         "ml-kernel-gaussian",
         "ml-kernel-polynomial",
         "ml-kernel-sigmoid",
-        "ml-matrix"
+        "ml-matrix@6.12.0"
       ]
     },
     "ml-kmeans@6.0.0": {
       "integrity": "sha512-aziEZqeHxczaDvo1qkfCrC7XNVAPevs6PigAzy7dp9TzeQI7oGan6NfCgADwL/FAlA/wWi+1DkV8da6pXfuuPg==",
       "dependencies": [
         "ml-distance-euclidean",
-        "ml-matrix",
+        "ml-matrix@6.12.0",
         "ml-nearest-vector",
         "ml-random@0.5.0"
       ]
@@ -12141,7 +12142,13 @@
       "integrity": "sha512-CuR8mg1IIgb5IuDkdJBpnHmx+r6FpRDDPvYhAGq+4WVMLw/lu44P6PniyCrdvk1PNBmxVXN/LwBDMpQ/VaWhgA==",
       "dependencies": [
         "is-any-array",
-        "ml-matrix"
+        "ml-matrix@6.12.0"
+      ]
+    },
+    "ml-matrix@4.0.0": {
+      "integrity": "sha512-BPNci46Kmh6eI+lJR8H7xSHwTBdfbPd//qY3hfVGwgojqwbX/l+9Fe8UtWwgQE8n9QeFvHcTjbiU0oZusxavzg==",
+      "dependencies": [
+        "ml-array-rescale"
       ]
     },
     "ml-matrix@6.12.0": {
@@ -12154,7 +12161,7 @@
     "ml-naivebayes@4.0.0": {
       "integrity": "sha512-JInn0MFvu9xJ8mCB8sef/UYs6IS9wH5DvPj0Jmft3vJj7vdBtXR4SH+EbcoJLLU0IO1NcvIaAHWLwD/hRda2+Q==",
       "dependencies": [
-        "ml-matrix"
+        "ml-matrix@6.12.0"
       ]
     },
     "ml-nearest-vector@2.0.1": {
@@ -12167,7 +12174,7 @@
       "integrity": "sha512-bbGApW3jmygv1puSz/0qcDZJm+2opZrCIZMt76L0RJB1Sg+cO/JAcboPvEXLCcDugMIL1WUiD9/5ruVklTn4kA==",
       "dependencies": [
         "median-quickselect",
-        "ml-matrix"
+        "ml-matrix@6.12.0"
       ]
     },
     "ml-pad-array@2.0.0": {
@@ -12176,7 +12183,7 @@
     "ml-pca@4.1.1": {
       "integrity": "sha512-HQwswMK1dObj+ppk3EPcQMR2djWK0Cri8mAFd2nITtXHkLfO4DBBsEtiCT5KiR+2e3hQjp+lI0UyqZpdf04AlQ==",
       "dependencies": [
-        "ml-matrix"
+        "ml-matrix@6.12.0"
       ]
     },
     "ml-peak-shape-generator@4.1.4": {
@@ -12195,7 +12202,7 @@
         "ml-array-mean",
         "ml-confusion-matrix@2.0.0",
         "ml-cross-validation",
-        "ml-matrix",
+        "ml-matrix@6.12.0",
         "ml-roc-multiclass"
       ]
     },
@@ -12206,7 +12213,7 @@
         "ml-array-median",
         "ml-array-mode",
         "ml-cart",
-        "ml-matrix",
+        "ml-matrix@6.12.0",
         "random-js"
       ]
     },
@@ -12239,14 +12246,14 @@
     "ml-regression-multivariate-linear@2.0.4": {
       "integrity": "sha512-/vShPAlP+mB7P2mC5TuXwObSJNl/UBI71/bszt9ilTg6yLKy6btDLpAYyJNa6t+JnL5a7q+Yy4dCltfpvqXRIw==",
       "dependencies": [
-        "ml-matrix"
+        "ml-matrix@6.12.0"
       ]
     },
     "ml-regression-polynomial@3.0.1": {
       "integrity": "sha512-dNds0VK4nrMyZvwovy9bYo2WaHPstEztPly4EWB8mj+vPcNxyq4a2UiTueR1jwkgLo6/QWDzA+HBsHP7S/0z3A==",
       "dependencies": [
         "cheminfo-types",
-        "ml-matrix",
+        "ml-matrix@6.12.0",
         "ml-regression-base"
       ]
     },
@@ -12261,7 +12268,7 @@
       "integrity": "sha512-GVaF1Qa5h6n8URUVpBl70oG/CNhUrdcgEy9Apu665KTU7r+FuuC9MMNKjkpCIUgQ3TG0tRRgfHJ427hkEQ99bA==",
       "dependencies": [
         "is-any-array",
-        "ml-matrix",
+        "ml-matrix@6.12.0",
         "ml-regression-base"
       ]
     },
@@ -12283,7 +12290,7 @@
       "integrity": "sha512-HQl2F7rIK6JnJvWeumxGppGEm8UWYk8rJHLJr77LzfB3MX36GFKyUUzTxBzj3v9FXhDnSvjFUEyg/Mb1pezpZA==",
       "dependencies": [
         "ml-kernel",
-        "ml-matrix",
+        "ml-matrix@6.12.0",
         "ml-regression-base",
         "ml-regression-exponential",
         "ml-regression-multivariate-linear",
@@ -12313,7 +12320,7 @@
     "ml-savitzky-golay@5.0.0": {
       "integrity": "sha512-N6KrfzqHC+XRfybTUsnY1/6boOUVh/fewLNO7cS8QvEREYX55H7l7FsYfhCTd6JPZ1obqo5yjpsQpJAT9iGrVw==",
       "dependencies": [
-        "ml-matrix",
+        "ml-matrix@6.12.0",
         "ml-pad-array"
       ]
     },
@@ -12344,7 +12351,7 @@
         "cheminfo-types",
         "fft.js",
         "is-any-array",
-        "ml-matrix",
+        "ml-matrix@6.12.0",
         "ml-xsadd@2.0.0",
         "spline-interpolator"
       ]
@@ -12405,7 +12412,7 @@
         "ml-kmeans",
         "ml-knn",
         "ml-levenberg-marquardt",
-        "ml-matrix",
+        "ml-matrix@6.12.0",
         "ml-naivebayes",
         "ml-ngmca",
         "ml-pad-array",

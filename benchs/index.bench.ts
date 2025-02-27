@@ -73,3 +73,12 @@ Deno.bench(`@psych/lib - n=${N},3,B=${B} - Bootstrap CI (mean)`, () => { pl.boot
 Deno.bench(`@psych/lib - n=${N},3,B=${B} - Bootstrap CI (median)`, () => { pl.bootstrapTest('median', B, 0.05, getData()) })
 // Reliability
 Deno.bench(`@psych/lib - n=${N},3 - Cronbach's Alpha`, () => { new pl.AlphaRealiability([getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)]) })
+// Matrix
+const matrix_a = () => new pl.Matrix(new Array(50).fill(0).map(() => getData(100)))
+const matrix_b = () => new pl.Matrix(new Array(100).fill(0).map(() => getData(50)))
+const matrix_c = () => new pl.Matrix(new Array(50).fill(0).map(() => getData(50)))
+Deno.bench(`@psych/lib - 50x100 - Matrix Creation`, () => { matrix_a() })
+Deno.bench(`@psych/lib - 50x100 - Matrix Addition`, () => { matrix_a().add(matrix_a()) })
+Deno.bench(`@psych/lib - 50x100 - Matrix Transpose`, () => { matrix_a().transpose() })
+Deno.bench(`@psych/lib - 50x100 - Matrix Multiplication`, () => { matrix_a().multiply(matrix_b()) })
+Deno.bench(`@psych/lib - 50x50 - Matrix Inverse`, () => { matrix_c().inverse() })
