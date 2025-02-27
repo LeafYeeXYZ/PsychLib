@@ -26,22 +26,29 @@ export class Matrix {
     if (data.some((v) => v.length != data[0].length)) {
       throw new TypeError('each row of the matrix must have the same length')
     }
-    this.data = data
-    
+    this.#data = data
   }
   /**
    * Matrix data
    * 
    * 矩阵数据
    */
-  data: number[][]
+  get data(): number[][] {
+    return this.#data
+  }
+  /**
+   * Matrix data
+   * 
+   * 矩阵数据
+   */
+  #data: number[][]
   /**
    * Matrix rows
    * 
    * 矩阵行数
    */
   get rows(): number {
-    return this.data.length
+    return this.#data.length
   }
   /**
    * Matrix columns
@@ -49,7 +56,7 @@ export class Matrix {
    * 矩阵列数
    */
   get cols(): number {
-    return this.data[0].length
+    return this.#data[0].length
   }
   /**
    * Matrix transpose (this method does not change the original matrix)

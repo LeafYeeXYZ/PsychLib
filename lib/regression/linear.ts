@@ -45,7 +45,7 @@ export class LinearRegression {
     if (n <= k) {
       throw new TypeError('The number of data points should be greater than the number of independent variables')
     }
-    this.dv = dv
+    this.#dv = dv
     this.#iv = new Matrix(iv)
     this.#n = n
     this.#k = k
@@ -78,7 +78,9 @@ export class LinearRegression {
    *
    * 因变量
    */
-  dv: number[]
+  get dv(): number[] {
+    return this.#dv
+  }
   
   /**
    * Independent variables matrix
@@ -86,6 +88,13 @@ export class LinearRegression {
    * 自变量矩阵
    */
   #iv: Matrix
+
+  /**
+   * Dependent variable
+   *
+   * 因变量
+   */
+  #dv: number[]
   
   /**
    * Number of observations
