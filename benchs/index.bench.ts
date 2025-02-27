@@ -66,11 +66,22 @@ Deno.bench(`@psych/lib - n=${N},2 - Two Sample T Test`, () => { new pl.TwoSample
 Deno.bench(`@psych/lib - n=${N},2 - Paired T Test`, () => { new pl.PeerSampleTTest(getData(), getData(N, MEAN + 2, STD + 1)) })
 Deno.bench(`@psych/lib - n=${N},2 - Welch T Test`, () => { new pl.WelchTTest(getData(), getData(N, MEAN + 2, STD + 1)) })
 Deno.bench(`@psych/lib - n=${N},2 - Pearson Correlation Test`, () => { new pl.PearsonCorrTest(getData(), getData(N, MEAN + 2, STD + 1)) })
-Deno.bench(`@psych/lib - n=${N},2 - Linear Regression One`, () => { new pl.LinearRegressionOne(getData(), getData(N, MEAN + 2, STD + 1)) })
-Deno.bench(`@psych/lib - n=${N},3 - Linear Regression Two`, () => { new pl.LinearRegressionTwo(getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)) })
 Deno.bench(`@psych/lib - n=${N},3,B=${B} - Bootstrap CI (ab)`, () => { pl.bootstrapTest('ab', B, 0.05, getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)) })
 Deno.bench(`@psych/lib - n=${N},3,B=${B} - Bootstrap CI (mean)`, () => { pl.bootstrapTest('mean', B, 0.05, getData()) })
 Deno.bench(`@psych/lib - n=${N},3,B=${B} - Bootstrap CI (median)`, () => { pl.bootstrapTest('median', B, 0.05, getData()) })
+// Regression
+Deno.bench(`@psych/lib - n=${N},2 - Linear Regression One`, () => { new pl.LinearRegressionOne(getData(), getData(N, MEAN + 2, STD + 1)) })
+Deno.bench(`@psych/lib - n=${N},3 - Linear Regression Two`, () => { new pl.LinearRegressionTwo(getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)) })
+Deno.bench(`@psych/lib - n=${N},5 - Linear Regression`, () => { 
+  const x = new Array(5).fill(0).map(() => getData())
+  const y = getData()
+  new pl.LinearRegression(new pl.Matrix(x).transpose().data, y)
+})
+Deno.bench(`@psych/lib - n=${N},10 - Linear Regression`, () => { 
+  const x = new Array(10).fill(0).map(() => getData())
+  const y = getData()
+  new pl.LinearRegression(new pl.Matrix(x).transpose().data, y)
+})
 // Reliability
 Deno.bench(`@psych/lib - n=${N},3 - Cronbach's Alpha`, () => { new pl.AlphaRealiability([getData(), getData(N, MEAN + 2, STD + 1), getData(N, MEAN + 4, STD + 2)]) })
 // Matrix

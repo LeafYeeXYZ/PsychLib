@@ -2,31 +2,34 @@ import { corr, mean, sp, ss, ssDiff, std, Matrix } from '../base.ts'
 import { f2p, t2p } from '../distribution/index.ts'
 
 /**
- * Multiple independent variables linear regression
+ * Multiple independent variables linear regression (Standard Regression)
  * 
- * 多元线性回归
+ * 多元线性回归 (标准多元回归)
  */
-class LinearRegression {
+export class LinearRegression {
   /**
-   * Multiple independent variables linear regression
+   * Multiple independent variables linear regression (Standard Regression)
    * 
-   * 多元线性回归
+   * 多元线性回归 (标准多元回归)
    * @param iv independent variables
    * @param dv dependent variable
-   * @param method method of linear regression
    * @throws {TypeError} At least one independent variable is required
    * @throws {TypeError} The x and y data of linear regression must be equal
    * @throws {TypeError} The dimension of independent variables must be equal
    * @throws {TypeError} The number of data points should be greater than the number of independent variables
    * @example
    * ```typescript
-   * 
+   * import { LinearRegression } from '@psych/lib'
+   * const iv = [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]
+   * const dv = [10, 20, 30, 40, 50]
+   * const lr = new LinearRegression(iv, dv)
+   * console.log(lr.coefficients)
+   * console.log(lr.calc([6, 7]))
    * ```
    */
   constructor(
     iv: number[][], 
     dv: number[],
-    method: 'standard' = 'standard',
   ) {
     const n = dv.length
     if (iv.length !== n) {
@@ -44,8 +47,23 @@ class LinearRegression {
     }
     this.dv = dv
     this.#iv = new Matrix(iv)
-
+    this.#n = n
+    this.#k = k
+    
+    // 计算平均值和标准差
+    this.dvMean = mean(dv)
+    this.dvStd = std(dv, true, this.dvMean)
+    this.ivMeans = Array(k).fill(0).map((_, i) => 
+      mean(iv.map(row => row[i]))
+    )
+    this.ivStds = Array(k).fill(0).map((_, i) => 
+      std(iv.map(row => row[i]), true, this.ivMeans[i])
+    )
+    
+    // 执行回归计算
+    this.#fitRegression()
   }
+  
   /**
    * Independent variables
    * 
@@ -54,18 +72,230 @@ class LinearRegression {
   get iv(): number[][] {
     return this.#iv.data
   }
+  
   /**
    * Dependent variable
    *
    * 因变量
    */
   dv: number[]
+  
   /**
    * Independent variables matrix
    *
    * 自变量矩阵
    */
   #iv: Matrix
+  
+  /**
+   * Number of observations
+   * 
+   * 观测数
+   */
+  #n: number
+  
+  /**
+   * Number of independent variables
+   * 
+   * 自变量数量
+   */
+  #k: number
+  
+  /**
+   * Mean of dependent variable
+   * 
+   * 因变量均值
+   */
+  dvMean: number
+  
+  /**
+   * Standard deviation of dependent variable
+   * 
+   * 因变量标准差
+   */
+  dvStd: number
+  
+  /**
+   * Means of independent variables
+   * 
+   * 自变量均值
+   */
+  ivMeans: number[]
+  
+  /**
+   * Standard deviations of independent variables
+   * 
+   * 自变量标准差
+   */
+  ivStds: number[]
+  
+  /**
+   * Regression coefficients [b0, b1, b2, ...]
+   * 
+   * 回归系数 [b0, b1, b2, ...]
+   */
+  coefficients: number[] = []
+  
+  /**
+   * Standard errors of regression coefficients
+   * 
+   * 回归系数的标准误
+   */
+  standardErrors: number[] = []
+  
+  /**
+   * t-statistics for each coefficient
+   * 
+   * 每个系数的 t 统计量
+   */
+  tValues: number[] = []
+  
+  /**
+   * p-values for each coefficient
+   * 
+   * 每个系数的 p 值
+   */
+  pValues: number[] = []
+  
+  /**
+   * Determination coefficient (R²)
+   * 
+   * 判定系数
+   */
+  r2: number = 0
+  
+  /**
+   * Adjusted determination coefficient
+   * 
+   * 调整后的判定系数
+   */
+  r2adj: number = 0
+  
+  /**
+   * F statistic
+   * 
+   * F 统计量
+   */
+  F: number = 0
+  
+  /**
+   * p-value for the F statistic
+   * 
+   * F 统计量的 p 值
+   */
+  p: number = 0
+  
+  /**
+   * Total sum of squares
+   * 
+   * 总平方和
+   */
+  SSt: number = 0
+  
+  /**
+   * Regression sum of squares
+   * 
+   * 回归平方和
+   */
+  SSr: number = 0
+  
+  /**
+   * Residual sum of squares
+   * 
+   * 残差平方和
+   */
+  SSe: number = 0
+  
+  /**
+   * Regression degrees of freedom
+   * 
+   * 回归自由度
+   */
+  dfR: number = 0
+  
+  /**
+   * Residual degrees of freedom
+   * 
+   * 残差自由度
+   */
+  dfE: number = 0
+  
+  /**
+   * Total degrees of freedom
+   * 
+   * 总自由度
+   */
+  dfT: number = 0
+  
+  /**
+   * Calculate the predicted value for given independent variables
+   * 
+   * 计算给定自变量的预测值
+   * @param x independent variables
+   * @returns the predicted value
+   * @throws {TypeError} The dimension of input must match the regression model
+   */
+  calc(x: number[]): number {
+    if (x.length !== this.#k) {
+      throw new TypeError(`The dimension of input must match the regression model (expected ${this.#k}, got ${x.length})`)
+    }
+    return this.coefficients[0] + x.reduce((sum, xi, i) => sum + this.coefficients[i + 1] * xi, 0)
+  }
+  
+  /**
+   * Fit the regression model
+   * 
+   * 拟合回归模型
+   * @private
+   */
+  #fitRegression(): void {
+    // 添加常数项列
+    const X = new Matrix(this.#iv.data.map(row => [1, ...row]))
+    const y = new Matrix([this.dv]).transpose()
+    
+    // 计算 (X'X)^(-1)X'y
+    const Xt = X.transpose()
+    const XtX = Xt.multiply(X)
+    const XtXInv = XtX.inverse()
+    const Xty = Xt.multiply(y)
+    const beta = XtXInv.multiply(Xty)
+    this.coefficients = beta.transpose().data[0]
+    
+    // 计算拟合值
+    const predictions = this.iv.map(row => this.calc(row))
+    
+    // 计算 SSE, SSR, SST
+    this.SSt = ss(this.dv, this.dvMean)
+    this.SSe = ssDiff(this.dv, predictions)
+    this.SSr = this.SSt - this.SSe
+    
+    // 计算自由度
+    this.dfR = this.#k
+    this.dfE = this.#n - this.#k - 1
+    this.dfT = this.#n - 1
+    
+    // 计算 R²
+    this.r2 = this.SSr / this.SSt
+    this.r2adj = 1 - ((1 - this.r2) * this.dfT / this.dfE)
+    
+    // 计算 F 统计量及其 p 值
+    this.F = (this.SSr / this.dfR) / (this.SSe / this.dfE)
+    this.p = f2p(this.F, this.dfR, this.dfE, false)
+    
+    // 计算系数的标准误、t 值和 p 值
+    const MSE = this.SSe / this.dfE
+    // 手动缩放矩阵
+    const varCovar = new Matrix(XtXInv.data.map(row => 
+      row.map(val => val * MSE)
+    ))
+    
+    this.standardErrors = Array(this.coefficients.length).fill(0).map((_, i) => 
+      Math.sqrt(varCovar.data[i][i])
+    )
+    
+    this.tValues = this.coefficients.map((b, i) => b / this.standardErrors[i])
+    this.pValues = this.tValues.map(t => t2p(Math.abs(t), this.dfE))
+  }
 }
 
 /**
