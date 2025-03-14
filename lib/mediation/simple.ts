@@ -45,8 +45,8 @@ export class SimpleMediationModel {
 		this.cT = x2y.t
 		this.cP = x2y.p
 		this.cPrime = xm2y.coefficients[1]
-		this.cPrimeT = x2y.t
-		this.cPrimeP = x2y.p
+		this.cPrimeT = xm2y.tValues[1]
+		this.cPrimeP = xm2y.pValues[1]
 		this.a = x2m.b1
 		this.aT = x2m.t
 		this.aP = x2m.p
