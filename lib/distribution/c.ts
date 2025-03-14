@@ -1,5 +1,5 @@
-import { lowRegGamma } from './utils.ts'
 import { chisquare } from 'npm:jstat-esm@2.0.2'
+import { lowRegGamma } from './utils.ts'
 
 /**
  * Chi-square distribution chi-square value to p value
@@ -14,15 +14,15 @@ import { chisquare } from 'npm:jstat-esm@2.0.2'
  * @throws {Error} chi-square value must be greater than or equal to 0
  */
 export function c2p(c: number, df: number): number {
-  if (df < 1) {
-    throw new Error('degree of freedom must be greater than 0')
-  }
-  if (c < 0) {
-    throw new Error('chi-square value must be greater than or equal to 0')
-  }
-  if (c === 0) return 1
-  if (c === Infinity) return 0
-  return 1 - lowRegGamma(df / 2, c / 2)
+	if (df < 1) {
+		throw new Error('degree of freedom must be greater than 0')
+	}
+	if (c < 0) {
+		throw new Error('chi-square value must be greater than or equal to 0')
+	}
+	if (c === 0) return 1
+	if (c === Number.POSITIVE_INFINITY) return 0
+	return 1 - lowRegGamma(df / 2, c / 2)
 }
 
 /**
@@ -37,19 +37,16 @@ export function c2p(c: number, df: number): number {
  * @throws {Error} degree of freedom must be greater than or equal to 1
  * @throws {Error} p value must be between 0 and 1
  */
-export function p2c(
-  p: number,
-  df: number,
-): number {
-  if (df < 1) {
-    throw new Error('degree of freedom must be greater than 0')
-  }
-  if (p < 0 || p > 1) {
-    throw new Error('p value must be between 0 and 1')
-  }
-  if (p === 0) return Infinity
-  if (p === 1) return 0
-  return chisquare.inv(1 - p, df)
+export function p2c(p: number, df: number): number {
+	if (df < 1) {
+		throw new Error('degree of freedom must be greater than 0')
+	}
+	if (p < 0 || p > 1) {
+		throw new Error('p value must be between 0 and 1')
+	}
+	if (p === 0) return Number.POSITIVE_INFINITY
+	if (p === 1) return 0
+	return chisquare.inv(1 - p, df)
 }
 
 /**
@@ -60,5 +57,5 @@ export function p2c(
  * @returns random number from chi-square distribution
  */
 export function randomChi2(df: number): number {
-  return chisquare.sample(df)
+	return chisquare.sample(df)
 }

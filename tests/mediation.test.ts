@@ -1,23 +1,34 @@
-import * as pl from '../lib/index.ts'
 import { assertAlmostEquals } from 'jsr:@std/assert'
+import * as pl from '../lib/index.ts'
 import py from './python.ts'
 
 const N = 200
 const B = 1000
 const ALPHA = 0.05
 const x: number[] = new Array(N).fill(0).map(() => pl.randomNormal(0, 1))
-const m: number[] = new Array(N).fill(0).map((_, i) => 0.5 * x[i] + pl.randomNormal(0, 1))
-const y: number[] = new Array(N).fill(0).map((_, i) => 0.3 * x[i] + 0.5 * m[i] + pl.randomNormal(0, 1))
+const m: number[] = new Array(N)
+	.fill(0)
+	.map((_, i) => 0.5 * x[i] + pl.randomNormal(0, 1))
+const y: number[] = new Array(N)
+	.fill(0)
+	.map((_, i) => 0.3 * x[i] + 0.5 * m[i] + pl.randomNormal(0, 1))
 Deno.test('Mediation Test', () => {
-  // Bootstrap test
-  const _mean = pl.bootstrapTest('mean', B, ALPHA, x)
-  const _median = pl.bootstrapTest('median', B, ALPHA, x)
-  const _custom = pl.bootstrapTest((...args) => pl.mean(args[0]) - pl.mean(args[1]), B, ALPHA, x, m)
-  assertAlmostEquals(pl.mean(_mean), pl.mean(x), 0.1)
-  assertAlmostEquals(pl.mean(_median), pl.median(x), 0.1)
-  assertAlmostEquals(pl.mean(_custom), pl.mean(x) - pl.mean(m), 0.1)
-  const bootstrap_pl = pl.bootstrapTest('ab', B, ALPHA, x, m, y)
-  const bootstrap_py = JSON.parse(py.runPython(`
+	// Bootstrap test
+	const _mean = pl.bootstrapTest('mean', B, ALPHA, x)
+	const _median = pl.bootstrapTest('median', B, ALPHA, x)
+	const _custom = pl.bootstrapTest(
+		(...args) => pl.mean(args[0]) - pl.mean(args[1]),
+		B,
+		ALPHA,
+		x,
+		m,
+	)
+	assertAlmostEquals(pl.mean(_mean), pl.mean(x), 0.1)
+	assertAlmostEquals(pl.mean(_median), pl.median(x), 0.1)
+	assertAlmostEquals(pl.mean(_custom), pl.mean(x) - pl.mean(m), 0.1)
+	const bootstrap_pl = pl.bootstrapTest('ab', B, ALPHA, x, m, y)
+	const bootstrap_py = JSON.parse(
+		py.runPython(`
     import numpy as np
     import pandas as pd
     import statsmodels.api as sm
@@ -46,8 +57,13 @@ Deno.test('Mediation Test', () => {
     ci_lower = np.percentile(bootstrap_effects, 2.5)
     ci_upper = np.percentile(bootstrap_effects, 97.5)
     json.dumps([ci_lower, ci_upper])
-  `))
-  assertAlmostEquals(bootstrap_pl[0], bootstrap_py[0], 0.1)
-  assertAlmostEquals(bootstrap_pl[1], bootstrap_py[1], 0.1)
-  assertAlmostEquals(bootstrap_pl[1] - bootstrap_pl[0], bootstrap_py[1] - bootstrap_py[0], 0.1)
+  `),
+	)
+	assertAlmostEquals(bootstrap_pl[0], bootstrap_py[0], 0.1)
+	assertAlmostEquals(bootstrap_pl[1], bootstrap_py[1], 0.1)
+	assertAlmostEquals(
+		bootstrap_pl[1] - bootstrap_pl[0],
+		bootstrap_py[1] - bootstrap_py[0],
+		0.1,
+	)
 })

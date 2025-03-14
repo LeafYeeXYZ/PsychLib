@@ -1,14 +1,15 @@
+import { assertAlmostEquals } from 'jsr:@std/assert'
 import * as pl from '../lib/index.ts'
 import py from './python.ts'
-import { assertAlmostEquals } from 'jsr:@std/assert'
-
 
 Deno.test('Reliability Test', () => {
-  // Note: CorrReliability and HalfReliability are already tested in base.test.ts (pl.corr)
-  for (let i = 0; i < 20; i++) {
-    const items = new Array(5).fill(0).map(() => new Array(50).fill(0).map(() => Math.random() * 10))
-    const pl_alpha = new pl.AlphaRealiability(items).alpha[0]
-    const py_alpha = py.runPython(`
+	// Note: CorrReliability and HalfReliability are already tested in base.test.ts (pl.corr)
+	for (let i = 0; i < 20; i++) {
+		const items = new Array(5)
+			.fill(0)
+			.map(() => new Array(50).fill(0).map(() => Math.random() * 10))
+		const pl_alpha = new pl.AlphaRealiability(items).alpha[0]
+		const py_alpha = py.runPython(`
       import numpy as np
       def cronbach_alpha(data):
         k = len(data)
@@ -22,6 +23,6 @@ Deno.test('Reliability Test', () => {
       alpha = cronbach_alpha(data)
       alpha
     `)
-    assertAlmostEquals(pl_alpha, py_alpha, 1e-6)
-  }
+		assertAlmostEquals(pl_alpha, py_alpha, 1e-6)
+	}
 })

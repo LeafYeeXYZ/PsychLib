@@ -1,5 +1,5 @@
-import { ibeta } from './utils.ts'
 import { studentt } from 'npm:jstat-esm@2.0.2'
+import { ibeta } from './utils.ts'
 
 /**
  * Student's t-distribution t value to p value
@@ -15,20 +15,20 @@ import { studentt } from 'npm:jstat-esm@2.0.2'
  * @returns p value
  * @throws {Error} degree of freedom must be greater than 0
  */
-export function t2p(t: number, df: number, twoside: boolean = true): number {
-  if (df <= 0) {
-    throw new Error('degree of freedom must be greater than 0')
-  }
-  const x: number = Math.abs(t)
-  if (x === Infinity) return 0
-  if (x === 0 && twoside) return 1
-  if (x === 0 && !twoside) return 0.5
-  const p: number = ibeta(
-    (x + Math.sqrt(x * x + df)) / (2 * Math.sqrt(x * x + df)),
-    df / 2,
-    df / 2,
-  )
-  return twoside ? 2 * (1 - p) : 1 - p
+export function t2p(t: number, df: number, twoside = true): number {
+	if (df <= 0) {
+		throw new Error('degree of freedom must be greater than 0')
+	}
+	const x: number = Math.abs(t)
+	if (x === Number.POSITIVE_INFINITY) return 0
+	if (x === 0 && twoside) return 1
+	if (x === 0 && !twoside) return 0.5
+	const p: number = ibeta(
+		(x + Math.sqrt(x * x + df)) / (2 * Math.sqrt(x * x + df)),
+		df / 2,
+		df / 2,
+	)
+	return twoside ? 2 * (1 - p) : 1 - p
 }
 
 /**
@@ -45,18 +45,14 @@ export function t2p(t: number, df: number, twoside: boolean = true): number {
  * @returns t value
  * @throws {Error} degree of freedom must be greater than 0
  */
-export function p2t(
-  p: number,
-  df: number,
-  twoside: boolean = true,
-): number {
-  if (df <= 0) throw new Error('degree of freedom must be greater than 0')
-  if (p === 0.5 && twoside) return 0
-  if (p === 1) return 0
-  if (p === 0) return Infinity
-  // 调整p值(单侧转换)
-  const _p = twoside ? p / 2 : p
-  return studentt.inv(1 - _p, df)
+export function p2t(p: number, df: number, twoside = true): number {
+	if (df <= 0) throw new Error('degree of freedom must be greater than 0')
+	if (p === 0.5 && twoside) return 0
+	if (p === 1) return 0
+	if (p === 0) return Number.POSITIVE_INFINITY
+	// 调整p值(单侧转换)
+	const _p = twoside ? p / 2 : p
+	return studentt.inv(1 - _p, df)
 }
 
 /**
@@ -67,5 +63,5 @@ export function p2t(
  * @returns random number from a t distribution
  */
 export function randomT(df: number): number {
-  return studentt.sample(df)
+	return studentt.sample(df)
 }

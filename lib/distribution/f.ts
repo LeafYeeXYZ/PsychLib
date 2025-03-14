@@ -1,5 +1,5 @@
-import { ibeta } from './utils.ts'
 import { centralF } from 'npm:jstat-esm@2.0.2'
+import { ibeta } from './utils.ts'
 
 /**
  * F distribution f value to p value
@@ -19,25 +19,25 @@ import { centralF } from 'npm:jstat-esm@2.0.2'
  * @throws {Error} f must be greater than or equal to 0
  */
 export function f2p(
-  f: number,
-  df1: number,
-  df2: number,
-  twoside: boolean = false,
+	f: number,
+	df1: number,
+	df2: number,
+	twoside = false,
 ): number {
-  if (df1 <= 0) {
-    throw new Error('df1 must be greater than 0')
-  }
-  if (df2 <= 0) {
-    throw new Error('df2 must be greater than 0')
-  }
-  if (f < 0) {
-    throw new Error('f must be greater than or equal to 0')
-  }
-  if (f === 0) return 1
-  if (f === Infinity) return 0
-  const x: number = df2 / (df2 + df1 * f)
-  const p: number = ibeta(x, df2 / 2, df1 / 2)
-  return twoside ? 2 * Math.min(p, 1 - p) : p
+	if (df1 <= 0) {
+		throw new Error('df1 must be greater than 0')
+	}
+	if (df2 <= 0) {
+		throw new Error('df2 must be greater than 0')
+	}
+	if (f < 0) {
+		throw new Error('f must be greater than or equal to 0')
+	}
+	if (f === 0) return 1
+	if (f === Number.POSITIVE_INFINITY) return 0
+	const x: number = df2 / (df2 + df1 * f)
+	const p: number = ibeta(x, df2 / 2, df1 / 2)
+	return twoside ? 2 * Math.min(p, 1 - p) : p
 }
 
 /**
@@ -57,24 +57,24 @@ export function f2p(
  * @throws {Error} df2 must be greater than 0
  */
 export function p2f(
-  p: number,
-  df1: number,
-  df2: number,
-  twoside: boolean = false,
+	p: number,
+	df1: number,
+	df2: number,
+	twoside = false,
 ): number {
-  // 参数验证
-  if (df1 <= 0) {
-    throw new Error('df1 must be greater than 0')
-  }
-  if (df2 <= 0) {
-    throw new Error('df2 must be greater than 0')
-  }
-  // 特殊值快速处理
-  if (p === 1) return 0
-  if (p === 0) return Infinity
-  // 调整p值(单侧转换)
-  const _p = twoside ? p / 2 : p
-  return centralF.inv(1 - _p, df1, df2)
+	// 参数验证
+	if (df1 <= 0) {
+		throw new Error('df1 must be greater than 0')
+	}
+	if (df2 <= 0) {
+		throw new Error('df2 must be greater than 0')
+	}
+	// 特殊值快速处理
+	if (p === 1) return 0
+	if (p === 0) return Number.POSITIVE_INFINITY
+	// 调整p值(单侧转换)
+	const _p = twoside ? p / 2 : p
+	return centralF.inv(1 - _p, df1, df2)
 }
 
 /**
@@ -86,5 +86,5 @@ export function p2f(
  * @returns random number from a f distribution
  */
 export function randomF(df1: number, df2: number): number {
-  return centralF.sample(df1, df2)
+	return centralF.sample(df1, df2)
 }
