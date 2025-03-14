@@ -55,7 +55,7 @@ export function bootstrapTest(
 	B: number,
 	a: number,
 	...args: [number[]]
-): number[]
+): [number, number]
 /**
  * Bootstrap test (calculate the confidence interval of median)
  *
@@ -77,7 +77,7 @@ export function bootstrapTest(
 	B: number,
 	a: number,
 	...args: [number[]]
-): number[]
+): [number, number]
 /**
  * Bootstrap test (calculate the confidence interval of the simple mediation effect)
  *
@@ -101,7 +101,7 @@ export function bootstrapTest(
 	B: number,
 	a: number,
 	...args: [number[], number[], number[]]
-): number[]
+): [number, number]
 /**
  * Bootstrap test (calculate the confidence interval of the statistic)
  *
@@ -123,13 +123,13 @@ export function bootstrapTest(
 	B: number,
 	a: number,
 	...args: number[][]
-): number[]
+): [number, number]
 export function bootstrapTest(
 	stat: BootstrapStat | ((...args: number[][]) => number),
 	B: number,
 	a: number,
 	...args: number[][]
-): number[] {
+): [number, number] {
 	if (args.length === 0) {
 		throw new Error('at least one argument is needed')
 	}
