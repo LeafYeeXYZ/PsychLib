@@ -166,7 +166,12 @@ export class SimpleMediationModel {
 	 * | v<sup>2</sup> | a<sup>2</sup> * b<sup>2</sup> |  |
 	 * | standarizedAB |  | 标准化的 ab |
 	 */
-	get effectSize() {
+	get effectSize(): {
+		PM: number
+		RM: number
+		v2: number
+		standarizedAB: () => number
+	} {
 		return {
 			PM: this.ab / this.c,
 			RM: this.ab / this.cPrime,
