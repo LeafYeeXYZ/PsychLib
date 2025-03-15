@@ -14,15 +14,15 @@ const y: number[] = new Array(N)
 	.map((_, i) => 0.3 * x[i] + 0.5 * m[i] + pl.randomNormal(0, 1))
 
 Deno.test('Simple Mediation Test', () => {
-  // Simple mediation test
-  const pl_smm = new pl.SimpleMediationModel(x, m, y)
-  const pl_effects = pl_smm.effectSize
-  const pl_results = pl_smm.bootstrap(B, ALPHA)
-  assertEquals(typeof pl_smm.ab, 'number')
-  assertEquals(typeof pl_effects.standarizedAB(), 'number')
-  assertEquals(typeof pl_results.ab[0], 'number')
-  assertEquals(typeof pl_results.ab[1], 'number')
-  // 暂无法交叉验证
+	// Simple mediation test
+	const pl_smm = new pl.SimpleMediationModel(x, m, y)
+	const pl_effects = pl_smm.effectSize
+	const pl_results = pl_smm.bootstrap(B, ALPHA)
+	assertEquals(typeof pl_smm.ab, 'number')
+	assertEquals(typeof pl_effects.standarizedAB(), 'number')
+	assertEquals(typeof pl_results.ab[0], 'number')
+	assertEquals(typeof pl_results.ab[1], 'number')
+	// 暂无法交叉验证
 })
 
 Deno.test('Bootstrap Test', () => {
