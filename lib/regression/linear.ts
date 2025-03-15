@@ -2,15 +2,15 @@ import { Matrix, corr, mean, ss, ssDiff, std } from '../base.ts'
 import { f2p, t2p } from '../distribution/index.ts'
 
 /**
- * Linear regression with stepwise selection
+ * Standard Linear regression with stepwise selection
  *
- * 多元线性回归 (逐步回归)
+ * 标准多元线性回归 (逐步回归)
  */
 export class LinearRegressionStepwise {
 	/**
-	 * Linear regression with stepwise selection
+	 * Standard Linear regression with stepwise selection
 	 *
-	 * 多元线性回归 (逐步回归)
+	 * 标准多元线性回归 (逐步回归)
 	 * @param iv independent variables
 	 * @param dv dependent variable
 	 * @param method stepwise selection method
@@ -362,7 +362,7 @@ export class LinearRegressionStepwise {
 				const testIv = this.#extractSubsetIv(testIndices)
 
 				try {
-					const model = new LinearRegression(testIv, this.#dv)
+					const model = new LinearRegressionStandard(testIv, this.#dv)
 					// 检查新添加变量的p值 (最后一个系数的p值)
 					const pValue = model.pValues[model.pValues.length - 1]
 
@@ -395,10 +395,10 @@ export class LinearRegressionStepwise {
 	#backwardElimination() {
 		// 先用所有变量尝试建立模型
 		let fullIv = this.#extractSubsetIv(this.#selectedIndices)
-		let currentModel: LinearRegression
+		let currentModel: LinearRegressionStandard
 
 		try {
-			currentModel = new LinearRegression(fullIv, this.#dv)
+			currentModel = new LinearRegressionStandard(fullIv, this.#dv)
 		} catch {
 			// 如果全模型有问题，回退到前向选择
 			this.#selectedIndices = []
@@ -436,7 +436,7 @@ export class LinearRegressionStepwise {
 				if (this.#selectedIndices.length > 0) {
 					fullIv = this.#extractSubsetIv(this.#selectedIndices)
 					try {
-						currentModel = new LinearRegression(fullIv, this.#dv)
+						currentModel = new LinearRegressionStandard(fullIv, this.#dv)
 					} catch {
 						// 如果新模型有问题，回滚并中断
 						this.#selectedIndices.push(worstIndex)
@@ -523,7 +523,7 @@ export class LinearRegressionStepwise {
 		} else {
 			// 使用选定的变量创建最终回归模型
 			const selectedIv = this.#extractSubsetIv(this.selectedVariables)
-			const finalModel = new LinearRegression(selectedIv, this.#dv)
+			const finalModel = new LinearRegressionStandard(selectedIv, this.#dv)
 
 			// 复制最终模型的结果
 			this.coefficients = finalModel.coefficients
@@ -549,7 +549,7 @@ export class LinearRegressionStepwise {
  *
  * 多元线性回归 (标准多元回归)
  */
-export class LinearRegression {
+export class LinearRegressionStandard {
 	/**
 	 * Multiple independent variables linear regression (Standard Regression)
 	 *

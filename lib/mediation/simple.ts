@@ -1,6 +1,9 @@
 import { standardize } from '../base.ts'
 import { bootstrapSample } from '../mediation/index.ts'
-import { LinearRegression, LinearRegressionOne } from '../regression/index.ts'
+import {
+	LinearRegressionOne,
+	LinearRegressionStandard,
+} from '../regression/index.ts'
 import { sort } from '../sort.ts'
 
 /**
@@ -37,7 +40,7 @@ export class SimpleMediationModel {
 		this.y = y
 		const x2m = new LinearRegressionOne(x, m)
 		const x2y = new LinearRegressionOne(m, y)
-		const xm2y = new LinearRegression(
+		const xm2y = new LinearRegressionStandard(
 			x.map((_, i) => [x[i], m[i]]),
 			y,
 		)

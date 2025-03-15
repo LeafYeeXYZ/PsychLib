@@ -47,7 +47,7 @@ Deno.test('Linear Regression Multi Test', () => {
 			row[9] * 1.0 +
 			Math.random(),
 	)
-	const lr10_pl = new pl.LinearRegression(x, y)
+	const lr10_pl = new pl.LinearRegressionStandard(x, y)
 	const lr10_py = JSON.parse(
 		py.runPython(`
     import numpy as np
@@ -88,7 +88,12 @@ Deno.test('Linear Regression Stepwise Test', () => {
 		.map(() => new Array(5).fill(0).map(() => Math.random()))
 	const y = x.map(
 		(row) =>
-			row[0] * 0.1 + row[1] * 0.2 + row[2] * 0.3 + row[3] * 0.4 + row[4] * 0.5 + Math.random(),
+			row[0] * 0.1 +
+			row[1] * 0.2 +
+			row[2] * 0.3 +
+			row[3] * 0.4 +
+			row[4] * 0.5 +
+			Math.random(),
 	)
 	const lr5_pl = new pl.LinearRegressionStepwise(x, y)
 	const lr5_py = JSON.parse(
@@ -192,7 +197,7 @@ Deno.test('Linear Regression Stepwise Test', () => {
 				final_model.rsquared_adj,
 			]
 			json.dumps(result)
-		`)
+		`),
 	)
 	for (let i = 0; i < lr5_pl.selectedVariables.length + 1; i++) {
 		assertAlmostEquals(lr5_pl.coefficients[i], lr5_py[0][i], 1e-6)
