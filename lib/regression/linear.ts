@@ -2,15 +2,262 @@ import { Matrix, corr, mean, ss, ssDiff, std } from '../base.ts'
 import { f2p, t2p } from '../distribution/index.ts'
 
 /**
- * Standard Linear regression with stepwise selection
+ * Linear regression (sequential / hierarchical)
  *
- * 标准多元线性回归 (逐步回归)
+ * 多元线性回归 (序列回归 / 分层回归)
+ */
+export class LinearRegressionSequential {
+	/**
+	 * Linear regression (sequential / hierarchical)
+	 *
+	 * 多元线性回归 (序列回归 / 分层回归)
+	 * @param iv independent variables (in order)
+	 * @param dv dependent variable
+	 * @throws {TypeError} At least one independent variable is required
+	 * @throws {TypeError} The x and y data of linear regression must be equal
+	 * @throws {TypeError} The dimension of independent variables must be equal
+	 * @throws {TypeError} The number of data points should be greater than the number of independent variables
+	 * @example
+	 * ```typescript
+	 * import { LinearRegressionSequential } from '@psych/lib'
+	 * const iv = [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]
+	 * const dv = [10, 20, 30, 40, 50]
+	 * const lr = new LinearRegressionSequential(iv, dv)
+	 * console.log(lr.coefficients)
+	 * console.log(lr.calc([6, 7]))
+	 * ```
+	 */
+	constructor(iv: number[][], dv: number[]) {
+		const n = dv.length
+		if (iv.length !== n) {
+			throw new TypeError('The x and y data of linear regression must be equal')
+		}
+		const k = iv[0].length
+		if (k === 0) {
+			throw new TypeError('At least one independent variable is required')
+		}
+		if (!iv.every((v) => v.length === k)) {
+			throw new TypeError(
+				'The dimension of independent variables must be equal',
+			)
+		}
+		if (n <= k) {
+			throw new TypeError(
+				'The number of data points should be greater than the number of independent variables',
+			)
+		}
+
+		this.#dv = dv
+		this.#iv = iv
+		this.#n = n
+		this.#k = k
+
+		// 计算平均值和标准差
+		this.dvMean = mean(dv)
+		this.dvStd = std(dv, true, this.dvMean)
+		this.ivMeans = Array(k)
+			.fill(0)
+			.map((_, i) => mean(iv.map((row) => row[i])))
+		this.ivStds = Array(k)
+			.fill(0)
+			.map((_, i) =>
+				std(
+					iv.map((row) => row[i]),
+					true,
+					this.ivMeans[i],
+				),
+			)
+
+		// 执行序列回归
+		this.#performSequentialRegression()
+	}
+
+	/**
+	 * Independent variables
+	 *
+	 * 自变量
+	 */
+	get iv(): number[][] {
+		return this.#iv
+	}
+
+	/**
+	 * Dependent variable
+	 *
+	 * 因变量
+	 */
+	get dv(): number[] {
+		return this.#dv
+	}
+
+	/**
+	 * Independent variables
+	 *
+	 * 自变量
+	 */
+	#iv: number[][]
+
+	/**
+	 * Dependent variable
+	 *
+	 * 因变量
+	 */
+	#dv: number[]
+
+	/**
+	 * Number of observations
+	 *
+	 * 观测数
+	 */
+	#n: number
+
+	/**
+	 * Number of independent variables
+	 *
+	 * 自变量数量
+	 */
+	#k: number
+
+	/**
+	 * Mean of dependent variable
+	 *
+	 * 因变量均值
+	 */
+	dvMean: number
+
+	/**
+	 * Standard deviation of dependent variable
+	 *
+	 * 因变量标准差
+	 */
+	dvStd: number
+
+	/**
+	 * Means of independent variables
+	 *
+	 * 自变量均值
+	 */
+	ivMeans: number[]
+
+	/**
+	 * Standard deviations of independent variables
+	 *
+	 * 自变量标准差
+	 */
+	ivStds: number[]
+
+	/**
+	 * Last model
+	 *
+	 * 最后一个模型
+	 */
+	get model(): LinearRegressionStandard {
+		return this.models[this.models.length - 1]
+	}
+
+	/**
+	 * Models for each step
+	 *
+	 * 每个步骤的模型
+	 */
+	models: LinearRegressionStandard[] = []
+
+	/**
+	 * R² change for each step
+	 *
+	 * 每个步骤的 R² 变化量
+	 */
+	r2Changes: number[] = []
+
+	/**
+	 * F change statistics for each step
+	 *
+	 * 每个步骤的 F 变化统计量
+	 */
+	fChanges: number[] = []
+
+	/**
+	 * P-values for F changes
+	 *
+	 * F 变化的 p 值
+	 */
+	pChanges: number[] = []
+
+	/**
+	 * Calculate the predicted value for given independent variables
+	 *
+	 * 计算给定自变量的预测值
+	 * @param x independent variables
+	 * @returns the predicted value
+	 * @throws {TypeError} The dimension of input must match the regression model
+	 */
+	calc(x: number[]): number {
+		if (x.length !== this.#k) {
+			throw new TypeError(
+				`The dimension of input must match the regression model (expected ${this.#k}, got ${x.length})`,
+			)
+		}
+		const model = this.models[this.models.length - 1]
+		return (
+			model.coefficients[0] +
+			x.reduce((sum, xi, i) => sum + model.coefficients[i + 1] * xi, 0)
+		)
+	}
+
+	/**
+	 * Perform sequential regression analysis
+	 *
+	 * 执行序列回归分析
+	 * @private
+	 */
+	#performSequentialRegression(): void {
+		// 在序列回归中，我们按顺序添加变量，测试每个新添加变量的贡献
+		let prevR2 = 0
+		let prevSSE = this.#n * this.dvStd * this.dvStd // 初始 SSE（总平方和）
+
+		for (let step = 1; step <= this.#k; step++) {
+			// 构建当前步骤的自变量子集
+			const currentIv = this.#iv.map((row) => row.slice(0, step))
+
+			// 使用当前变量子集创建标准回归模型
+			try {
+				const model = new LinearRegressionStandard(currentIv, this.#dv)
+				this.models.push(model)
+
+				// 计算 R² 变化
+				const r2Change = model.r2 - prevR2
+				this.r2Changes.push(r2Change)
+
+				// 计算 F 变化统计量
+				// F变化 = [(SSE前 - SSE后) / df新变量] / [SSE后 / df残差]
+				const fChange = (prevSSE - model.SSe) / 1 / (model.SSe / model.dfE)
+				this.fChanges.push(fChange)
+
+				// 计算 F 变化的 p 值
+				const pChange = f2p(fChange, 1, model.dfE, false)
+				this.pChanges.push(pChange)
+
+				// 更新上一步的 R² 和 SSE，用于下一次迭代
+				prevR2 = model.r2
+				prevSSE = model.SSe
+			} catch (error) {
+				console.error(`Error at step ${step}:`, error)
+				break
+			}
+		}
+	}
+}
+
+/**
+ * Linear regression (stepwise selection)
+ *
+ * 多元线性回归 (逐步回归)
  */
 export class LinearRegressionStepwise {
 	/**
-	 * Standard Linear regression with stepwise selection
+	 * Linear regression (stepwise selection)
 	 *
-	 * 标准多元线性回归 (逐步回归)
+	 * 多元线性回归 (逐步回归)
 	 * @param iv independent variables
 	 * @param dv dependent variable
 	 * @param method stepwise selection method
@@ -545,15 +792,15 @@ export class LinearRegressionStepwise {
 }
 
 /**
- * Multiple independent variables linear regression (Standard Regression)
+ * Linear regression (standard regression / OLS / simultaneous entry)
  *
- * 多元线性回归 (标准多元回归)
+ * 多元线性回归 (标准多元回归 / 最小二乘法 / 同时进入法)
  */
 export class LinearRegressionStandard {
 	/**
-	 * Multiple independent variables linear regression (Standard Regression)
+	 * Linear regression (standard regression / OLS / simultaneous entry)
 	 *
-	 * 多元线性回归 (标准多元回归)
+	 * 多元线性回归 (标准多元回归 / 最小二乘法 / 同时进入法)
 	 * @param iv independent variables
 	 * @param dv dependent variable
 	 * @throws {TypeError} At least one independent variable is required
@@ -562,10 +809,10 @@ export class LinearRegressionStandard {
 	 * @throws {TypeError} The number of data points should be greater than the number of independent variables
 	 * @example
 	 * ```typescript
-	 * import { LinearRegression } from '@psych/lib'
+	 * import { LinearRegressionStandard } from '@psych/lib'
 	 * const iv = [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]
 	 * const dv = [10, 20, 30, 40, 50]
-	 * const lr = new LinearRegression(iv, dv)
+	 * const lr = new LinearRegressionStandard(iv, dv)
 	 * console.log(lr.coefficients)
 	 * console.log(lr.calc([6, 7]))
 	 * ```

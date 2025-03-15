@@ -197,6 +197,9 @@ Deno.bench(`LinearRegressionStandard - n=${N},3iv`, () => {
 Deno.bench(`LinearRegressionStepwise - n=${N},3iv`, () => {
 	new pl.LinearRegressionStepwise(iv, dv)
 })
+Deno.bench(`LinearRegressionSequential - n=${N},3iv`, () => {
+	new pl.LinearRegressionSequential(iv, dv)
+})
 // Mediation
 Deno.bench(`SimpleMediationModel - n=${N}`, () => {
 	new pl.SimpleMediationModel(a, b, c)

@@ -118,8 +118,9 @@ bootstrapTest() - mean - n=500,B=5000                       36.6 ms          27.
 bootstrapTest() - median - n=500,B=5000                    127.0 ms           7.9 (125.9 ms … 130.1 ms) 127.2 ms 130.1 ms 130.1 ms
 bootstrapTest() - ab - n=500,B=5000                         78.3 ms          12.8 ( 75.4 ms …  87.0 ms)  78.1 ms  87.0 ms  87.0 ms
 LinearRegressionOne - n=500                                  6.4 µs       156,900 (  4.8 µs … 506.3 µs)   5.2 µs  14.0 µs  14.2 µs
-LinearRegressionStandard - n=500,3iv                               107.6 µs         9,298 ( 90.6 µs … 605.9 µs) 115.9 µs 160.3 µs 321.3 µs
+LinearRegressionStandard - n=500,3iv                       107.6 µs         9,298 ( 90.6 µs … 605.9 µs) 115.9 µs 160.3 µs 321.3 µs
 LinearRegressionStepwise - n=500,3iv                       829.4 µs         1,206 (738.6 µs …   1.3 ms) 853.6 µs   1.2 ms   1.2 ms
+LinearRegressionSequential - n=500,3iv                     311.7 µs         3,208 (268.0 µs … 635.8 µs) 314.2 µs 541.0 µs 572.5 µs
 SimpleMediationModel - n=500                                95.3 µs        10,490 ( 82.8 µs … 509.2 µs)  98.7 µs 116.2 µs 223.2 µs
 SimpleMediationModel - n=500 - bootstrap (B=5000)          457.0 ms           2.2 (445.8 ms … 460.7 ms) 459.3 ms 460.7 ms 460.7 ms
 AlphaRealiability - n=500,3iv                               22.3 µs        44,770 ( 21.3 µs … 273.8 µs)  22.1 µs  24.9 µs  28.3 µs
