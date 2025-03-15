@@ -263,6 +263,27 @@ export class LinearRegressionStepwise {
 	selectedVariables: number[] = []
 
 	/**
+	 * Degree of freedom for regression
+	 *
+	 * 回归自由度
+	 */
+	dfR = 0
+
+	/**
+	 * Degree of freedom for residuals
+	 *
+	 * 残差自由度
+	 */
+	dfE = 0
+
+	/**
+	 * Degree of freedom for total
+	 *
+	 * 总自由度
+	 */
+	dfT = 0
+
+	/**
 	 * Calculate the predicted value for given independent variables
 	 *
 	 * 计算给定自变量的预测值
@@ -496,6 +517,9 @@ export class LinearRegressionStepwise {
 			this.SSt = ss(this.#dv, this.dvMean)
 			this.SSe = this.SSt
 			this.SSr = 0
+			this.dfR = 0
+			this.dfE = this.#n - 1
+			this.dfT = this.#n - 1
 		} else {
 			// 使用选定的变量创建最终回归模型
 			const selectedIv = this.#extractSubsetIv(this.selectedVariables)
@@ -513,6 +537,9 @@ export class LinearRegressionStepwise {
 			this.SSt = finalModel.SSt
 			this.SSr = finalModel.SSr
 			this.SSe = finalModel.SSe
+			this.dfR = finalModel.dfR
+			this.dfE = finalModel.dfE
+			this.dfT = finalModel.dfT
 		}
 	}
 }
