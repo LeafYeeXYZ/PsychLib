@@ -1,5 +1,5 @@
-import * as _jt from 'npm:jstat-esm@^2.0.0'
 import { assertAlmostEquals } from 'jsr:@std/assert'
+import * as _jt from 'npm:jstat-esm@^2.0.0'
 import * as pl from '../lib/index.ts'
 
 const jt = {

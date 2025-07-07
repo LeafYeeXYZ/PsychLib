@@ -1,21 +1,57 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
 		"useIgnoreFile": true
 	},
-	"organizeImports": {
-		"enabled": true
-	},
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"complexity": {
+				"noForEach": "error",
+				"useWhile": "error"
+			},
+			"correctness": {
+				"useExhaustiveDependencies": "error",
+				"useHookAtTopLevel": "error",
+				"useImportExtensions": "error",
+				"useJsxKeyInIterable": "error"
+			},
+			"nursery": {
+				"noDestructuredProps": "error",
+				"noGlobalDirnameFilename": "error",
+				"noImportCycles": "error",
+				"noNestedComponentDefinitions": "error",
+				"noProcessGlobal": "error",
+				"noReactPropAssign": "error",
+				"noUselessEscapeInString": "error",
+				"useAdjacentGetterSetter": "error",
+				"useConsistentObjectDefinition": "error",
+				"useExhaustiveSwitchCases": "error",
+				"useUniqueElementIds": "error"
+			},
+			"performance": {
+				"useTopLevelRegex": "error"
+			},
+			"style": {
+				"noCommonJs": "error",
+				"noParameterAssign": "error",
+				"useBlockStatements": "error",
+				"useSelfClosingElements": "error",
+				"useSingleVarDeclarator": "error",
+				"useNumberNamespace": "error"
+			},
+			"suspicious": {
+				"noVar": "error"
+			}
 		}
 	},
 	"javascript": {
 		"formatter": {
+			"jsxQuoteStyle": "single",
 			"trailingCommas": "all",
 			"semicolons": "asNeeded",
 			"quoteStyle": "single"

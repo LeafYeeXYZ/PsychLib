@@ -10,8 +10,12 @@ export function p2z(p: number): number {
 	if (p < 0 || p > 1) {
 		throw new Error('p must be between 0 and 1')
 	}
-	if (p === 0) return Number.NEGATIVE_INFINITY
-	if (p === 1) return Number.POSITIVE_INFINITY
+	if (p === 0) {
+		return Number.NEGATIVE_INFINITY
+	}
+	if (p === 1) {
+		return Number.POSITIVE_INFINITY
+	}
 	// Coefficients for the approximation
 	const a1 = -3.969683028665376e1
 	const a2 = 2.209460984245205e2
@@ -72,8 +76,12 @@ export function p2z(p: number): number {
  * @returns p value
  */
 export function z2p(z: number): number {
-	if (z === Number.POSITIVE_INFINITY) return 1
-	if (z === Number.NEGATIVE_INFINITY) return 0
+	if (z === Number.POSITIVE_INFINITY) {
+		return 1
+	}
+	if (z === Number.NEGATIVE_INFINITY) {
+		return 0
+	}
 	const p = 0.3275911
 	const a1 = 0.254829592
 	const a2 = -0.284496736

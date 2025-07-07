@@ -33,8 +33,12 @@ export function f2p(
 	if (f < 0) {
 		throw new Error('f must be greater than or equal to 0')
 	}
-	if (f === 0) return 1
-	if (f === Number.POSITIVE_INFINITY) return 0
+	if (f === 0) {
+		return 1
+	}
+	if (f === Number.POSITIVE_INFINITY) {
+		return 0
+	}
 	const x: number = df2 / (df2 + df1 * f)
 	const p: number = ibeta(x, df2 / 2, df1 / 2)
 	return twoside ? 2 * Math.min(p, 1 - p) : p
@@ -70,8 +74,12 @@ export function p2f(
 		throw new Error('df2 must be greater than 0')
 	}
 	// 特殊值快速处理
-	if (p === 1) return 0
-	if (p === 0) return Number.POSITIVE_INFINITY
+	if (p === 1) {
+		return 0
+	}
+	if (p === 0) {
+		return Number.POSITIVE_INFINITY
+	}
 	// 调整p值(单侧转换)
 	const _p = twoside ? p / 2 : p
 	return centralF.inv(1 - _p, df1, df2)

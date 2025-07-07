@@ -1,10 +1,10 @@
 import { standardize } from '../base.ts'
-import { bootstrapSample } from '../mediation/index.ts'
 import {
 	LinearRegressionOne,
 	LinearRegressionStandard,
 } from '../regression/index.ts'
 import { sort } from '../sort.ts'
+import { bootstrapSample } from './bootstrap.ts'
 
 /**
  * Simple mediation analysis

@@ -1,5 +1,5 @@
-import sl from 'npm:@stdlib/stats-anova1'
 import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
+import sl from 'npm:@stdlib/stats-anova1'
 import * as pl from '../lib/index.ts'
 
 Deno.test('One Way Anova Test', () => {

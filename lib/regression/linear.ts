@@ -1,4 +1,4 @@
-import { Matrix, corr, mean, ss, ssDiff, std } from '../base.ts'
+import { corr, Matrix, mean, ss, ssDiff, std } from '../base.ts'
 import { f2p, t2p } from '../distribution/index.ts'
 
 /**
@@ -602,7 +602,9 @@ export class LinearRegressionStepwise {
 
 			// 尝试添加每个可用变量
 			for (const index of availableIndices) {
-				if (this.#selectedIndices.includes(index)) continue
+				if (this.#selectedIndices.includes(index)) {
+					continue
+				}
 
 				// 创建尝试模型 (当前已选 + 新变量)
 				const testIndices = [...this.#selectedIndices, index]

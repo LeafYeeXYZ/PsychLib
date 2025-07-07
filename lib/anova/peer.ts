@@ -286,8 +286,8 @@ export class PeerAnova {
 					groupA: this.groups[i],
 					groupB: this.groups[j],
 					diff,
-					f: f,
-					p: p,
+					f,
+					p,
 				})
 			}
 		}
@@ -315,8 +315,8 @@ export class PeerAnova {
 					groupA: this.groups[i],
 					groupB: this.groups[j],
 					diff,
-					t: t,
-					p: p,
+					t,
+					p,
 					sig,
 				})
 			}

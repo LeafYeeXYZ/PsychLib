@@ -20,8 +20,12 @@ export function c2p(c: number, df: number): number {
 	if (c < 0) {
 		throw new Error('chi-square value must be greater than or equal to 0')
 	}
-	if (c === 0) return 1
-	if (c === Number.POSITIVE_INFINITY) return 0
+	if (c === 0) {
+		return 1
+	}
+	if (c === Number.POSITIVE_INFINITY) {
+		return 0
+	}
 	return 1 - lowRegGamma(df / 2, c / 2)
 }
 
@@ -44,8 +48,12 @@ export function p2c(p: number, df: number): number {
 	if (p < 0 || p > 1) {
 		throw new Error('p value must be between 0 and 1')
 	}
-	if (p === 0) return Number.POSITIVE_INFINITY
-	if (p === 1) return 0
+	if (p === 0) {
+		return Number.POSITIVE_INFINITY
+	}
+	if (p === 1) {
+		return 0
+	}
 	return chisquare.inv(1 - p, df)
 }
 

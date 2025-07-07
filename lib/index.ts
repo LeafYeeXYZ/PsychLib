@@ -29,13 +29,13 @@
  * ```
  */
 
-export * from './base.ts'
-export * from './sort.ts'
-export * from './regression/index.ts'
-export * from './mediation/index.ts'
-export * from './ttest/index.ts'
-export * from './distribution/index.ts'
-export * from './correlation/index.ts'
 export * from './anova/index.ts'
+export * from './base.ts'
+export * from './correlation/index.ts'
+export * from './distribution/index.ts'
+export * from './mediation/index.ts'
 export * from './nonparam/index.ts'
+export * from './regression/index.ts'
 export * from './reliability/index.ts'
+export * from './sort.ts'
+export * from './ttest/index.ts'

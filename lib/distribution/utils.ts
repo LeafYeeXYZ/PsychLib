@@ -12,7 +12,9 @@ export function lowRegGamma(s: number, z: number): number {
 	for (let n = 1; n < 100; n++) {
 		sum *= z / (s + n)
 		value += sum
-		if (sum < EPSILON) break
+		if (sum < EPSILON) {
+			break
+		}
 	}
 	return value * Math.exp(-z + s * Math.log(z) - gammaln(s))
 }
@@ -41,7 +43,9 @@ export function betacf(x: number, a: number, b: number): number {
 
 	let c = 1
 	let d = 1 - (qab * x) / qap
-	if (Math.abs(d) < fpmin) d = fpmin
+	if (Math.abs(d) < fpmin) {
+		d = fpmin
+	}
 	d = 1 / d
 	let h = d
 
@@ -51,8 +55,12 @@ export function betacf(x: number, a: number, b: number): number {
 		let aa = (m * (b - m) * x) / ((qam + m2) * (a + m2))
 		d = 1 + aa * d
 		c = 1 + aa / c
-		if (Math.abs(d) < fpmin) d = fpmin
-		if (Math.abs(c) < fpmin) c = fpmin
+		if (Math.abs(d) < fpmin) {
+			d = fpmin
+		}
+		if (Math.abs(c) < fpmin) {
+			c = fpmin
+		}
 		d = 1 / d
 		const del = d * c
 		h *= del
@@ -60,20 +68,30 @@ export function betacf(x: number, a: number, b: number): number {
 		aa = (-(a + m) * (qab + m) * x) / ((a + m2) * (qap + m2))
 		d = 1 + aa * d
 		c = 1 + aa / c
-		if (Math.abs(d) < fpmin) d = fpmin
-		if (Math.abs(c) < fpmin) c = fpmin
+		if (Math.abs(d) < fpmin) {
+			d = fpmin
+		}
+		if (Math.abs(c) < fpmin) {
+			c = fpmin
+		}
 		d = 1 / d
 		const delNext = d * c
 		h *= delNext
 		// 提前退出条件
-		if (Math.abs(del - 1) < eps && Math.abs(delNext - 1) < eps) break
+		if (Math.abs(del - 1) < eps && Math.abs(delNext - 1) < eps) {
+			break
+		}
 	}
 	return h
 }
 
 export function ibeta(x: number, a: number, b: number): number {
-	if (x <= 0) return 0
-	if (x >= 1) return 1
+	if (x <= 0) {
+		return 0
+	}
+	if (x >= 1) {
+		return 1
+	}
 
 	const bt = Math.exp(
 		gammaln(a + b) -

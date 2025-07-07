@@ -403,7 +403,12 @@ export function quantile(data: number[], q: number, sorted = false): number {
  * ```
  */
 export function min(data: number[], sorted = false): number {
-	if (sorted) return data[0]
+	if (data.length === 0) {
+		throw new Error('Cannot calculate min of an empty array')
+	}
+	if (sorted) {
+		return data[0]
+	}
 	let r = data[0]
 	for (let i = 1; i < data.length; i++) {
 		if (data[i] < r) {
@@ -427,7 +432,12 @@ export function min(data: number[], sorted = false): number {
  * ```
  */
 export function max(data: number[], sorted = false): number {
-	if (sorted) return data[data.length - 1]
+	if (data.length === 0) {
+		throw new Error('Cannot calculate max of an empty array')
+	}
+	if (sorted) {
+		return data[data.length - 1]
+	}
 	let r = data[0]
 	for (let i = 1; i < data.length; i++) {
 		if (data[i] > r) {

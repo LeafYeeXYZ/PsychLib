@@ -1,5 +1,5 @@
-import pc from 'npm:@stdlib/stats-pcorrtest@^0.2.2'
 import { assertAlmostEquals } from 'jsr:@std/assert'
+import pc from 'npm:@stdlib/stats-pcorrtest@^0.2.2'
 import * as pl from '../lib/index.ts'
 
 Deno.test('Correlation Test', () => {

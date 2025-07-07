@@ -1,6 +1,6 @@
+import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
 import sl_ks from 'npm:@stdlib/stats-kstest'
 import sl_le from 'npm:@stdlib/stats-levene-test'
-import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
 import * as pl from '../lib/index.ts'
 
 const x = (n = 50) => new Array(n).fill(0).map(() => Math.random() * 100)

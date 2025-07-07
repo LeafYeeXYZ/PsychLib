@@ -20,9 +20,15 @@ export function t2p(t: number, df: number, twoside = true): number {
 		throw new Error('degree of freedom must be greater than 0')
 	}
 	const x: number = Math.abs(t)
-	if (x === Number.POSITIVE_INFINITY) return 0
-	if (x === 0 && twoside) return 1
-	if (x === 0 && !twoside) return 0.5
+	if (x === Number.POSITIVE_INFINITY) {
+		return 0
+	}
+	if (x === 0 && twoside) {
+		return 1
+	}
+	if (x === 0 && !twoside) {
+		return 0.5
+	}
 	const p: number = ibeta(
 		(x + Math.sqrt(x * x + df)) / (2 * Math.sqrt(x * x + df)),
 		df / 2,
@@ -46,10 +52,18 @@ export function t2p(t: number, df: number, twoside = true): number {
  * @throws {Error} degree of freedom must be greater than 0
  */
 export function p2t(p: number, df: number, twoside = true): number {
-	if (df <= 0) throw new Error('degree of freedom must be greater than 0')
-	if (p === 0.5 && twoside) return 0
-	if (p === 1) return 0
-	if (p === 0) return Number.POSITIVE_INFINITY
+	if (df <= 0) {
+		throw new Error('degree of freedom must be greater than 0')
+	}
+	if (p === 0.5 && twoside) {
+		return 0
+	}
+	if (p === 1) {
+		return 0
+	}
+	if (p === 0) {
+		return Number.POSITIVE_INFINITY
+	}
 	// 调整p值(单侧转换)
 	const _p = twoside ? p / 2 : p
 	return studentt.inv(1 - _p, df)

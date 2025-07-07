@@ -1,6 +1,6 @@
-import { Matrix, inverse } from 'npm:ml-matrix@6.12.0'
-import * as ss from 'npm:simple-statistics@^7.0.0'
 import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
+import { inverse, Matrix } from 'npm:ml-matrix@6.12.0'
+import * as ss from 'npm:simple-statistics@^7.0.0'
 import * as pl from '../lib/index.ts'
 
 const x: number[] = new Array(1000).fill(0).map(() => Math.random() * 100)
