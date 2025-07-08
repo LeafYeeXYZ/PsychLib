@@ -69,13 +69,8 @@ export class LeveneTest {
 		let _partBt = 0
 		let _partBb = 0
 		for (let i = 0; i < k; i++) {
-			if (this.center === 'mean') {
-				_partBt += this.groupsCount[i] * (this.groupsMeanC[i] - _mean) ** 2
-				_partBb += ss(this.valuesC[i], this.groupsMeanC[i])
-			} else {
-				_partBt += this.groupsCount[i] * (this.groupsMedianC[i] - _mean) ** 2
-				_partBb += ss(this.valuesC[i], this.groupsMedianC[i])
-			}
+			_partBt += this.groupsCount[i] * (this.groupsMeanC[i] - _mean) ** 2
+			_partBb += ss(this.valuesC[i], this.groupsMeanC[i])
 		}
 		this.w = (_partA * _partBt) / _partBb
 		this.p = f2p(this.w, this.dfB, this.dfW)
