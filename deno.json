@@ -1,6 +1,6 @@
 {
 	"name": "@psych/lib",
-	"version": "1.24.1",
+	"version": "1.24.2",
 	"tasks": {
 		"check": "deno run -A npm:@biomejs/biome@2.0.6 check --write .",
 		"test": "deno test -A",

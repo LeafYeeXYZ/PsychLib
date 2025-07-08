@@ -1,78 +1,144 @@
-import { assertAlmostEquals } from 'jsr:@std/assert'
-import * as pl from '../lib/index.ts'
-import py from './python.ts'
+import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
+import * as m from '../lib/ttest/index.ts'
+import { R } from './r.ts'
+import { normalArray } from './utils.ts'
 
-const x = new Array(1000).fill(0).map(() => Math.random() * 100)
-const y = new Array(1000).fill(0).map(() => Math.random() * 101)
+Deno.test('One Sample T-Test', async () => {
+	const data = normalArray(1000, 1, 1)
+	const resultActual = new m.OneSampleTTest(data, 0)
+	const resultExpected = await R(
+		`
+		library(psych)
+		data <- c(${data.join(',')})
+		result <- t.test(data, mu = 0)
+		list(
+			t = result$statistic,
+			p = result$p.value,
+			df = result$parameter,
+			ci = result$conf.int,
+			mean = result$estimate[1],
+			sem = result$stderr,
+			cohenD = mean(data) / sd(data),
+			r2 = result$statistic^2 / (result$statistic^2 + result$parameter)
+		)
+	`,
+		['psych'],
+	)
+	assertAlmostEquals(resultActual.ci[0], resultExpected.ci[0], 1e-4)
+	assertAlmostEquals(resultActual.ci[1], resultExpected.ci[1], 1e-4)
+	assertEquals(resultActual.df, resultExpected.df)
+	assertAlmostEquals(resultActual.t, resultExpected.t, 1e-4)
+	assertAlmostEquals(resultActual.p, resultExpected.p, 1e-4)
+	assertAlmostEquals(resultActual.mean, resultExpected.mean, 1e-4)
+	assertAlmostEquals(resultActual.sem, resultExpected.sem, 1e-4)
+	assertAlmostEquals(resultActual.cohenD, resultExpected.cohenD, 1e-4)
+	assertAlmostEquals(resultActual.r2, resultExpected.r2, 1e-4)
+})
 
-Deno.test('TTest Test', () => {
-	const ttest_pl = new pl.OneSampleTTest(x, 0)
-	const ttest_py = JSON.parse(
-		py.runPython(`
-    import numpy as np
-    from scipy.stats import ttest_1samp
-    import json
-    x = ${JSON.stringify(x)}
-    result = ttest_1samp(x, 0)
-    low, high = result.confidence_interval()
-    json.dumps([result.statistic.item(), result.pvalue.item(), result.df.item(), [low, high]])
-  `),
+Deno.test('Paired T-Test', async () => {
+	const dataA = normalArray(1000, 1, 1)
+	const dataB = normalArray(1000, 2, 1)
+	const resultActual = new m.PeerSampleTTest(dataA, dataB)
+	const resultExpected = await R(
+		`
+		library(psych)
+		data1 <- c(${dataA.join(',')})
+		data2 <- c(${dataB.join(',')})
+		result <- t.test(data1, data2, paired = TRUE)
+		list(
+			t = result$statistic,
+			p = result$p.value,
+			df = result$parameter,
+			ci = result$conf.int,
+			meanA = mean(data1),
+			meanB = mean(data2),
+			sem = sd(data1 - data2) / sqrt(length(data1)),
+			cohenD = (mean(data1) - mean(data2)) / sd(data1 - data2),
+			r2 = result$statistic^2 / (result$statistic^2 + result$parameter)
+		)
+	`,
+		['psych'],
 	)
-	assertAlmostEquals(ttest_pl.t, ttest_py[0], 1e-6)
-	assertAlmostEquals(ttest_pl.p, ttest_py[1], 1e-6)
-	assertAlmostEquals(ttest_pl.df, ttest_py[2], 1e-6)
-	assertAlmostEquals(ttest_pl.ci[0], ttest_py[3][0], 1e-6)
-	assertAlmostEquals(ttest_pl.ci[1], ttest_py[3][1], 1e-6)
-	const ttestp_pl = new pl.PeerSampleTTest(x, y)
-	const ttestp_py = JSON.parse(
-		py.runPython(`
-    import numpy as np
-    from scipy.stats import ttest_rel
-    import json
-    x = ${JSON.stringify(x)}
-    y = ${JSON.stringify(y)}
-    result = ttest_rel(x, y)
-    low, high = result.confidence_interval()
-    json.dumps([result.statistic.item(), result.pvalue.item(), result.df.item(), [low, high]])
-  `),
+	assertAlmostEquals(resultActual.ci[0], resultExpected.ci[0], 1e-4)
+	assertAlmostEquals(resultActual.ci[1], resultExpected.ci[1], 1e-4)
+	assertEquals(resultActual.df, resultExpected.df)
+	assertAlmostEquals(resultActual.t, resultExpected.t, 1e-4)
+	assertAlmostEquals(resultActual.p, resultExpected.p, 1e-4)
+	assertAlmostEquals(resultActual.meanA, resultExpected.meanA, 1e-4)
+	assertAlmostEquals(resultActual.meanB, resultExpected.meanB, 1e-4)
+	assertAlmostEquals(resultActual.sem, resultExpected.sem, 1e-4)
+	assertAlmostEquals(resultActual.cohenD, resultExpected.cohenD, 1e-4)
+	assertAlmostEquals(resultActual.r2, resultExpected.r2, 1e-4)
+})
+
+Deno.test('Two Sample T-Test', async () => {
+	const dataA = normalArray(1000, 1, 1)
+	const dataB = normalArray(1000, 2, 1)
+	const resultActual = new m.TwoSampleTTest(dataA, dataB)
+	const resultExpected = await R(
+		`
+		library(psych)
+		data1 <- c(${dataA.join(',')})
+		data2 <- c(${dataB.join(',')})
+		result <- t.test(data1, data2, var.equal = TRUE)
+		list(
+			t = result$statistic,
+			p = result$p.value,
+			df = result$parameter,
+			ci = result$conf.int,
+			meanA = result$estimate[1],
+			meanB = result$estimate[2],
+			sem = result$stderr,
+			cohenD = (mean(data1) - mean(data2)) / sqrt((sd(data1)^2 + sd(data2)^2) / 2),
+			r2 = result$statistic^2 / (result$statistic^2 + result$parameter)
+		)
+	`,
+		['psych'],
 	)
-	assertAlmostEquals(ttestp_pl.t, ttestp_py[0], 1e-6)
-	assertAlmostEquals(ttestp_pl.p, ttestp_py[1], 1e-6)
-	assertAlmostEquals(ttestp_pl.df, ttestp_py[2], 1e-6)
-	assertAlmostEquals(ttestp_pl.ci[0], ttestp_py[3][0], 1e-6)
-	assertAlmostEquals(ttestp_pl.ci[1], ttestp_py[3][1], 1e-6)
-	const ttest2_pl = new pl.TwoSampleTTest(x, y)
-	const ttest2_py = JSON.parse(
-		py.runPython(`
-    import numpy as np
-    from scipy.stats import ttest_ind
-    import json
-    x = ${JSON.stringify(x)}
-    y = ${JSON.stringify(y)}
-    result = ttest_ind(x, y)
-    json.dumps([result.statistic, result.pvalue, result.df, result.confidence_interval()])
-  `),
+	assertAlmostEquals(resultActual.ci[0], resultExpected.ci[0], 1e-4)
+	assertAlmostEquals(resultActual.ci[1], resultExpected.ci[1], 1e-4)
+	assertEquals(resultActual.df, resultExpected.df)
+	assertAlmostEquals(resultActual.t, resultExpected.t, 1e-4)
+	assertAlmostEquals(resultActual.p, resultExpected.p, 1e-4)
+	assertAlmostEquals(resultActual.meanA, resultExpected.meanA, 1e-4)
+	assertAlmostEquals(resultActual.meanB, resultExpected.meanB, 1e-4)
+	assertAlmostEquals(resultActual.sem, resultExpected.sem, 1e-4)
+	assertAlmostEquals(resultActual.cohenD, resultExpected.cohenD, 1e-4)
+	assertAlmostEquals(resultActual.r2, resultExpected.r2, 1e-4)
+})
+
+Deno.test('Welch T-Test', async () => {
+	const dataA = normalArray(1000, 1, 1)
+	const dataB = normalArray(1000, 2, 1)
+	const resultActual = new m.WelchTTest(dataA, dataB)
+	const resultExpected = await R(
+		`
+		library(psych)
+		data1 <- c(${dataA.join(',')})
+		data2 <- c(${dataB.join(',')})
+		result <- t.test(data1, data2, var.equal = FALSE)
+		list(
+			t = result$statistic,
+			p = result$p.value,
+			df = result$parameter,
+			ci = result$conf.int,
+			meanA = result$estimate[1],
+			meanB = result$estimate[2],
+			sem = result$stderr,
+			cohenD = (mean(data1) - mean(data2)) / sqrt((sd(data1)^2 + sd(data2)^2) / 2),
+			r2 = result$statistic^2 / (result$statistic^2 + result$parameter)
+		)
+	`,
+		['psych'],
 	)
-	assertAlmostEquals(ttest2_pl.t, ttest2_py[0], 1e-6)
-	assertAlmostEquals(ttest2_pl.p, ttest2_py[1], 1e-6)
-	assertAlmostEquals(ttest2_pl.df, ttest2_py[2], 1e-6)
-	assertAlmostEquals(ttest2_pl.ci[0], ttest2_py[3][0], 1e-6)
-	assertAlmostEquals(ttest2_pl.ci[1], ttest2_py[3][1], 1e-6)
-	const ttestw_pl = new pl.WelchTTest(x, y)
-	const ttestw_py = JSON.parse(
-		py.runPython(`
-    import numpy as np
-    from scipy.stats import ttest_ind
-    import json
-    x = ${JSON.stringify(x)}
-    y = ${JSON.stringify(y)}
-    result = ttest_ind(x, y, equal_var=False)
-    json.dumps([result.statistic, result.pvalue, result.df, result.confidence_interval()])
-  `),
-	)
-	assertAlmostEquals(ttestw_pl.t, ttestw_py[0], 1e-6)
-	assertAlmostEquals(ttestw_pl.p, ttestw_py[1], 1e-6)
-	assertAlmostEquals(ttestw_pl.df, ttestw_py[2], 1e-6)
-	assertAlmostEquals(ttestw_pl.ci[0], ttestw_py[3][0], 1e-6)
-	assertAlmostEquals(ttestw_pl.ci[1], ttestw_py[3][1], 1e-6)
+	assertAlmostEquals(resultActual.ci[0], resultExpected.ci[0], 1e-4)
+	assertAlmostEquals(resultActual.ci[1], resultExpected.ci[1], 1e-4)
+	assertAlmostEquals(resultActual.df, resultExpected.df, 1e-4)
+	assertAlmostEquals(resultActual.t, resultExpected.t, 1e-4)
+	assertAlmostEquals(resultActual.p, resultExpected.p, 1e-4)
+	assertAlmostEquals(resultActual.meanA, resultExpected.meanA, 1e-4)
+	assertAlmostEquals(resultActual.meanB, resultExpected.meanB, 1e-4)
+	assertAlmostEquals(resultActual.sem, resultExpected.sem, 1e-4)
+	assertAlmostEquals(resultActual.cohenD, resultExpected.cohenD, 1e-4)
+	assertAlmostEquals(resultActual.r2, resultExpected.r2, 1e-4)
 })

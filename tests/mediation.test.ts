@@ -1,6 +1,11 @@
 import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
+import { loadPyodide } from 'npm:pyodide@0.26.4'
 import * as pl from '../lib/index.ts'
-import py from './python.ts'
+
+const PACKAGES = ['numpy', 'pandas', 'scipy', 'scikit-learn', 'statsmodels']
+
+const py = await loadPyodide()
+await py.loadPackage(PACKAGES)
 
 const N = 200
 const B = 1000

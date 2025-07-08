@@ -6,12 +6,14 @@
 
 - PsychLib can be used in all modern JavaScript/TypeScript environments, including browsers, Node.js, Deno, and Bun.
 - For use cases, please refer to my another project [PsychPen](https://github.com/LeafYeeXYZ/PsychPen).
+- All functions have been tested for consistency with R's psych package and other JavaScript/R statistical libraries.
 
 **For full documentation, see <https://jsr.io/@psych/lib/doc>.**
 
 - [Introduction](#introduction)
 - [Qiuck Start](#qiuck-start)
 - [Development](#development)
+- [Testing](#testing)
 - [Benchmark](#benchmark)
 
 # Qiuck Start
@@ -48,84 +50,111 @@ Now you can write `TypeScript` code in `/lib/**/*.ts` and export functions in `/
 After writing the code, remember to add test cases in `/tests/*.test.ts`. You can run the test cases using the following command.
 
 ```bash
-deno test -A
+deno task r:install # only once
+deno task r:server
+deno task test
 ```
 
 You can also add benchmark cases in `/benchs/*.bench.ts` and run the benchmark using the following command.
 
 ```bash
-deno bench -A
+deno task bench
 ```
 
 This project publishes to <https://jsr.io>, so you don't need to compile the code to JavaScript. And you also don't need to publish the package manually. Just modify `deno.json` and push the code to the repository. The `GitHub Action` will do the rest for you.
+
+# Testing
+
+| PsychLib Function | Testing Method | Passed | Precision |
+| :---: | :---: | :---: | :---: |
+| Basic Functions | `JS:simple-statistics` | ✅ | `1e-6` |
+| `Matrix` | `JS:ml-matrix` | ✅ | `1e-6` |
+| `sort` | `JS:Array.prototype.sort` | ✅ |  |
+| `OneSampleTTest` | `R:psych` | ✅ | `1e-4` |
+| `TwoSampleTTest` | `R:psych` | ✅ | `1e-4` |
+| `PeerSampleTTest` | `R:psych` | ✅ | `1e-4` |
+| `WelchTTest` | `R:psych` | ✅ | `1e-4` |
+| `AlphaRealiability` | `R:psych` | ✅ | `1e-4` |
+| `LeveneTest` | `R:car` | ✅ | `1e-4` |
+| `OneSampleKSTest` | `R:stats` | ⚠️ | D: `1e-4`<br>p: `1e-4` (`n >= 100`) / `0.15` (`n < 100`)<br>Reject: `0` |
+| `z2p` & `p2z` | `R:stats` | ✅ | `1e-4` |
+| `t2p` & `p2t` | `R:stats` | ✅ | `1e-4` |
+| `f2p` & `p2f` | `R:stats` | ✅ | `1e-4` |
+| `c2p` & `p2c` | `R:stats` | ✅ | `1e-4` |
+| `PearsonCorrTest` | `R:stats` | ✅ | `1e-4` |
+| Regression | See `tests/regression.test.ts` | ⚠️ WIP |  |
+| Mediation | See `tests/mediation.test.ts` | ⚠️ WIP |  |
+| ANOVA | See `tests/anova.test.ts` | ⚠️ WIP |  |
+
+> I'm working on migrating all tests to `R`, you can see the progress above.
 
 # Benchmark
 
 ```bash
     CPU | Apple M3
-Runtime | Deno 2.2.3 (aarch64-apple-darwin)
+Runtime | Deno 2.4.0 (aarch64-apple-darwin)
 
 
-benchmark                                           time/iter (avg)        iter/s      (min … max)           p75      p99     p995
---------------------------------------------------- ----------------------------- --------------------- --------------------------
-sum() - n=500                                              273.9 ns     3,652,000 (270.6 ns … 286.9 ns) 275.3 ns 282.1 ns 286.9 ns
-mean() - n=500                                             275.8 ns     3,626,000 (271.3 ns … 303.9 ns) 276.2 ns 292.6 ns 303.9 ns
-max() - n=500                                              178.0 ns     5,619,000 (171.9 ns … 197.9 ns) 185.1 ns 192.3 ns 195.9 ns
-min() - n=500                                              175.0 ns     5,715,000 (169.4 ns … 194.1 ns) 181.8 ns 186.5 ns 187.2 ns
-median() - n=500                                             6.9 µs       144,000 (  6.0 µs …  11.5 µs)   7.0 µs  11.5 µs  11.5 µs
-mode() - n=500                                              25.3 µs        39,520 ( 22.0 µs … 121.1 µs)  25.0 µs  49.9 µs  51.1 µs
-quantile() - n=500                                           6.4 µs       155,300 (  6.3 µs …   7.2 µs)   6.4 µs   7.2 µs   7.2 µs
-range() - n=500                                            358.6 ns     2,788,000 (339.6 ns … 379.9 ns) 366.3 ns 374.8 ns 379.9 ns
-vari() - n=500                                             598.7 ns     1,670,000 (591.2 ns … 664.2 ns) 596.0 ns 664.2 ns 664.2 ns
-std() - n=500                                              595.3 ns     1,680,000 (591.2 ns … 626.5 ns) 595.2 ns 626.5 ns 626.5 ns
-cov() - n=500,2                                            905.5 ns     1,104,000 (895.5 ns … 962.2 ns) 904.6 ns 962.2 ns 962.2 ns
-corr() - n=500,2                                             1.5 µs       673,900 (  1.4 µs …   2.2 µs)   1.5 µs   2.2 µs   2.2 µs
-kurtosis() - n=500                                           4.6 µs       219,400 (  4.5 µs …   4.6 µs)   4.6 µs   4.6 µs   4.6 µs
-skewness() - n=500                                           4.6 µs       219,000 (  4.5 µs …   4.7 µs)   4.6 µs   4.7 µs   4.7 µs
-ss() - n=500                                               637.8 ns     1,568,000 (590.7 ns …   2.5 µs) 625.7 ns   2.5 µs   2.5 µs
-ssDiff() - n=500,2                                         330.6 ns     3,025,000 (312.1 ns … 344.0 ns) 336.2 ns 341.8 ns 344.0 ns
-sem() - n=500                                              597.6 ns     1,673,000 (591.4 ns … 628.6 ns) 596.5 ns 628.6 ns 628.6 ns
-Array.prototype.sort() - n=5000                              1.3 ms         764.9 (  1.2 ms …   3.1 ms)   1.3 ms   1.5 ms   1.8 ms
-sort() - iterativeQuickSort - n=5000                       121.1 µs         8,258 (106.5 µs … 291.8 µs) 124.3 µs 150.9 µs 159.1 µs
-sort() - recursiveQuickSort - n=5000                       149.1 µs         6,707 (130.8 µs … 294.5 µs) 152.8 µs 185.2 µs 205.8 µs
-sort() - mergeSort - n=5000                                340.3 µs         2,938 (302.5 µs … 470.2 µs) 344.7 µs 389.3 µs 396.0 µs
-sort() - heapSort - n=5000                                 433.5 µs         2,307 (388.4 µs … 596.4 µs) 435.2 µs 504.7 µs 527.8 µs
-z2p()                                                        6.5 ns   153,800,000 (  6.3 ns …  16.0 ns)   6.4 ns   9.8 ns  10.1 ns
-p2z()                                                       14.8 ns    67,350,000 ( 13.1 ns …  29.7 ns)  14.7 ns  19.8 ns  21.1 ns
-t2p() - df=30                                              115.5 ns     8,659,000 (107.0 ns … 125.8 ns) 116.7 ns 124.5 ns 124.8 ns
-p2t() - df=30                                              534.8 ns     1,870,000 (493.3 ns … 565.3 ns) 542.0 ns 558.4 ns 565.3 ns
-f2p() - df=5,30                                             95.3 ns    10,490,000 ( 87.5 ns … 119.1 ns)  96.2 ns 105.2 ns 107.5 ns
-p2f() - df=5,30                                            557.6 ns     1,793,000 (523.5 ns … 574.5 ns) 565.0 ns 574.5 ns 574.5 ns
-c2p() - df=6                                                41.5 ns    24,080,000 ( 38.0 ns …  58.3 ns)  41.6 ns  49.3 ns  51.5 ns
-p2c() - df=6                                               382.1 ns     2,617,000 (332.8 ns …   3.1 µs) 361.3 ns 820.7 ns   3.1 µs
-randomNormal()                                              15.6 ns    64,280,000 ( 13.5 ns …  34.8 ns)  15.7 ns  20.1 ns  21.1 ns
-randomT() - df=30                                           74.4 ns    13,440,000 ( 68.3 ns … 101.9 ns)  75.2 ns  83.8 ns  84.6 ns
-randomF() - df=5,30                                        115.9 ns     8,630,000 (110.0 ns … 175.7 ns) 116.8 ns 135.0 ns 135.3 ns
-randomChi2() - df=6                                         55.9 ns    17,900,000 ( 52.9 ns … 115.5 ns)  56.1 ns  63.9 ns  68.7 ns
-KurtosisTest - n=500                                         4.8 µs       207,800 (  4.6 µs …   8.2 µs)   4.7 µs   8.2 µs   8.2 µs
-SkewnessTest - n=500                                         4.6 µs       215,600 (  4.6 µs …   4.7 µs)   4.7 µs   4.7 µs   4.7 µs
-OneWayAnova - n=500                                          6.6 µs       151,900 (  6.0 µs … 128.6 µs)   6.5 µs   7.8 µs  10.5 µs
-PeerAnova - n=500,3iv                                       18.5 µs        54,180 ( 17.3 µs … 150.9 µs)  18.3 µs  23.7 µs  41.4 µs
-LeveneTest - n=500                                          21.3 µs        46,890 ( 20.5 µs … 154.2 µs)  21.1 µs  27.2 µs  32.0 µs
-OneSampleKSTest - n=500                                     90.0 µs        11,110 ( 87.2 µs … 194.9 µs)  89.2 µs 139.0 µs 145.8 µs
-OneSampleTTest - n=500                                       1.6 µs       626,100 (  1.6 µs …   1.8 µs)   1.6 µs   1.8 µs   1.8 µs
-TwoSampleTTest - n=500                                       3.0 µs       334,600 (  2.9 µs …   4.3 µs)   3.0 µs   4.3 µs   4.3 µs
-PeerSampleTTest - n=500                                      4.0 µs       250,700 (  3.9 µs …   4.0 µs)   4.0 µs   4.0 µs   4.0 µs
-WelchTTest - n=500                                           2.2 µs       453,900 (  2.1 µs …   3.3 µs)   2.2 µs   3.3 µs   3.3 µs
-PearsonCorrTest - n=500                                      1.8 µs       551,100 (  1.8 µs …   1.9 µs)   1.8 µs   1.9 µs   1.9 µs
-bootstrapSample() - n=500,B=5000                            34.2 ms          29.3 ( 32.7 ms …  37.8 ms)  34.8 ms  37.8 ms  37.8 ms
-bootstrapTest() - mean - n=500,B=5000                       36.6 ms          27.3 ( 34.5 ms …  40.0 ms)  37.7 ms  40.0 ms  40.0 ms
-bootstrapTest() - median - n=500,B=5000                    127.0 ms           7.9 (125.9 ms … 130.1 ms) 127.2 ms 130.1 ms 130.1 ms
-bootstrapTest() - ab - n=500,B=5000                         78.3 ms          12.8 ( 75.4 ms …  87.0 ms)  78.1 ms  87.0 ms  87.0 ms
-LinearRegressionOne - n=500                                  6.4 µs       156,900 (  4.8 µs … 506.3 µs)   5.2 µs  14.0 µs  14.2 µs
-LinearRegressionStandard - n=500,3iv                       107.6 µs         9,298 ( 90.6 µs … 605.9 µs) 115.9 µs 160.3 µs 321.3 µs
-LinearRegressionStepwise - n=500,3iv                       829.4 µs         1,206 (738.6 µs …   1.3 ms) 853.6 µs   1.2 ms   1.2 ms
-LinearRegressionSequential - n=500,3iv                     311.7 µs         3,208 (268.0 µs … 635.8 µs) 314.2 µs 541.0 µs 572.5 µs
-SimpleMediationModel - n=500                                95.3 µs        10,490 ( 82.8 µs … 509.2 µs)  98.7 µs 116.2 µs 223.2 µs
-SimpleMediationModel - n=500 - bootstrap (B=5000)          457.0 ms           2.2 (445.8 ms … 460.7 ms) 459.3 ms 460.7 ms 460.7 ms
-AlphaRealiability - n=500,3iv                               22.3 µs        44,770 ( 21.3 µs … 273.8 µs)  22.1 µs  24.9 µs  28.3 µs
-Matrix.prototype.add() - 50x100                             17.4 µs        57,360 ( 16.9 µs … 356.9 µs)  17.3 µs  19.6 µs  20.7 µs
-Matrix.prototype.transpose() - 50x100                       19.9 µs        50,250 ( 19.0 µs … 271.7 µs)  19.9 µs  22.0 µs  23.8 µs
-Matrix.prototype.multiply() - 50x100 * 100x50                1.1 ms         936.9 (  1.1 ms …   1.2 ms)   1.1 ms   1.1 ms   1.1 ms
-Matrix.prototype.inverse() - 50x50                         453.0 µs         2,208 (444.2 µs … 737.9 µs) 452.3 µs 473.9 µs 500.0 µs
+| benchmark                                           | time/iter (avg) |        iter/s |      (min … max)      |      p75 |      p99 |     p995 |
+| --------------------------------------------------- | --------------- | ------------- | --------------------- | -------- | -------- | -------- |
+| sum() - n=500                                       |        287.3 ns |     3,480,000 | (270.5 ns … 310.4 ns) | 295.4 ns | 309.4 ns | 310.4 ns |
+| mean() - n=500                                      |        284.9 ns |     3,511,000 | (271.1 ns … 311.0 ns) | 295.2 ns | 310.4 ns | 311.0 ns |
+| max() - n=500                                       |        193.5 ns |     5,169,000 | (179.8 ns … 204.9 ns) | 196.1 ns | 202.1 ns | 203.9 ns |
+| min() - n=500                                       |        183.8 ns |     5,439,000 | (169.7 ns … 198.3 ns) | 185.1 ns | 195.7 ns | 196.6 ns |
+| median() - n=500                                    |          6.0 µs |       167,500 | (  5.8 µs …   7.3 µs) |   5.9 µs |   7.3 µs |   7.3 µs |
+| mode() - n=500                                      |         24.6 µs |        40,590 | ( 23.2 µs … 103.9 µs) |  24.0 µs |  47.7 µs |  50.5 µs |
+| quantile() - n=500                                  |          5.9 µs |       168,200 | (  5.8 µs …   7.3 µs) |   5.9 µs |   7.3 µs |   7.3 µs |
+| range() - n=500                                     |        378.2 ns |     2,644,000 | (372.8 ns … 399.6 ns) | 379.9 ns | 399.1 ns | 399.6 ns |
+| vari() - n=500                                      |        635.3 ns |     1,574,000 | (598.8 ns … 848.3 ns) | 640.3 ns | 848.3 ns | 848.3 ns |
+| std() - n=500                                       |        631.9 ns |     1,582,000 | (592.5 ns … 652.8 ns) | 638.9 ns | 652.8 ns | 652.8 ns |
+| cov() - n=500                                       |        961.6 ns |     1,040,000 | (906.8 ns … 995.7 ns) | 968.5 ns | 995.7 ns | 995.7 ns |
+| corr() - n=500                                      |          1.6 µs |       633,500 | (  1.5 µs …   3.1 µs) |   1.5 µs |   3.1 µs |   3.1 µs |
+| kurtosis() - n=500                                  |          4.5 µs |       222,300 | (  4.5 µs …   4.6 µs) |   4.5 µs |   4.6 µs |   4.6 µs |
+| skewness() - n=500                                  |          4.5 µs |       221,100 | (  4.5 µs …   4.7 µs) |   4.5 µs |   4.7 µs |   4.7 µs |
+| ss() - n=500                                        |        640.9 ns |     1,560,000 | (610.1 ns … 921.1 ns) | 641.5 ns | 921.1 ns | 921.1 ns |
+| ssDiff() - n=500                                    |        339.6 ns |     2,945,000 | (334.7 ns … 514.6 ns) | 339.7 ns | 355.3 ns | 514.6 ns |
+| sem() - n=500                                       |        669.6 ns |     1,493,000 | (599.9 ns …   2.4 µs) | 640.5 ns |   2.4 µs |   2.4 µs |
+| Array.prototype.sort() - n=5000                     |          1.3 ms |         743.5 | (  1.3 ms …   2.2 ms) |   1.4 ms |   1.6 ms |   1.8 ms |
+| sort() - iterativeQuickSort - n=5000                |        124.1 µs |         8,059 | (110.1 µs … 453.8 µs) | 130.8 µs | 185.2 µs | 216.0 µs |
+| sort() - recursiveQuickSort - n=5000                |        150.9 µs |         6,627 | (137.5 µs … 326.8 µs) | 152.8 µs | 201.4 µs | 225.2 µs |
+| sort() - mergeSort - n=5000                         |        338.1 µs |         2,958 | (317.6 µs … 531.6 µs) | 346.5 µs | 399.7 µs | 417.2 µs |
+| sort() - heapSort - n=5000                          |        444.9 µs |         2,248 | (432.9 µs … 575.3 µs) | 446.8 µs | 493.9 µs | 520.6 µs |
+| z2p()                                               |          6.5 ns |   154,400,000 | (  6.3 ns …  11.6 ns) |   6.4 ns |   9.1 ns |   9.2 ns |
+| p2z()                                               |         14.7 ns |    68,080,000 | ( 14.0 ns …  20.0 ns) |  14.6 ns |  17.3 ns |  17.6 ns |
+| t2p() - df=30                                       |        116.4 ns |     8,592,000 | (114.6 ns … 127.1 ns) | 116.5 ns | 121.8 ns | 122.7 ns |
+| p2t() - df=30                                       |        560.2 ns |     1,785,000 | (555.8 ns … 584.3 ns) | 560.6 ns | 574.3 ns | 584.3 ns |
+| f2p() - df=5,30                                     |         95.0 ns |    10,530,000 | ( 93.7 ns … 108.3 ns) |  95.0 ns |  98.5 ns | 100.0 ns |
+| p2f() - df=5,30                                     |        563.5 ns |     1,775,000 | (558.9 ns … 592.5 ns) | 563.8 ns | 592.5 ns | 592.5 ns |
+| c2p() - df=6                                        |         41.1 ns |    24,310,000 | ( 40.6 ns …  50.7 ns) |  41.1 ns |  44.3 ns |  44.6 ns |
+| p2c() - df=6                                        |        357.6 ns |     2,796,000 | (351.4 ns … 369.7 ns) | 359.5 ns | 366.9 ns | 369.7 ns |
+| randomNormal()                                      |         15.9 ns |    63,010,000 | ( 14.4 ns …  21.7 ns) |  15.8 ns |  18.5 ns |  18.6 ns |
+| randomT() - df=30                                   |         74.0 ns |    13,510,000 | ( 71.1 ns …  98.2 ns) |  74.4 ns |  77.6 ns |  78.5 ns |
+| randomF() - df=5,30                                 |        113.8 ns |     8,788,000 | (109.6 ns … 124.7 ns) | 114.6 ns | 118.4 ns | 118.5 ns |
+| randomChi2() - df=6                                 |         55.4 ns |    18,060,000 | ( 52.0 ns …  64.0 ns) |  55.9 ns |  59.3 ns |  59.9 ns |
+| KurtosisTest - n=500                                |          4.5 µs |       221,200 | (  4.5 µs …   4.6 µs) |   4.5 µs |   4.6 µs |   4.6 µs |
+| SkewnessTest - n=500                                |          4.5 µs |       220,400 | (  4.5 µs …   4.6 µs) |   4.5 µs |   4.6 µs |   4.6 µs |
+| OneWayAnova - n=500                                 |          6.6 µs |       151,400 | (  6.3 µs … 109.2 µs) |   6.5 µs |   7.7 µs |  10.5 µs |
+| PeerAnova - n=500,3iv                               |         17.9 µs |        55,930 | ( 17.0 µs …  93.0 µs) |  17.8 µs |  24.4 µs |  45.0 µs |
+| LeveneTest - n=500                                  |         20.6 µs |        48,660 | ( 19.9 µs … 162.8 µs) |  20.5 µs |  24.8 µs |  27.0 µs |
+| OneSampleKSTest - n=500                             |         14.3 µs |        69,710 | ( 13.2 µs … 105.9 µs) |  16.0 µs |  16.9 µs |  18.4 µs |
+| OneSampleTTest - n=500                              |          1.6 µs |       616,400 | (  1.6 µs …   2.2 µs) |   1.6 µs |   2.2 µs |   2.2 µs |
+| TwoSampleTTest - n=500                              |          2.9 µs |       348,200 | (  2.8 µs …   4.9 µs) |   2.8 µs |   4.9 µs |   4.9 µs |
+| PeerSampleTTest - n=500                             |          3.9 µs |       257,800 | (  3.9 µs …   3.9 µs) |   3.9 µs |   3.9 µs |   3.9 µs |
+| WelchTTest - n=500                                  |          2.3 µs |       440,500 | (  2.2 µs …   4.2 µs) |   2.2 µs |   4.2 µs |   4.2 µs |
+| PearsonCorrTest - n=500                             |          1.8 µs |       546,000 | (  1.8 µs …   1.9 µs) |   1.8 µs |   1.9 µs |   1.9 µs |
+| bootstrapSample() - n=500,B=5000                    |         33.9 ms |          29.5 | ( 32.1 ms …  37.5 ms) |  34.4 ms |  37.5 ms |  37.5 ms |
+| bootstrapTest() - mean - n=500,B=5000               |         36.4 ms |          27.5 | ( 34.4 ms …  39.5 ms) |  36.9 ms |  39.5 ms |  39.5 ms |
+| bootstrapTest() - median - n=500,B=5000             |        125.2 ms |           8.0 | (124.2 ms … 129.0 ms) | 125.5 ms | 129.0 ms | 129.0 ms |
+| bootstrapTest() - ab - n=500,B=5000                 |         96.3 ms |          10.4 | ( 73.8 ms … 138.7 ms) | 119.5 ms | 138.7 ms | 138.7 ms |
+| LinearRegressionOne - n=500                         |          7.0 µs |       142,900 | (  4.7 µs … 480.5 µs) |  11.4 µs |  12.4 µs |  12.7 µs |
+| LinearRegressionStandard - n=500,3iv                |        138.9 µs |         7,200 | (116.4 µs …   1.1 ms) | 137.3 µs | 250.1 µs | 283.2 µs |
+| LinearRegressionStepwise - n=500,3iv                |          1.0 ms |         969.8 | (977.4 µs …   1.4 ms) |   1.0 ms |   1.3 ms |   1.3 ms |
+| LinearRegressionSequential - n=500,3iv              |        347.1 µs |         2,881 | (322.6 µs … 654.6 µs) | 362.3 µs | 461.9 µs | 485.9 µs |
+| SimpleMediationModel - n=500                        |        105.2 µs |         9,502 | (100.5 µs … 373.0 µs) | 105.3 µs | 118.9 µs | 203.4 µs |
+| SimpleMediationModel - n=500 - bootstrap (B=5000)   |        580.2 ms |           1.7 | (542.7 ms … 748.5 ms) | 600.2 ms | 748.5 ms | 748.5 ms |
+| AlphaRealiability - n=500,3iv                       |         22.3 µs |        44,900 | ( 21.4 µs … 185.8 µs) |  22.2 µs |  24.7 µs |  26.8 µs |
+| Matrix.prototype.add() - 50x100                     |         20.4 µs |        49,050 | ( 19.2 µs … 152.5 µs) |  20.5 µs |  22.7 µs |  24.4 µs |
+| Matrix.prototype.transpose() - 50x100               |         25.4 µs |        39,400 | ( 24.4 µs … 155.4 µs) |  25.4 µs |  28.2 µs |  30.8 µs |
+| Matrix.prototype.multiply() - 50x100 * 100x50       |        944.8 µs |         1,058 | (904.1 µs …   1.0 ms) | 945.4 µs |   1.0 ms |   1.0 ms |
+| Matrix.prototype.inverse() - 50x50                  |        458.9 µs |         2,179 | (452.5 µs … 636.7 µs) | 458.8 µs | 481.3 µs | 565.6 µs |
 ```

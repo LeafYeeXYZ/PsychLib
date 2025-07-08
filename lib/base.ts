@@ -771,9 +771,36 @@ export function mode(data: number[]): number {
 }
 
 /**
- * Centralize the array
+ * Calculate the factorial of a number
  *
- * 中心化数组
+ * 计算一个数的阶乘
+ * @param n number
+ * @returns factorial of n
+ * @example
+ * ```typescript
+ * import { factorial } from '@psych/lib'
+ * console.log(factorial(5)) // 120
+ * ```
+ * @throws {Error} factorial is not defined for negative numbers
+ */
+export function factorial(n: number): number {
+	if (n < 0) {
+		throw new Error('factorial is not defined for negative numbers')
+	}
+	if (n === 0 || n === 1) {
+		return 1
+	}
+	let result = 1
+	for (let i = 2; i <= n; i++) {
+		result *= i
+	}
+	return result
+}
+
+/**
+ * Centralize the array. This function does not change the original array.
+ *
+ * 中心化数组. 此函数不改变原数组.
  * @param data numbers
  * @param stat statistics to refer to (default is mean)
  * @param abs whether to absolute the centralized array (default is false)
@@ -800,9 +827,9 @@ export function centralize(
 }
 
 /**
- * Standardize the array
+ * Standardize the array. This function does not change the original array.
  *
- * 标准化数组
+ * 标准化数组. 此函数不改变原数组.
  * @param data numbers
  * @param sample whether to calculate the sample standard deviation (default is true)
  * @param abs whether to absolute the standardized array (default is false)

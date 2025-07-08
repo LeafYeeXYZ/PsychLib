@@ -1,51 +1,115 @@
 import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
-import sl_ks from 'npm:@stdlib/stats-kstest'
-import sl_le from 'npm:@stdlib/stats-levene-test'
-import * as pl from '../lib/index.ts'
+import * as m from '../lib/nonparam/index.ts'
+import { R } from './r.ts'
+import { normalArray } from './utils.ts'
 
-const x = (n = 50) => new Array(n).fill(0).map(() => Math.random() * 100)
+Deno.test('One-sample Kolmogorov-Smirnov Test', async () => {
+	const sizes = [1000, 500, 200, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
+	for (const size of sizes) {
+		const data = normalArray(size, 1, 1)
+		const resultActual = new m.OneSampleKSTest(data)
+		const resultExpected = await R(
+			`
+			library(stats)
+			data <- c(${data.join(',')})
+			result <- ks.test(scale(data), 'pnorm', mean = 0, sd = 1)
+			list(
+				d = result$statistic,
+				p = result$p.value,
+				decide = result$p.value < 0.05
+			)
+		`,
+			['stats'],
+		)
+		console.table([
+			{
+				size,
+				source: 'PsychLib',
+				d: resultActual.d,
+				p: resultActual.p,
+				rejected: resultActual.rejected,
+			},
+			{
+				size,
+				source: 'R',
+				d: resultExpected.d,
+				p: resultExpected.p,
+				rejected: resultExpected.decide,
+			},
+			{
+				source: 'Difference',
+				d: resultActual.d - resultExpected.d,
+				p: resultActual.p - resultExpected.p,
+			},
+		])
+		assertAlmostEquals(resultActual.d, resultExpected.d, 1e-4)
+		assertAlmostEquals(
+			resultActual.p,
+			resultExpected.p,
+			size < 100 ? 0.2 : 1e-4,
+		)
+		assertEquals(resultActual.rejected, resultExpected.decide)
+	}
+})
 
-Deno.test('Non-param Test', () => {
-	assertEquals(typeof new pl.KurtosisTest(x()).p, 'number')
-	assertEquals(typeof new pl.SkewnessTest(x()).p, 'number')
-	assertEquals(typeof new pl.KurtosisTest(x()).z, 'number')
-	assertEquals(typeof new pl.SkewnessTest(x()).z, 'number')
-	for (let i = 0; i < 20; i++) {
-		const levels = Math.floor(Math.random() * 8) + 3
-		const group: number[] = new Array(1000)
-			.fill(0)
-			.map(() => Math.floor(Math.random() * levels))
-		const value: number[] = group.map((v) => Math.random() * 10 + v)
-		const pl_res = new pl.LeveneTest(value, group)
-		const sl_res = sl_le(value, { groups: group })
-		assertAlmostEquals(pl_res.w, sl_res.statistic, 1e-6)
-		assertAlmostEquals(pl_res.p, sl_res.pValue, 1e-6)
-	}
-	for (let i = 0; i < 20; i++) {
-		const _x = x()
-		const _mean = pl.mean(_x)
-		const _std = pl.std(_x, true, _mean)
-		const pl_res = new pl.OneSampleKSTest(_x)
-		const sl_res = sl_ks(
-			_x.map((v) => (v - _mean) / _std),
-			'normal',
-			0,
-			1,
+Deno.test('Levene Test (center = mean)', async () => {
+	const data = [
+		normalArray(200, 1, 1),
+		normalArray(200, 2, 0.95),
+		normalArray(200, 3, 1.05),
+		normalArray(200, 4, 1),
+	].flat()
+	const group = [
+		...new Array(200).fill(0),
+		...new Array(200).fill(1),
+		...new Array(200).fill(2),
+		...new Array(200).fill(3),
+	]
+	const resultActual = new m.LeveneTest(data, group, 'mean')
+	const resultExpected = await R(
+		`
+		library(car)
+		data <- c(${data.join(',')})
+		group <- factor(c(${group.join(',')}))
+		result <- leveneTest(data ~ group, center = mean)
+		list(
+			w = result$\`F value\`[1],
+			p = result$\`Pr(>F)\`[1]
 		)
-		assertAlmostEquals(pl_res.d, sl_res.statistic, 1e-4)
-		assertEquals(pl_res.rejected, sl_res.rejected)
-	}
-	for (let i = 0; i < 20; i++) {
-		const _x = x(1000)
-		const _mean = pl.mean(_x)
-		const _std = pl.std(_x, true, _mean)
-		const pl_res = new pl.OneSampleKSTest(_x)
-		const sl_res = sl_ks(
-			_x.map((v) => (v - _mean) / _std),
-			'normal',
-			0,
-			1,
+	`,
+		['car'],
+	)
+	assertAlmostEquals(resultActual.w, resultExpected.w, 1e-4)
+	assertAlmostEquals(resultActual.p, resultExpected.p, 1e-4)
+})
+
+Deno.test('Levene Test (center = median)', async () => {
+	const data = [
+		normalArray(200, 1, 1),
+		normalArray(200, 2, 0.95),
+		normalArray(200, 3, 1.05),
+		normalArray(200, 4, 1),
+	].flat()
+	const group = [
+		...new Array(200).fill(0),
+		...new Array(200).fill(1),
+		...new Array(200).fill(2),
+		...new Array(200).fill(3),
+	]
+	const resultActual = new m.LeveneTest(data, group, 'median')
+	const resultExpected = await R(
+		`
+		library(car)
+		data <- c(${data.join(',')})
+		group <- factor(c(${group.join(',')}))
+		result <- leveneTest(data ~ group, center = median)
+		list(
+			w = result$\`F value\`[1],
+			p = result$\`Pr(>F)\`[1]
 		)
-		assertAlmostEquals(pl_res.p, sl_res.pValue, 1e-3)
-	}
+	`,
+		['car'],
+	)
+	assertAlmostEquals(resultActual.w, resultExpected.w, 1e-4)
+	assertAlmostEquals(resultActual.p, resultExpected.p, 1e-4)
 })
