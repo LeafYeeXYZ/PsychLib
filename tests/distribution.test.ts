@@ -1,6 +1,6 @@
 import { assertAlmostEquals } from 'jsr:@std/assert'
 import * as m from '../lib/distribution/index.ts'
-import { R } from './r.ts'
+import { R } from '../utils/r.ts'
 
 Deno.test('Z Distribution', async () => {
 	for (let i = 0; i < 100; i++) {

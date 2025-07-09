@@ -1,7 +1,7 @@
 import { assertAlmostEquals } from 'jsr:@std/assert'
 import * as m from '../lib/anova/index.ts'
-import { R } from './r.ts'
-import { normalArray } from './utils.ts'
+import { R } from '../utils/r.ts'
+import { normalArray } from '../utils/tools.ts'
 
 Deno.test('One Way ANOVA', async () => {
 	const dataA = [

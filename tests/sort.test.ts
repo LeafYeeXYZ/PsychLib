@@ -1,6 +1,6 @@
 import { assertEquals } from 'jsr:@std/assert'
 import * as m from '../lib/sort.ts'
-import { normalArray } from './utils.ts'
+import { normalArray } from '../utils/tools.ts'
 
 Deno.test('Sort', () => {
 	const data = normalArray(10000, 0, 100)

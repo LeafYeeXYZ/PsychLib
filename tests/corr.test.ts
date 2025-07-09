@@ -1,7 +1,7 @@
 import { assertAlmostEquals } from 'jsr:@std/assert'
 import * as m from '../lib/correlation/index.ts'
-import { R } from './r.ts'
-import { normalArray } from './utils.ts'
+import { R } from '../utils/r.ts'
+import { normalArray } from '../utils/tools.ts'
 
 Deno.test('Pearson Correlation Test', async () => {
 	for (let i = 0; i < 100; i++) {

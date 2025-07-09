@@ -1,7 +1,7 @@
 import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
 import * as m from '../lib/nonparam/index.ts'
-import { R } from './r.ts'
-import { normalArray } from './utils.ts'
+import { R } from '../utils/r.ts'
+import { normalArray } from '../utils/tools.ts'
 
 Deno.test('One-sample Kolmogorov-Smirnov Test', async () => {
 	const sizes = [1000, 500, 200, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10]

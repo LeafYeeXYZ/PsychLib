@@ -1,7 +1,7 @@
 import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
 import * as m from '../lib/ttest/index.ts'
-import { R } from './r.ts'
-import { normalArray } from './utils.ts'
+import { R } from '../utils/r.ts'
+import { normalArray } from '../utils/tools.ts'
 
 Deno.test('One Sample T-Test', async () => {
 	const data = normalArray(1000, 1, 1)

@@ -2,11 +2,11 @@
 	"name": "@psych/lib",
 	"version": "1.24.3",
 	"tasks": {
-		"check": "deno run -A npm:@biomejs/biome@2.0.6 check --write .",
+		"check": "deno run -A npm:@biomejs/biome@2.1.1 check --write .",
 		"test": "deno test -A",
 		"bench": "deno bench -A",
 		"r:install": "Rscript -e \"options(repos = c(CRAN = 'https://cran.rstudio.com/')); install.packages('plumber')\"",
-		"r:server": "Rscript -e \"library(plumber); pr <- plumber::plumb('tests/server.R'); pr_run(pr, port=8000)\""
+		"r:server": "Rscript -e \"library(plumber); pr <- plumber::plumb('utils/server.R'); pr_run(pr, port=8000)\""
 	},
 	"exports": {
 		".": "./lib/index.ts"

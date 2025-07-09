@@ -2,7 +2,7 @@ import { assertAlmostEquals, assertEquals } from 'jsr:@std/assert'
 import { inverse, Matrix } from 'npm:ml-matrix@6.12.1'
 import * as ss from 'npm:simple-statistics@7.8.8'
 import * as m from '../lib/base.ts'
-import { randomArray, randomMatrix } from './utils.ts'
+import { randomArray, randomMatrix } from '../utils/tools.ts'
 
 Deno.test('Basic Functions', () => {
 	assertEquals(m.factorial(10), ss.factorial(10))
