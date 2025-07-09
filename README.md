@@ -69,7 +69,7 @@ This project publishes to <https://jsr.io>, so you don't need to compile the cod
 | :---: | :---: | :---: | :---: |
 | Basic Functions | `JS:simple-statistics` | ✅ | `1e-6` |
 | `Matrix` | `JS:ml-matrix` | ✅ | `1e-6` |
-| `sort` | `JS:Array.prototype.sort` | ✅ |  |
+| `sort` | `JS:Array.prototype.sort` | ✅ | `0` |
 | `OneSampleTTest` | `R:psych` | ✅ | `1e-4` |
 | `TwoSampleTTest` | `R:psych` | ✅ | `1e-4` |
 | `PeerSampleTTest` | `R:psych` | ✅ | `1e-4` |
@@ -82,9 +82,11 @@ This project publishes to <https://jsr.io>, so you don't need to compile the cod
 | `f2p` & `p2f` | `R:stats` | ✅ | `1e-4` |
 | `c2p` & `p2c` | `R:stats` | ✅ | `1e-4` |
 | `PearsonCorrTest` | `R:stats` | ✅ | `1e-4` |
+| `OneWayAnova` | `R:stats` | ✅ | `1e-4` |
+| `PeerAnova` | `R:stats` | ✅ | `1e-4` |
+| ANOVA Post Hoc | see `tests/anova.test.ts` | ⚠️ WIP |  |
 | Regression | See `tests/regression.test.ts` | ⚠️ WIP |  |
 | Mediation | See `tests/mediation.test.ts` | ⚠️ WIP |  |
-| ANOVA | See `tests/anova.test.ts` | ⚠️ WIP |  |
 
 > I'm working on migrating all tests to `R`, you can see the progress above.
 

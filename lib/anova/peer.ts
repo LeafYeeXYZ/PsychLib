@@ -84,7 +84,7 @@ export class PeerAnova {
 		this.p = f2p(this.f, this.dfB, this.dfError)
 		this.r2 = this.SSb / this.SSt
 		this.r2adj = this.SSb / (this.SSb + this.SSerror)
-		this.cohenF = Math.sqrt(this.r2 / (1 - this.r2))
+		this.cohenF = Math.sqrt(this.r2adj / (1 - this.r2adj))
 		for (let i = 0; i < k - 1; i++) {
 			for (let j = i + 1; j < k; j++) {
 				const groupA = this.groups[i]

@@ -17,9 +17,9 @@ export class OneSampleKSTest {
 	 * One-sample Kolmogorov-Smirnov test for Normal distribution
 	 *
 	 * 单样本 Kolmogorov-Smirnov 正态分布检验
-	 * 
+	 *
 	 * For small sample sizes (n <= 50), p value may not be accurate, please refer to the decision value for significance judgment.
-	 * 
+	 *
 	 * 对于小样本量 (n <= 50)，p值可能不准确，请使用决策值进行显著性判断
 	 * @param data sample data
 	 * @param alpha significance level (default: 0.05)
