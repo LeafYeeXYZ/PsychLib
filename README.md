@@ -15,8 +15,6 @@
 - [Development](#development)
 - [Testing](#testing)
 - [Benchmark](#benchmark)
-  - [Basic Functions](#basic-functions)
-  - [Compare with R](#compare-with-r)
 
 # Qiuck Start
 
@@ -67,34 +65,32 @@ This project publishes to <https://jsr.io>, so you don't need to compile the cod
 
 # Testing
 
-| PsychLib Function | Testing Method | Passed | Precision |
-| :---: | :---: | :---: | :---: |
-| Basic Functions | `JS:simple-statistics` | ✅ | `1e-6` |
-| `Matrix` | `JS:ml-matrix` | ✅ | `1e-6` |
-| `sort` | `JS:Array.prototype.sort` | ✅ | `0` |
-| `OneSampleTTest` | `R:psych` | ✅ | `1e-4` |
-| `TwoSampleTTest` | `R:psych` | ✅ | `1e-4` |
-| `PeerSampleTTest` | `R:psych` | ✅ | `1e-4` |
-| `WelchTTest` | `R:psych` | ✅ | `1e-4` |
-| `AlphaRealiability` | `R:psych` | ✅ | `1e-4` |
-| `LeveneTest` | `R:car` | ✅ | `1e-4` |
-| `OneSampleKSTest` | `R:stats` | ⚠️ | D: `1e-4`<br>p: `1e-4` (`n >= 100`) / `0.15` (`n < 100`)<br>Reject: `0` |
-| `z2p` & `p2z` | `R:stats` | ✅ | `1e-4` |
-| `t2p` & `p2t` | `R:stats` | ✅ | `1e-4` |
-| `f2p` & `p2f` | `R:stats` | ✅ | `1e-4` |
-| `c2p` & `p2c` | `R:stats` | ✅ | `1e-4` |
-| `PearsonCorrTest` | `R:stats` | ✅ | `1e-4` |
-| `OneWayAnova` | `R:stats` | ✅ | `1e-4` |
-| `PeerAnova` | `R:stats` | ✅ | `1e-4` |
-| ANOVA Post Hoc | see `tests/anova.test.ts` | ⚠️ WIP |  |
-| Regression | See `tests/regression.test.ts` | ⚠️ WIP |  |
-| Mediation | See `tests/mediation.test.ts` | ⚠️ WIP |  |
+| PsychLib Function | Testing Method | Passed | Precision | Note |
+| :---: | :---: | :---: | :---: | :---: |
+| Basic Functions | `JS:simple-statistics` | 🟩 | `1e-6` | |
+| `Matrix` | `JS:ml-matrix` | 🟩 | `1e-6` | |
+| `sort` | `JS:Array.prototype.sort` | 🟩 | `0` | |
+| `OneSampleTTest` | `R:psych` | 🟩 | `1e-4` | |
+| `TwoSampleTTest` | `R:psych` | 🟩 | `1e-4` | |
+| `PeerSampleTTest` | `R:psych` | 🟩 | `1e-4` | |
+| `WelchTTest` | `R:psych` | 🟩 | `1e-4` | |
+| `AlphaRealiability` | `R:psych` | 🟩 | `1e-4` | |
+| `LeveneTest` | `R:car` | 🟩 | `1e-4` | |
+| `OneSampleKSTest` | `R:stats` | 🟨 | `1e-4` | the precision for `p` when `n < 100` is worse than `1e-4` |
+| `z2p` & `p2z` | `R:stats` | 🟩 | `1e-4` | |
+| `t2p` & `p2t` | `R:stats` | 🟩 | `1e-4` | |
+| `f2p` & `p2f` | `R:stats` | 🟩 | `1e-4` | |
+| `c2p` & `p2c` | `R:stats` | 🟩 | `1e-4` | |
+| `PearsonCorrTest` | `R:stats` | 🟩 | `1e-4` | |
+| `OneWayAnova` | `R:stats` | 🟩 | `1e-4` | |
+| `PeerAnova` | `R:stats` | 🟩 | `1e-4` | |
+| ANOVA Post Hoc | see `tests/anova.test.ts` | 🟥 WIP | |
+| Regression | See `tests/regression.test.ts` | 🟥 WIP | |
+| Mediation | `R:lavaan` | 🟩 | `1e-4` | `p` value is not tested |
 
 > I'm working on migrating all tests to `R`, you can see the progress above.
 
 # Benchmark
-
-## Basic Functions
 
 ```bash
     CPU | Apple M3
@@ -143,30 +139,4 @@ Runtime | Deno 2.4.1 (aarch64-apple-darwin)
 | matrix.transpose() - 50x50            |         11.0 µs |        91,160 | ( 10.4 µs … 165.0 µs) |  11.0 µs |  12.5 µs |  13.9 µs |
 | matrix.multiply() - 50x50             |        378.5 µs |         2,642 | (339.8 µs …   2.9 ms) | 348.0 µs | 498.0 µs |   1.6 ms |
 | matrix.inverse() - 50x50              |        472.6 µs |         2,116 | (449.1 µs …   5.6 ms) | 457.1 µs | 779.0 µs | 994.7 µs |
-```
-
-## Compare with R
-
-⚠️ Currently work in progress, the results may not be accurate.
-
-```bash
-    CPU | Apple M3
-Runtime | Deno 2.4.1 (aarch64-apple-darwin) | R 4.5.1 (2025-06-13)
-   File | /benchs/ttest.ts & /benchs/tool.ts
-
-
-┌───────┬─────────────────────────────────────┬───────────────────┬───────────────────┬───────────────────┬──────────────┬────────────────┐
-│ (idx) │ 名称                                │ 单次运行时间_毫秒 │ 单次运行时间_微秒 │ 单次运行时间_纳秒 │ 每秒运行次数 │ 比比较对象快了 │
-├───────┼─────────────────────────────────────┼───────────────────┼───────────────────┼───────────────────┼──────────────┼────────────────┤
-│     0 │ "R语言服务器基准测试 - n=1000"      │ 1.263272          │ 1263              │ 1263272           │ 792          │                │
-│     1 │ "R语言服务器基准测试 - n=1000x2"    │ 1.678868          │ 1679              │ 1678868           │ 596          │                │
-│     2 │ "单样本T检验 - PsychLib - n=1000"   │ 0.002515          │ 3                 │ 2515              │ 397687       │ "40.74倍"      │
-│     3 │ "单样本T检验 - R - n=1000"          │ 0.102441          │ 102               │ 102441            │ 9762         │                │
-│     4 │ "配对样本T检验 - PsychLib - n=1000" │ 0.007628          │ 8                 │ 7628              │ 131100       │ "27.16倍"      │
-│     5 │ "配对样本T检验 - R - n=1000"        │ 0.207184          │ 207               │ 207184            │ 4827         │                │
-│     6 │ "独立样本T检验 - PsychLib - n=1000" │ 0.005021          │ 5                 │ 5021              │ 199182       │ "53.31倍"      │
-│     7 │ "独立样本T检验 - R - n=1000"        │ 0.267655          │ 268               │ 267655            │ 3736         │                │
-│     8 │ "不等方差T检验 - PsychLib - n=1000" │ 0.003761          │ 4                 │ 3761              │ 265869       │ "86.43倍"      │
-│     9 │ "不等方差T检验 - R - n=1000"        │ 0.32509           │ 325               │ 325090            │ 3076         │                │
-└───────┴─────────────────────────────────────┴───────────────────┴───────────────────┴───────────────────┴──────────────┴────────────────┘
 ```

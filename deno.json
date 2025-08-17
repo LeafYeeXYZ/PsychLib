@@ -2,7 +2,7 @@
 	"name": "@psych/lib",
 	"version": "1.24.3",
 	"tasks": {
-		"check": "deno run -A npm:@biomejs/biome@2.1.1 check --write .",
+		"check": "deno run -A npm:@biomejs/biome@2.2.0 check --write .",
 		"test": "deno test -A",
 		"bench": "deno bench -A",
 		"r:install": "Rscript -e \"options(repos = c(CRAN = 'https://cran.rstudio.com/')); install.packages('plumber')\"",
